@@ -10,6 +10,8 @@ public class Tank : MonoBehaviour
      public Wheel RightWheel1;
      public Wheel RightWheel2;
      public Wheel RightWheel3;
+     public Transform camera_location;
+     public Transform cube_location;
 
 
     // Start is called before the first frame update
@@ -33,6 +35,12 @@ public class Tank : MonoBehaviour
 
     void FixedUpdate()
     {
+      // set tank position
+      // transform.position = cube_location.position;
+
+
+
+
       if(Input.GetKey("w"))
       {
         // Debug.Log("drive forward");
