@@ -38,7 +38,24 @@ public class Wheel : MonoBehaviour
     public void Drive(float DriveSpeed)
     {
       Debug.Log("wheel drive backward");
-      wheelrigidbody.AddForce(Time.deltaTime*transform.right * DriveSpeed );
+      // wheelrigidbody.AddForce(Time.deltaTime*transform.right * DriveSpeed );
+
+
+      // wheelrigidbody.AddRelativeTorque()
+      // Debug.DrawLine(transform.position, transform.position+(Time.deltaTime*1000*transform.right), color);
+
+
+      wheelrigidbody.AddTorque(-DriveSpeed*wheelrigidbody.transform.forward);
+
+      Debug.DrawLine(
+        wheelrigidbody.transform.position,
+        wheelrigidbody.transform.position+wheelrigidbody.transform.forward,
+        new Color(1.0f, 0.0f, 1.0f)
+        );
+
+
+
+
     }
 
 
