@@ -23,16 +23,22 @@ public class Wheel : MonoBehaviour
 
     void FixedUpdate()
     {
-      if(Input.GetKey("w"))
-      {
-        wheelrigidbody.AddForce(Time.deltaTime*transform.right * 1000);
-        // Color color = new Color(0.0f, 0.0f, 1.0f);
-        // Debug.DrawLine(transform.position, transform.position+(Time.deltaTime*1000*transform.right), color);
-      }
-      else if(Input.GetKey("s"))
-      {
-        wheelrigidbody.AddForce(-Time.deltaTime*transform.right * 1000);
-      }
+      // if(Input.GetKey("w"))
+      // {
+        // wheelrigidbody.AddForce(Time.deltaTime*transform.right * 1000);
+        // // Color color = new Color(0.0f, 0.0f, 1.0f);
+        // // Debug.DrawLine(transform.position, transform.position+(Time.deltaTime*1000*transform.right), color);
+      // }
+      // else if(Input.GetKey("s"))
+      // {
+        // wheelrigidbody.AddForce(-Time.deltaTime*transform.right * 1000);
+      // }
+    }
+
+    public void Drive(float DriveSpeed)
+    {
+      Debug.Log("wheel drive backward");
+      wheelrigidbody.AddForce(Time.deltaTime*transform.right * DriveSpeed );
     }
 
 
