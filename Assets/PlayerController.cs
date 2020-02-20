@@ -8,10 +8,16 @@ public class PlayerController : MonoBehaviour
   public Transform playerCamera;
   public Tank tank;
   public Camera cam;
+
+  bool ControlModeMouse;
+
+
   // Start is called before the first frame update
   void Start()
   {
     // FindObjectOfType<GameManager>()
+    Cursor.lockState = CursorLockMode.Locked;
+    ControlModeMouse = true; // locked
 
   }
 
@@ -25,18 +31,18 @@ public class PlayerController : MonoBehaviour
 
 
     // check for player mouse button click
-    if(Input.GetMouseButtonDown(0))
+    // Debug.Log("ControlModeMouse"+ControlModeMouse);
+    if(Input.GetMouseButtonDown(0) && ControlModeMouse)
     {
-
       Ray ray = cam.ScreenPointToRay(Input.mousePosition);
       RaycastHit hit;
       bool HitSomething = Physics.Raycast(ray, out hit);
       if(HitSomething)
       {
-        Debug.Log(hit.point.ToString());
-        Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
-        Debug.Log("draw debug line");
-        Debug.Log(hit.transform.gameObject.name);
+        // Debug.Log(hit.point.ToString());
+        // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+        // Debug.Log("draw debug line");
+        // Debug.Log(hit.transform.gameObject.name);
         Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
 
         if(tankclicked)
@@ -45,8 +51,6 @@ public class PlayerController : MonoBehaviour
           tank = tankclicked;
         }
       }
-
-
     }
 
   }
@@ -70,6 +74,24 @@ public class PlayerController : MonoBehaviour
     {
       tank.DriveWheels(-10,10);
     }
+
+
+    // if cursor toggle key is pressed
+    if(Input.GetKeyDown("space"))
+    {
+      // Debug.Log("unlock cursor");
+      if(Cursor.lockState == CursorLockMode.Locked)
+      {
+        Cursor.lockState = CursorLockMode.None;
+        ControlModeMouse = true; // unlocked
+      }
+      else if (Cursor.lockState == CursorLockMode.None)
+      {
+        Cursor.lockState = CursorLockMode.Locked;
+        ControlModeMouse = false; // locked
+      }
+    }
+
 
   }
 }

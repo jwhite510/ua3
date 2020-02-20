@@ -29,7 +29,7 @@ public class Tank : MonoBehaviour
     void DriveForward()
     {
 
-      Debug.Log("DriveForward called");
+      // Debug.Log("DriveForward called");
 
     }
 
