@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     {
 
       // playerCamera.position = tank.camera_location.position;
-      playerCamera.position = tank.transform.position;
+      playerCamera.position = tank.camera_location.transform.position;
+      playerCamera.rotation = tank.camera_location.transform.rotation;
 
     }
 
