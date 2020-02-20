@@ -37,47 +37,16 @@ public class Tank : MonoBehaviour
     {
       // set tank position
       // transform.position = cube_location.position;
+    }
+    public void DriveWheels(float LeftSide, float RightSide)
+    {
+        LeftWheel1.Drive(LeftSide);
+        LeftWheel2.Drive(LeftSide);
+        LeftWheel3.Drive(LeftSide);
+        RightWheel1.Drive(RightSide);
+        RightWheel2.Drive(RightSide);
+        RightWheel3.Drive(RightSide);
 
-
-
-
-      if(Input.GetKey("w"))
-      {
-        // Debug.Log("drive forward");
-        LeftWheel1.Drive(10);
-        LeftWheel2.Drive(10);
-        LeftWheel3.Drive(10);
-        RightWheel1.Drive(10);
-        RightWheel2.Drive(10);
-        RightWheel3.Drive(10);
-      }
-      else if(Input.GetKey("s"))
-      {
-        LeftWheel1.Drive(-10);
-        LeftWheel2.Drive(-10);
-        LeftWheel3.Drive(-10);
-        RightWheel1.Drive(-10);
-        RightWheel2.Drive(-10);
-        RightWheel3.Drive(-10);
-      }
-      else if(Input.GetKey("d"))
-      {
-        LeftWheel1.Drive(10);
-        LeftWheel2.Drive(10);
-        LeftWheel3.Drive(10);
-        RightWheel1.Drive(-10);
-        RightWheel2.Drive(-10);
-        RightWheel3.Drive(-10);
-      }
-      else if(Input.GetKey("a"))
-      {
-        LeftWheel1.Drive(-10);
-        LeftWheel2.Drive(-10);
-        LeftWheel3.Drive(-10);
-        RightWheel1.Drive(10);
-        RightWheel2.Drive(10);
-        RightWheel3.Drive(10);
-      }
     }
 
 
