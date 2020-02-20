@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
   public Camera cam;
 
   bool ControlModeMouse;
+  // the delta rotation
+  float drotx = 0;
+  float droty = 0;
 
 
   // Start is called before the first frame update
@@ -17,7 +20,7 @@ public class PlayerController : MonoBehaviour
   {
     // FindObjectOfType<GameManager>()
     Cursor.lockState = CursorLockMode.Locked;
-    ControlModeMouse = true; // locked
+    ControlModeMouse = false; // locked
 
   }
 
@@ -29,7 +32,11 @@ public class PlayerController : MonoBehaviour
     playerCamera.position = tank.camera_location.transform.position;
     playerCamera.rotation = tank.camera_location.transform.rotation;
 
+    Vector3 rotcamera = playerCamera.rotation.eulerAngles;
+    rotcamera.y += drotx;
+    rotcamera.x -= droty;
 
+    playerCamera.rotation = Quaternion.Euler(rotcamera);
     // check for player mouse button click
     // Debug.Log("ControlModeMouse"+ControlModeMouse);
     if(Input.GetMouseButtonDown(0) && ControlModeMouse)
@@ -49,11 +56,11 @@ public class PlayerController : MonoBehaviour
         {
           Debug.Log(tankclicked.name);
           tank = tankclicked;
+          drotx = 0;
+          droty = 0;
         }
       }
     }
-
-
     // if cursor toggle key is pressed
     if(Input.GetKeyDown("space"))
     {
@@ -69,9 +76,6 @@ public class PlayerController : MonoBehaviour
         ControlModeMouse = false; // locked
       }
     }
-
-
-
   }
 
   void FixedUpdate()
@@ -94,8 +98,17 @@ public class PlayerController : MonoBehaviour
       tank.DriveWheels(-10,10);
     }
 
-
-
-
+    // if in no mouse mode
+    if(!ControlModeMouse)
+    {
+      // Debug.Log("get mouse axis");
+      // Debug.Log(Input.mousePosition);
+      float mouseX = Input.GetAxis("Mouse X");
+      float mouseY = Input.GetAxis("Mouse Y");
+      drotx+=mouseX;
+      droty+=mouseY;
+      Debug.Log(drotx);
+      Debug.Log(droty);
+    }
   }
 }
