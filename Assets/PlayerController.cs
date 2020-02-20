@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
           tank = tankclicked;
           drotx = 0;
           droty = 0;
+          ControlModeMouse = false; // locked
+          Cursor.lockState = CursorLockMode.Locked;
         }
       }
     }
