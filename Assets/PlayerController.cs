@@ -53,6 +53,25 @@ public class PlayerController : MonoBehaviour
       }
     }
 
+
+    // if cursor toggle key is pressed
+    if(Input.GetKeyDown("space"))
+    {
+      // Debug.Log("unlock cursor");
+      if(Cursor.lockState == CursorLockMode.Locked)
+      {
+        Cursor.lockState = CursorLockMode.None;
+        ControlModeMouse = true; // unlocked
+      }
+      else if (Cursor.lockState == CursorLockMode.None)
+      {
+        Cursor.lockState = CursorLockMode.Locked;
+        ControlModeMouse = false; // locked
+      }
+    }
+
+
+
   }
 
   void FixedUpdate()
@@ -76,21 +95,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // if cursor toggle key is pressed
-    if(Input.GetKeyDown("space"))
-    {
-      // Debug.Log("unlock cursor");
-      if(Cursor.lockState == CursorLockMode.Locked)
-      {
-        Cursor.lockState = CursorLockMode.None;
-        ControlModeMouse = true; // unlocked
-      }
-      else if (Cursor.lockState == CursorLockMode.None)
-      {
-        Cursor.lockState = CursorLockMode.Locked;
-        ControlModeMouse = false; // locked
-      }
-    }
 
 
   }
