@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 
   public Transform playerCamera;
-  public Tank tank;
+  public Tank controlled_tank;
   public Camera cam;
+  public Text SelectedVehicleText;
+  public Tank SelectedTank;
 
   bool ControlModeMouse;
   // the delta rotation
   float drotx = 0;
   float droty = 0;
+
+  float ClickTime = 0.0f;
+  bool handling_mouseclick = false;
 
 
   // Start is called before the first frame update
@@ -21,6 +27,7 @@ public class PlayerController : MonoBehaviour
     // FindObjectOfType<GameManager>()
     Cursor.lockState = CursorLockMode.Locked;
     ControlModeMouse = false; // locked
+    SelectedVehicleText.text = controlled_tank.name;
 
   }
 
@@ -28,9 +35,9 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
 
-    // playerCamera.position = tank.camera_location.position;
-    playerCamera.position = tank.camera_location.transform.position;
-    playerCamera.rotation = tank.camera_location.transform.rotation;
+    // playerCamera.position = controlled_tank.camera_location.position;
+    playerCamera.position = controlled_tank.camera_location.transform.position;
+    playerCamera.rotation = controlled_tank.camera_location.transform.rotation;
 
     Vector3 rotcamera = playerCamera.rotation.eulerAngles;
     rotcamera.y += drotx;
@@ -39,28 +46,32 @@ public class PlayerController : MonoBehaviour
     playerCamera.rotation = Quaternion.Euler(rotcamera);
     // check for player mouse button click
     // Debug.Log("ControlModeMouse"+ControlModeMouse);
+
+    // Debug.Log(Time.time);
     if(Input.GetMouseButtonDown(0) && ControlModeMouse)
     {
-      Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-      RaycastHit hit;
-      bool HitSomething = Physics.Raycast(ray, out hit);
-      if(HitSomething)
+      Debug.Log("mouse down");
+      if(!handling_mouseclick)
       {
-        // Debug.Log(hit.point.ToString());
-        // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
-        // Debug.Log("draw debug line");
-        // Debug.Log(hit.transform.gameObject.name);
-        Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
-
-        if(tankclicked)
-        {
-          Debug.Log(tankclicked.name);
-          tank = tankclicked;
-          drotx = 0;
-          droty = 0;
-          ControlModeMouse = false; // locked
-          Cursor.lockState = CursorLockMode.Locked;
-        }
+        ClickTime = Time.time;
+        handling_mouseclick = true;
+      }
+      else if(handling_mouseclick)
+      {
+        Debug.Log("Handle Double Click");
+        // possess the clicked unit
+        HandleDoubleClick();
+        handling_mouseclick = false;
+      }
+    }
+    if(handling_mouseclick)
+    {
+      if(Time.time > (ClickTime + 0.2))
+      {
+        Debug.Log("Handle Single Click");
+        // select the clicked unit
+        HandleSingleClick();
+        handling_mouseclick = false;
       }
     }
     // if cursor toggle key is pressed
@@ -85,19 +96,19 @@ public class PlayerController : MonoBehaviour
 
     if(Input.GetKey("w"))
     {
-      tank.DriveWheels(10,10);
+      controlled_tank.DriveWheels(10,10);
     }
     else if(Input.GetKey("s"))
     {
-      tank.DriveWheels(-10,-10);
+      controlled_tank.DriveWheels(-10,-10);
     }
     else if(Input.GetKey("d"))
     {
-      tank.DriveWheels(10,-10);
+      controlled_tank.DriveWheels(10,-10);
     }
     else if(Input.GetKey("a"))
     {
-      tank.DriveWheels(-10,10);
+      controlled_tank.DriveWheels(-10,10);
     }
 
     // if in no mouse mode
@@ -109,8 +120,50 @@ public class PlayerController : MonoBehaviour
       float mouseY = Input.GetAxis("Mouse Y");
       drotx+=mouseX;
       droty+=mouseY;
-      Debug.Log(drotx);
-      Debug.Log(droty);
+      // Debug.Log(drotx);
+      // Debug.Log(droty);
+    }
+  }
+
+  void HandleSingleClick()
+  {
+
+    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    RaycastHit hit;
+    bool HitSomething = Physics.Raycast(ray, out hit);
+    if(HitSomething)
+    {
+      // Debug.Log(hit.point.ToString());
+      // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+      // Debug.Log("draw debug line");
+      // Debug.Log(hit.transform.gameObject.name);
+      Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
+
+      if(tankclicked)
+      {
+        Debug.Log(tankclicked.name);
+        SelectedVehicleText.text = tankclicked.name;
+        SelectedTank = tankclicked;
+      }
+    }
+  }
+  void HandleDoubleClick()
+  {
+    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    RaycastHit hit;
+    bool HitSomething = Physics.Raycast(ray, out hit);
+    if(HitSomething)
+    {
+      Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
+      if(tankclicked)
+      {
+        controlled_tank = tankclicked;
+        drotx = 0;
+        droty = 0;
+        ControlModeMouse = false; // locked
+        Cursor.lockState = CursorLockMode.Locked;
+      }
     }
   }
 }
+
