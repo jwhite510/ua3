@@ -111,6 +111,18 @@ public class Tank : MonoBehaviour
               Color.green,
               0.0f
               );
+
+
+          // drive wheels
+          if(Mathf.Abs(turnvalue)>0.5)
+          {
+            DriveWheels(-10*turnvalue, 10*turnvalue);
+          }
+          else
+          {
+            DriveWheels(10*dotprod, 10*dotprod);
+          }
+
         }
 
 
