@@ -76,10 +76,39 @@ public class Tank : MonoBehaviour
               0.0f
               );
 
+          // movement direction
+          Vector3 move_direction = agent.path.corners[1] - cube_location.position;
+          move_direction.Normalize();
+
+          // get dot product
+          // move_direction
+          // cube_location.right
+          float dotprod = Vector3.Dot(move_direction, cube_location.right);
+          Debug.Log("forwarddrive"+dotprod);
+          Vector3 crossprod = Vector3.Cross(move_direction, cube_location.right);
+
+          // get dot product of crossprod
+          float turnvalue = Vector3.Dot(cube_location.up, crossprod);
+
+          Debug.Log("turn"+turnvalue);
+
+          crossprod*=10;
+
+          // draw crossprod
           Debug.DrawLine(
               cube_location.position,
-              agent.path.corners[1],
-              Color.yellow,
+              cube_location.position + crossprod,
+              Color.green,
+              0.0f
+              );
+
+
+
+          move_direction *= 10;
+          Debug.DrawLine(
+              cube_location.position,
+              cube_location.position + move_direction,
+              Color.green,
               0.0f
               );
         }
