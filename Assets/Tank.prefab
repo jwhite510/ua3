@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8098836818484525859}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 7714975371052298038}
   - component: {fileID: 3808692385054509993}
   - component: {fileID: 5941139236478348109}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8161826319151989919}
   - component: {fileID: 6046332614960918124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CameraLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2418393539771133893}
   - component: {fileID: 850117804028765121}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,6 +349,8 @@ MonoBehaviour:
   RightWheel3: {fileID: 5148066011081217299}
   camera_location: {fileID: 8161826319151989919}
   cube_location: {fileID: 1486261931510030972}
+  ThisNavWaypoint: {x: 0, y: 0, z: 0}
+  MoveToWayPoint: 0
 --- !u!1 &7155754921956770315
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +364,7 @@ GameObject:
   - component: {fileID: 7006567255284837551}
   - component: {fileID: 4780784143313064161}
   - component: {fileID: 3034359978065219861}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,6 +467,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418393539771133893}
     m_Modifications:
+    - target: {fileID: 8294071080238265017, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071080696461826, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -525,6 +537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelComponent (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8294071081409482941, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
 --- !u!4 &8473607736822167282 stripped
@@ -558,6 +575,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418393539771133893}
     m_Modifications:
+    - target: {fileID: 8294071080238265017, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071080696461826, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -618,6 +645,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelComponent (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8294071081409482941, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
 --- !u!114 &8302347167621152976 stripped
@@ -651,6 +683,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418393539771133893}
     m_Modifications:
+    - target: {fileID: 8294071080238265017, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071080696461826, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -711,6 +753,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelComponent (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8294071081409482941, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
 --- !u!4 &3856663870484106058 stripped
@@ -744,6 +791,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418393539771133893}
     m_Modifications:
+    - target: {fileID: 8294071080238265017, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071080696461826, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -804,6 +861,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelComponent
       objectReference: {fileID: 0}
+    - target: {fileID: 8294071081409482941, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
 --- !u!114 &3848578322993102573 stripped
@@ -837,6 +899,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418393539771133893}
     m_Modifications:
+    - target: {fileID: 8294071080238265017, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071080696461826, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -897,6 +969,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelComponent (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8294071081409482941, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
 --- !u!54 &549860904534705817 stripped
@@ -930,6 +1007,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2418393539771133893}
     m_Modifications:
+    - target: {fileID: 8294071080238265017, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071080696461826, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -989,6 +1076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WheelComponent (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294071081409482941, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
