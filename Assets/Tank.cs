@@ -13,6 +13,9 @@ public class Tank : MonoBehaviour
      public Transform camera_location;
      public Transform cube_location;
 
+     public Vector3 ThisNavWaypoint;
+     public bool MoveToWayPoint = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,8 @@ public class Tank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      // Debug.Log("tank update called");
+      // Debug.Log(name+" "+ThisNavWaypoint.ToString());
     }
 
     void DriveForward()
@@ -37,6 +41,14 @@ public class Tank : MonoBehaviour
     {
       // set tank position
       // transform.position = cube_location.position;
+      if(MoveToWayPoint)
+      {
+        Debug.Log(name+" moving to "+ThisNavWaypoint.ToString());
+        Debug.DrawLine(ThisNavWaypoint, ThisNavWaypoint+new Vector3(0,1,0), Color.red, 1.0f);
+      }
+
+
+
     }
     public void DriveWheels(float LeftSide, float RightSide)
     {

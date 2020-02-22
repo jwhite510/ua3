@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     // Debug.Log(Time.time);
     if(Input.GetMouseButtonDown(0) && ControlModeMouse)
     {
-      Debug.Log("mouse down");
+      // Debug.Log("mouse down");
       if(!handling_mouseclick)
       {
         ClickTime = Time.time;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
       }
       else if(handling_mouseclick)
       {
-        Debug.Log("Handle Double Click");
+        // Debug.Log("Handle Double Click");
         // possess the clicked unit
         HandleDoubleClick();
         handling_mouseclick = false;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
       if(Time.time > (ClickTime + 0.2))
       {
-        Debug.Log("Handle Single Click");
+        // Debug.Log("Handle Single Click");
         // select the clicked unit
         HandleSingleClick();
         handling_mouseclick = false;
@@ -88,6 +88,10 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         ControlModeMouse = false; // locked
       }
+    }
+    if(Input.GetMouseButtonDown(1) && ControlModeMouse)
+    {
+      HandleSingleRightClick();
     }
   }
 
@@ -141,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
       if(tankclicked)
       {
-        Debug.Log(tankclicked.name);
+        // Debug.Log(tankclicked.name);
         SelectedVehicleText.text = tankclicked.name;
         SelectedTank = tankclicked;
       }
@@ -163,6 +167,24 @@ public class PlayerController : MonoBehaviour
         ControlModeMouse = false; // locked
         Cursor.lockState = CursorLockMode.Locked;
       }
+    }
+  }
+  void HandleSingleRightClick()
+  {
+    // Debug.Log("Right Click");
+    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    RaycastHit hit;
+    bool HitSomething = Physics.Raycast(ray, out hit);
+    if(HitSomething)
+    {
+      // Debug.Log(hit.point.ToString());
+      Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+      if(SelectedTank)
+      {
+        SelectedTank.ThisNavWaypoint = hit.point;
+        SelectedTank.MoveToWayPoint = true;
+      }
+
     }
   }
 }
