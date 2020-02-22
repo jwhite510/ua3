@@ -43,16 +43,48 @@ public class Tank : MonoBehaviour
       // transform.position = cube_location.position;
       if(MoveToWayPoint)
       {
-        Debug.Log("GetType:"+agent.path.corners.GetType());
-        float height = 1.0f;
+        // Debug.Log("GetType:"+agent.path.corners.GetType());
+        float height = 10.0f;
         foreach(Vector3 vec in agent.path.corners)
         {
-          Debug.Log(vec.ToString());
+          // Debug.Log(vec.ToString());
           Debug.DrawLine(vec, vec + new Vector3(0,height,0), Color.red, 0.0f);
           height *= 0.7f;
         }
 
         Debug.DrawLine(agent.transform.position, agent.transform.position+new Vector3(0,1,0), Color.blue, 0.0f);
+
+        // drive wheels to this location
+        // agent.path.corners[0]
+        Debug.DrawLine(
+          cube_location.position,
+          cube_location.position + 10*cube_location.right,
+          Color.blue,
+          0.0f
+            );
+
+        // get direction from current position
+        // agent.path.corners[0] // nearest point to move to
+        // Debug.Log("Count:"+agent.path.corners.Length);
+        if(agent.path.corners.Length>1)
+        {
+          // move to this point
+          Debug.DrawLine(
+              agent.path.corners[1],
+              agent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
+              Color.green,
+              0.0f
+              );
+
+          Debug.DrawLine(
+              cube_location.position,
+              agent.path.corners[1],
+              Color.yellow,
+              0.0f
+              );
+        }
+
+
 
       }
 
