@@ -7,8 +7,8 @@ do
 	then
 		break
 	fi
-	if [[ $line == *"Refresh Completed time"* ]];
-	then
-		break
-	fi
+	# if [[ $line == *"Refresh Completed time"* ]];
+	# then
+	# 	break
+	# fi
 done

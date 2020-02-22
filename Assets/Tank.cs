@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Tank : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class Tank : MonoBehaviour
      public Wheel RightWheel3;
      public Transform camera_location;
      public Transform cube_location;
+     public NavMeshAgent agent;
 
-     public Vector3 ThisNavWaypoint;
      public bool MoveToWayPoint = false;
 
 
@@ -27,7 +28,6 @@ public class Tank : MonoBehaviour
     void Update()
     {
       // Debug.Log("tank update called");
-      // Debug.Log(name+" "+ThisNavWaypoint.ToString());
     }
 
     void DriveForward()
@@ -43,8 +43,17 @@ public class Tank : MonoBehaviour
       // transform.position = cube_location.position;
       if(MoveToWayPoint)
       {
-        Debug.Log(name+" moving to "+ThisNavWaypoint.ToString());
-        Debug.DrawLine(ThisNavWaypoint, ThisNavWaypoint+new Vector3(0,1,0), Color.red, 1.0f);
+        Debug.Log("GetType:"+agent.path.corners.GetType());
+        float height = 1.0f;
+        foreach(Vector3 vec in agent.path.corners)
+        {
+          Debug.Log(vec.ToString());
+          Debug.DrawLine(vec, vec + new Vector3(0,height,0), Color.red, 0.0f);
+          height *= 0.7f;
+        }
+
+        Debug.DrawLine(agent.transform.position, agent.transform.position+new Vector3(0,1,0), Color.blue, 0.0f);
+
       }
 
 

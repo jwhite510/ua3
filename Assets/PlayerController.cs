@@ -178,11 +178,11 @@ public class PlayerController : MonoBehaviour
     if(HitSomething)
     {
       // Debug.Log(hit.point.ToString());
-      Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+      // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
       if(SelectedTank)
       {
-        SelectedTank.ThisNavWaypoint = hit.point;
         SelectedTank.MoveToWayPoint = true;
+        SelectedTank.agent.SetDestination(hit.point);
       }
 
     }
