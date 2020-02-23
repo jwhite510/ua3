@@ -129,9 +129,6 @@ public class Tank : MonoBehaviour
 
         }
       }
-
-
-
     }
     public void DriveWheels(float LeftSide, float RightSide)
     {
@@ -141,8 +138,26 @@ public class Tank : MonoBehaviour
         RightWheel1.Drive(RightSide);
         RightWheel2.Drive(RightSide);
         RightWheel3.Drive(RightSide);
-
     }
+    public void RotateTurret(float x, float y)
+    {
+      Vector3 rot_turret = turret_hinge.rotation.eulerAngles;
+      rot_turret.y += x;
+      rot_turret.z += y;
+      if(rot_turret.z > 350 || rot_turret.z < 80)
+      {
+        turret_hinge.rotation = Quaternion.Euler(rot_turret);
+      }
+      else
+      {
+        rot_turret.z -= y;
+        turret_hinge.rotation = Quaternion.Euler(rot_turret);
+      }
 
-
+      // Debug.Log("rot_turret.y"+rot_turret.y);
+      // Debug.Log("rot_turret.z"+rot_turret.z);
+      // Debug.Log(hello1);
+      // Debug.Log(hello2);
+      // Debug.Log( hello2||hello1 );
+    }
 }

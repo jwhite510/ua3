@@ -126,15 +126,7 @@ public class PlayerController : MonoBehaviour
       float mouseY = Input.GetAxis("Mouse Y");
       // drotx+=mouseX;
       // droty+=mouseY;
-
-      Vector3 rot_turret = controlled_tank.turret_hinge.rotation.eulerAngles;
-      rot_turret.y += mouseX;
-      // rot_turret.x -= mouseY;
-      rot_turret.z += mouseY;
-      controlled_tank.turret_hinge.rotation = Quaternion.Euler(rot_turret);
-
-      Debug.Log(mouseX);
-      Debug.Log(mouseY);
+      controlled_tank.RotateTurret(mouseX, mouseY);
     }
   }
 
