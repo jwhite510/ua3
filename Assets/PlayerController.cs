@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
     {
       HandleSingleRightClick();
     }
+    // mouse click
+    if(Input.GetMouseButtonDown(0) && !ControlModeMouse)
+    {
+      controlled_tank.FireCannon();
+    }
   }
 
   void FixedUpdate()

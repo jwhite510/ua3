@@ -12,14 +12,17 @@ public class Tank : MonoBehaviour
      public Wheel RightWheel2;
      public Wheel RightWheel3;
      public Transform camera_location;
-     public Transform cube_location;
+     public GameObject vehicle_base;
      public NavMeshAgent agent;
      public Transform tank_barrel;
 
      public Transform turret_hinge;
+     public GameObject projectile;
 
      public bool MoveToWayPoint = false;
      public bool player_controlled = false;
+
+     public Transform projectile_spawn_point;
 
 
 
@@ -45,7 +48,7 @@ public class Tank : MonoBehaviour
     void FixedUpdate()
     {
       // set tank position
-      // transform.position = cube_location.position;
+      // transform.position = vehicle_base.transform.position;
       if(MoveToWayPoint && !player_controlled)
       {
         // Debug.Log("GetType:"+agent.path.corners.GetType());
@@ -62,8 +65,8 @@ public class Tank : MonoBehaviour
         // drive wheels to this location
         // agent.path.corners[0]
         Debug.DrawLine(
-          cube_location.position,
-          cube_location.position + 10*cube_location.right,
+          vehicle_base.transform.position,
+          vehicle_base.transform.position + 10*vehicle_base.transform.right,
           Color.blue,
           0.0f
             );
@@ -82,18 +85,18 @@ public class Tank : MonoBehaviour
               );
 
           // movement direction
-          Vector3 move_direction = agent.path.corners[1] - cube_location.position;
+          Vector3 move_direction = agent.path.corners[1] - vehicle_base.transform.position;
           move_direction.Normalize();
 
           // get dot product
           // move_direction
-          // cube_location.right
-          float dotprod = Vector3.Dot(move_direction, cube_location.right);
+          // vehicle_base.transform.right
+          float dotprod = Vector3.Dot(move_direction, vehicle_base.transform.right);
           // Debug.Log("forwarddrive"+dotprod);
-          Vector3 crossprod = Vector3.Cross(move_direction, cube_location.right);
+          Vector3 crossprod = Vector3.Cross(move_direction, vehicle_base.transform.right);
 
           // get dot product of crossprod
-          float turnvalue = Vector3.Dot(cube_location.up, crossprod);
+          float turnvalue = Vector3.Dot(vehicle_base.transform.up, crossprod);
 
           // Debug.Log("turn"+turnvalue);
 
@@ -101,8 +104,8 @@ public class Tank : MonoBehaviour
 
           // draw crossprod
           // Debug.DrawLine(
-              // cube_location.position,
-              // cube_location.position + crossprod,
+              // vehicle_base.transform.position,
+              // vehicle_base.transform.position + crossprod,
               // Color.green,
               // 0.0f
               // );
@@ -111,8 +114,8 @@ public class Tank : MonoBehaviour
 
           move_direction *= 10;
           // Debug.DrawLine(
-              // cube_location.position,
-              // cube_location.position + move_direction,
+              // vehicle_base.transform.position,
+              // vehicle_base.transform.position + move_direction,
               // Color.green,
               // 0.0f
               // );
@@ -140,11 +143,11 @@ public class Tank : MonoBehaviour
 
         foreach(GameObject gameo in gameobjects)
         {
-          float dist = Vector3.Distance(cube_location.position, gameo.transform.position);
+          float dist = Vector3.Distance(vehicle_base.transform.position, gameo.transform.position);
           // Debug.Log(name+"  dist"+dist);
           // Debug.Log(name+"  closest_distance"+closest_distance);
           // Debug.Log(dist < closest_distance);
-          if(dist < closest_distance && gameo.transform!=cube_location)
+          if(dist < closest_distance && gameo.transform!=vehicle_base.transform)
           {
             closestobject = gameo;
             closest_distance = dist;
@@ -155,7 +158,7 @@ public class Tank : MonoBehaviour
         {
           // Debug.DrawLine(
               // closestobject.transform.position,
-              // cube_location.position,
+              // vehicle_base.transform.position,
               // Color.red,
               // 0.0f
               // );
@@ -215,7 +218,7 @@ public class Tank : MonoBehaviour
           // Debug.Log("forward_dot: "+forward_dot); // right or left
           // Debug.Log("up_dot: "+up_dot); // is the target in front of or behind the barrel
 
-          RotateTurret(-100*forward_dot*Time.deltaTime, 100*right_dot*Time.deltaTime);
+          RotateTurret(-300*forward_dot*Time.deltaTime, 300*right_dot*Time.deltaTime);
 
         }
 
@@ -254,5 +257,10 @@ public class Tank : MonoBehaviour
       // Debug.Log(hello1);
       // Debug.Log(hello2);
       // Debug.Log( hello2||hello1 );
+    }
+    public void FireCannon()
+    {
+      GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
+      proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
     }
 }
