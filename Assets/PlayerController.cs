@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     Cursor.lockState = CursorLockMode.Locked;
     ControlModeMouse = false; // locked
     SelectedVehicleText.text = controlled_tank.name;
+    controlled_tank.player_controlled = true;
 
   }
 
@@ -161,7 +162,9 @@ public class PlayerController : MonoBehaviour
       Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
       if(tankclicked)
       {
+        controlled_tank.player_controlled = false;
         controlled_tank = tankclicked;
+        controlled_tank.player_controlled = true;
         drotx = 0;
         droty = 0;
         ControlModeMouse = false; // locked

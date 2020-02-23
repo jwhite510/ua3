@@ -16,6 +16,8 @@ public class Tank : MonoBehaviour
      public NavMeshAgent agent;
 
      public bool MoveToWayPoint = false;
+     public bool player_controlled = false;
+
 
 
     // Start is called before the first frame update
@@ -41,7 +43,7 @@ public class Tank : MonoBehaviour
     {
       // set tank position
       // transform.position = cube_location.position;
-      if(MoveToWayPoint)
+      if(MoveToWayPoint && !player_controlled)
       {
         // Debug.Log("GetType:"+agent.path.corners.GetType());
         float height = 10.0f;
@@ -124,9 +126,6 @@ public class Tank : MonoBehaviour
           }
 
         }
-
-
-
       }
 
 
