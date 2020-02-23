@@ -26,27 +26,19 @@ public class Tank : MonoBehaviour
 
      private float last_fire_time = 0;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
-        
     }
-
     // Update is called once per frame
     void Update()
     {
       // Debug.Log("tank update called");
     }
-
     void DriveForward()
     {
-
       // Debug.Log("DriveForward called");
-
     }
-
     void FixedUpdate()
     {
       // set tank position
@@ -207,7 +199,7 @@ public class Tank : MonoBehaviour
           float on_target = -Vector3.Dot(intend_aim_direction, tank_barrel.up);
 
 
-          Debug.Log("on_target: "+on_target);
+          // Debug.Log("on_target: "+on_target);
           if(on_target > 0.9)
           {
             FireCannon();
@@ -233,8 +225,6 @@ public class Tank : MonoBehaviour
 
 
       }
-
-
     }
     public void DriveWheels(float LeftSide, float RightSide)
     {
