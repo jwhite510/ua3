@@ -47,11 +47,11 @@ public class Wheel : MonoBehaviour
 
       wheelrigidbody.AddTorque(-DriveSpeed*wheelrigidbody.transform.forward);
 
-      Debug.DrawLine(
-        wheelrigidbody.transform.position,
-        wheelrigidbody.transform.position+wheelrigidbody.transform.forward,
-        new Color(1.0f, 0.0f, 1.0f)
-        );
+      // Debug.DrawLine(
+        // wheelrigidbody.transform.position,
+        // wheelrigidbody.transform.position+wheelrigidbody.transform.forward,
+        // new Color(1.0f, 0.0f, 1.0f)
+        // );
 
 
 

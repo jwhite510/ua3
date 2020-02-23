@@ -57,7 +57,7 @@ public class Tank : MonoBehaviour
           height *= 0.7f;
         }
 
-        Debug.DrawLine(agent.transform.position, agent.transform.position+new Vector3(0,1,0), Color.blue, 0.0f);
+        // Debug.DrawLine(agent.transform.position, agent.transform.position+new Vector3(0,1,0), Color.blue, 0.0f);
 
         // drive wheels to this location
         // agent.path.corners[0]
@@ -100,22 +100,22 @@ public class Tank : MonoBehaviour
           crossprod*=10;
 
           // draw crossprod
-          Debug.DrawLine(
-              cube_location.position,
-              cube_location.position + crossprod,
-              Color.green,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // cube_location.position,
+              // cube_location.position + crossprod,
+              // Color.green,
+              // 0.0f
+              // );
 
 
 
           move_direction *= 10;
-          Debug.DrawLine(
-              cube_location.position,
-              cube_location.position + move_direction,
-              Color.green,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // cube_location.position,
+              // cube_location.position + move_direction,
+              // Color.green,
+              // 0.0f
+              // );
 
 
           // drive wheels
@@ -153,49 +153,49 @@ public class Tank : MonoBehaviour
 
         if(closestobject)
         {
-          Debug.DrawLine(
-              closestobject.transform.position,
-              cube_location.position,
-              Color.red,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // closestobject.transform.position,
+              // cube_location.position,
+              // Color.red,
+              // 0.0f
+              // );
 
 
           // move torret roward target
           // barrel aim direction
-          Debug.DrawLine(
-              tank_barrel.position,
-              tank_barrel.position+(-3)*tank_barrel.up,
-              Color.red,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // tank_barrel.position,
+              // tank_barrel.position+(-3)*tank_barrel.up,
+              // Color.red,
+              // 0.0f
+              // );
 
           // barrel up and right
-          Debug.DrawLine(
-              tank_barrel.position,
-              tank_barrel.position+(-1)*tank_barrel.right,
-              Color.blue,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // tank_barrel.position,
+              // tank_barrel.position+(-1)*tank_barrel.right,
+              // Color.blue,
+              // 0.0f
+              // );
           // barrel up and right
-          Debug.DrawLine(
-              tank_barrel.position,
-              tank_barrel.position+(-1)*tank_barrel.forward,
-              Color.blue,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // tank_barrel.position,
+              // tank_barrel.position+(-1)*tank_barrel.forward,
+              // Color.blue,
+              // 0.0f
+              // );
 
           Vector3 current_barrel_direction = -1*tank_barrel.up;
           // direction to target
           Vector3 intend_aim_direction = closestobject.transform.position - tank_barrel.position;
           intend_aim_direction.Normalize();
 
-          Debug.DrawLine(
-              tank_barrel.position,
-              tank_barrel.position+(3)*intend_aim_direction,
-              Color.blue,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // tank_barrel.position,
+              // tank_barrel.position+(3)*intend_aim_direction,
+              // Color.blue,
+              // 0.0f
+              // );
 
           float right_dot = Vector3.Dot(intend_aim_direction, tank_barrel.right);
           float forward_dot = Vector3.Dot(intend_aim_direction, tank_barrel.forward);
