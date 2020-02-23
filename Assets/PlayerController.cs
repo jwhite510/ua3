@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
 
   bool ControlModeMouse;
   // the delta rotation
-  float drotx = 0;
-  float droty = 0;
+  // float drotx = 0;
+  // float droty = 0;
 
   float ClickTime = 0.0f;
   bool handling_mouseclick = false;
@@ -39,12 +39,13 @@ public class PlayerController : MonoBehaviour
     // playerCamera.position = controlled_tank.camera_location.position;
     playerCamera.position = controlled_tank.camera_location.transform.position;
     playerCamera.rotation = controlled_tank.camera_location.transform.rotation;
+    // playerCamera.forward = playerCamera.right;
 
-    Vector3 rotcamera = playerCamera.rotation.eulerAngles;
-    rotcamera.y += drotx;
-    rotcamera.x -= droty;
+    // Vector3 rotcamera = playerCamera.rotation.eulerAngles;
+    // rotcamera.y += drotx;
+    // rotcamera.x -= droty;
 
-    playerCamera.rotation = Quaternion.Euler(rotcamera);
+    // playerCamera.rotation = Quaternion.Euler(rotcamera);
     // check for player mouse button click
     // Debug.Log("ControlModeMouse"+ControlModeMouse);
 
@@ -123,10 +124,17 @@ public class PlayerController : MonoBehaviour
       // Debug.Log(Input.mousePosition);
       float mouseX = Input.GetAxis("Mouse X");
       float mouseY = Input.GetAxis("Mouse Y");
-      drotx+=mouseX;
-      droty+=mouseY;
-      // Debug.Log(drotx);
-      // Debug.Log(droty);
+      // drotx+=mouseX;
+      // droty+=mouseY;
+
+      Vector3 rot_turret = controlled_tank.turret_hinge.rotation.eulerAngles;
+      rot_turret.y += mouseX;
+      // rot_turret.x -= mouseY;
+      rot_turret.z += mouseY;
+      controlled_tank.turret_hinge.rotation = Quaternion.Euler(rot_turret);
+
+      Debug.Log(mouseX);
+      Debug.Log(mouseY);
     }
   }
 
@@ -165,8 +173,8 @@ public class PlayerController : MonoBehaviour
         controlled_tank.player_controlled = false;
         controlled_tank = tankclicked;
         controlled_tank.player_controlled = true;
-        drotx = 0;
-        droty = 0;
+        // drotx = 0;
+        // droty = 0;
         ControlModeMouse = false; // locked
         Cursor.lockState = CursorLockMode.Locked;
       }

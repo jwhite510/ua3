@@ -15,6 +15,8 @@ public class Tank : MonoBehaviour
      public Transform cube_location;
      public NavMeshAgent agent;
 
+     public Transform turret_hinge;
+
      public bool MoveToWayPoint = false;
      public bool player_controlled = false;
 
