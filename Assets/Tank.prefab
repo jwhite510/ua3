@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 8585701607857217279}
   - component: {fileID: 5018744693293609813}
   m_Layer: 9
-  m_Name: Cylinder
+  m_Name: TankBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,6 +480,7 @@ MonoBehaviour:
   camera_location: {fileID: 8161826319151989919}
   cube_location: {fileID: 1486261931510030972}
   agent: {fileID: 7016847808983475144}
+  tank_barrel: {fileID: 930919051392052103}
   turret_hinge: {fileID: 8614574279924829761}
   MoveToWayPoint: 0
   player_controlled: 0
