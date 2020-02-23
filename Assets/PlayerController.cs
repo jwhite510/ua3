@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     // playerCamera.position = controlled_tank.camera_location.position;
     playerCamera.position = controlled_tank.camera_location.transform.position;
     playerCamera.rotation = controlled_tank.camera_location.transform.rotation;
-    // playerCamera.forward = playerCamera.right;
+    // pgameolayerCamera.forward = playerCamera.right;
 
     // Vector3 rotcamera = playerCamera.rotation.eulerAngles;
     // rotcamera.y += drotx;

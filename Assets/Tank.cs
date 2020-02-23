@@ -33,19 +33,35 @@ public class Tank : MonoBehaviour
 
      public Transform projectile_spawn_point;
 
+     public int team = 0;
+
      private float last_fire_time = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-      vehicle_base.GetComponent<Renderer>().material.color = Color.green;
-      turret_hinge.GetComponent<Renderer>().material.color = Color.green;
-      LeftWheel1Renderer.GetComponent<Renderer>().material.color = Color.green;
-      LeftWheel2Renderer.GetComponent<Renderer>().material.color = Color.green;
-      LeftWheel3Renderer.GetComponent<Renderer>().material.color = Color.green;
-      RightWheel1Renderer.GetComponent<Renderer>().material.color = Color.green;
-      RightWheel2Renderer.GetComponent<Renderer>().material.color = Color.green;
-      RightWheel3Renderer.GetComponent<Renderer>().material.color = Color.green;
+      if(team == 1)
+      {
+        vehicle_base.GetComponent<Renderer>().material.color = Color.green;
+        turret_hinge.GetComponent<Renderer>().material.color = Color.green;
+        LeftWheel1Renderer.GetComponent<Renderer>().material.color = Color.green;
+        LeftWheel2Renderer.GetComponent<Renderer>().material.color = Color.green;
+        LeftWheel3Renderer.GetComponent<Renderer>().material.color = Color.green;
+        RightWheel1Renderer.GetComponent<Renderer>().material.color = Color.green;
+        RightWheel2Renderer.GetComponent<Renderer>().material.color = Color.green;
+        RightWheel3Renderer.GetComponent<Renderer>().material.color = Color.green;
+      }
+      else if (team == 2)
+      {
+        vehicle_base.GetComponent<Renderer>().material.color = Color.red;
+        turret_hinge.GetComponent<Renderer>().material.color = Color.red;
+        LeftWheel1Renderer.GetComponent<Renderer>().material.color = Color.red;
+        LeftWheel2Renderer.GetComponent<Renderer>().material.color = Color.red;
+        LeftWheel3Renderer.GetComponent<Renderer>().material.color = Color.red;
+        RightWheel1Renderer.GetComponent<Renderer>().material.color = Color.red;
+        RightWheel2Renderer.GetComponent<Renderer>().material.color = Color.red;
+        RightWheel3Renderer.GetComponent<Renderer>().material.color = Color.red;
+      }
     }
     // Update is called once per frame
     void Update()
@@ -160,8 +176,14 @@ public class Tank : MonoBehaviour
           // Debug.Log(dist < closest_distance);
           if(dist < closest_distance && gameo.transform!=vehicle_base.transform)
           {
-            closestobject = gameo;
-            closest_distance = dist;
+
+            Tank thisTank = gameo.GetComponentInParent<Tank>();
+            if(thisTank && thisTank.team != team)
+            {
+              closestobject = gameo;
+              closest_distance = dist;
+            }
+
           }
         }
 
@@ -219,7 +241,7 @@ public class Tank : MonoBehaviour
           // Debug.Log("on_target: "+on_target);
           if(on_target > 0.9)
           {
-            FireCannon();
+            // FireCannon();
           }
 
 
