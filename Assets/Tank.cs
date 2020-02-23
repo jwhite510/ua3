@@ -24,6 +24,8 @@ public class Tank : MonoBehaviour
 
      public Transform projectile_spawn_point;
 
+     private float last_fire_time = 0;
+
 
 
     // Start is called before the first frame update
@@ -202,7 +204,14 @@ public class Tank : MonoBehaviour
 
           float right_dot = Vector3.Dot(intend_aim_direction, tank_barrel.right);
           float forward_dot = Vector3.Dot(intend_aim_direction, tank_barrel.forward);
-          float up_dot = Vector3.Dot(intend_aim_direction, tank_barrel.up);
+          float on_target = -Vector3.Dot(intend_aim_direction, tank_barrel.up);
+
+
+          Debug.Log("on_target: "+on_target);
+          if(on_target > 0.9)
+          {
+            FireCannon();
+          }
 
 
           // float VerticalAim = (Vector3.Scale(tank_barrel.forward, intend_aim_direction)).magnitude;
@@ -216,7 +225,7 @@ public class Tank : MonoBehaviour
           // Debug.Log("right_dot: "+right_dot);
 
           // Debug.Log("forward_dot: "+forward_dot); // right or left
-          // Debug.Log("up_dot: "+up_dot); // is the target in front of or behind the barrel
+          // Debug.Log("on_target: "+on_target); // is the target in front of or behind the barrel
 
           RotateTurret(-300*forward_dot*Time.deltaTime, 300*right_dot*Time.deltaTime);
 
@@ -260,7 +269,11 @@ public class Tank : MonoBehaviour
     }
     public void FireCannon()
     {
-      GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
-      proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
+      if((Time.time - last_fire_time) > 1)
+      {
+        GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
+        proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
+        last_fire_time = Time.time;
+      }
     }
 }
