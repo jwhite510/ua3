@@ -210,7 +210,7 @@ public class Tank : MonoBehaviour
           // Vector3 current_barrel_r = Quaternion.LookRotation(current_barrel_direction).eulerAngles;
 
           // RotateTurret()
-          Debug.Log("right_dot: "+right_dot);
+          // Debug.Log("right_dot: "+right_dot);
 
           // Debug.Log("forward_dot: "+forward_dot); // right or left
           // Debug.Log("up_dot: "+up_dot); // is the target in front of or behind the barrel
@@ -235,17 +235,18 @@ public class Tank : MonoBehaviour
     }
     public void RotateTurret(float x, float y)
     {
-      Vector3 rot_turret = turret_hinge.rotation.eulerAngles;
+      Vector3 rot_turret = turret_hinge.localRotation.eulerAngles;
       rot_turret.y += x;
       rot_turret.z += y;
+
       if(rot_turret.z > 350 || rot_turret.z < 80)
       {
-        turret_hinge.rotation = Quaternion.Euler(rot_turret);
+        turret_hinge.localRotation = Quaternion.Euler(rot_turret);
       }
       else
       {
         rot_turret.z -= y;
-        turret_hinge.rotation = Quaternion.Euler(rot_turret);
+        turret_hinge.localRotation = Quaternion.Euler(rot_turret);
       }
 
       // Debug.Log("rot_turret.y"+rot_turret.y);

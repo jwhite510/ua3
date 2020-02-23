@@ -25,7 +25,8 @@ public class FollowComponentAtOffset : MonoBehaviour
     transform.position += offset.z*followComponent.transform.forward;
     transform.position += offset.x*followComponent.transform.right;
 
-    transform.forward = followComponent.transform.forward;
+    // transform.forward = followComponent.transform.forward;
+    transform.rotation = followComponent.transform.rotation;
     // transform.rotation = followComponent.transform.rotation;
     // transform.Rotate(transform.right);
     // transform.rotation = followComponent.transform.right;
