@@ -16,8 +16,17 @@ public class Tank : MonoBehaviour
      public NavMeshAgent agent;
      public Transform tank_barrel;
 
-     public Transform turret_hinge;
+     public GameObject turret_hinge;
      public GameObject projectile;
+
+     // wheels
+     public Renderer LeftWheel1Renderer;
+     public Renderer LeftWheel2Renderer;
+     public Renderer LeftWheel3Renderer;
+     public Renderer RightWheel1Renderer;
+     public Renderer RightWheel2Renderer;
+     public Renderer RightWheel3Renderer;
+
 
      public bool MoveToWayPoint = false;
      public bool player_controlled = false;
@@ -29,6 +38,14 @@ public class Tank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      vehicle_base.GetComponent<Renderer>().material.color = Color.green;
+      turret_hinge.GetComponent<Renderer>().material.color = Color.green;
+      LeftWheel1Renderer.GetComponent<Renderer>().material.color = Color.green;
+      LeftWheel2Renderer.GetComponent<Renderer>().material.color = Color.green;
+      LeftWheel3Renderer.GetComponent<Renderer>().material.color = Color.green;
+      RightWheel1Renderer.GetComponent<Renderer>().material.color = Color.green;
+      RightWheel2Renderer.GetComponent<Renderer>().material.color = Color.green;
+      RightWheel3Renderer.GetComponent<Renderer>().material.color = Color.green;
     }
     // Update is called once per frame
     void Update()
@@ -237,18 +254,18 @@ public class Tank : MonoBehaviour
     }
     public void RotateTurret(float x, float y)
     {
-      Vector3 rot_turret = turret_hinge.localRotation.eulerAngles;
+      Vector3 rot_turret = turret_hinge.transform.localRotation.eulerAngles;
       rot_turret.y += x;
       rot_turret.z += y;
 
       if(rot_turret.z > 350 || rot_turret.z < 80)
       {
-        turret_hinge.localRotation = Quaternion.Euler(rot_turret);
+        turret_hinge.transform.localRotation = Quaternion.Euler(rot_turret);
       }
       else
       {
         rot_turret.z -= y;
-        turret_hinge.localRotation = Quaternion.Euler(rot_turret);
+        turret_hinge.transform.localRotation = Quaternion.Euler(rot_turret);
       }
 
       // Debug.Log("rot_turret.y"+rot_turret.y);
