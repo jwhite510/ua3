@@ -143,8 +143,8 @@ GameObject:
   - component: {fileID: 7714975371052298038}
   - component: {fileID: 3808692385054509993}
   m_Layer: 9
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: VehcleBase
+  m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -88,13 +88,13 @@ public class Tank : MonoBehaviour
           // move_direction
           // cube_location.right
           float dotprod = Vector3.Dot(move_direction, cube_location.right);
-          Debug.Log("forwarddrive"+dotprod);
+          // Debug.Log("forwarddrive"+dotprod);
           Vector3 crossprod = Vector3.Cross(move_direction, cube_location.right);
 
           // get dot product of crossprod
           float turnvalue = Vector3.Dot(cube_location.up, crossprod);
 
-          Debug.Log("turn"+turnvalue);
+          // Debug.Log("turn"+turnvalue);
 
           crossprod*=10;
 
@@ -129,6 +129,41 @@ public class Tank : MonoBehaviour
 
         }
       }
+      // move barrel to ai at nearest enemy
+      if(!player_controlled)
+      {
+        // Debug.Log(name+" find nearest enemy");
+        GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("Vehicle");
+        float closest_distance = 1000.0f;
+        GameObject closestobject = null;
+
+        foreach(GameObject gameo in gameobjects)
+        {
+          float dist = Vector3.Distance(cube_location.position, gameo.transform.position);
+          Debug.Log(name+"  dist"+dist);
+          Debug.Log(name+"  closest_distance"+closest_distance);
+          Debug.Log(dist < closest_distance);
+          if(dist < closest_distance && gameo.transform!=cube_location)
+          {
+            closestobject = gameo;
+            closest_distance = dist;
+          }
+        }
+
+        if(closestobject)
+        {
+          Debug.DrawLine(
+              closestobject.transform.position,
+              cube_location.position,
+              Color.red,
+              0.0f
+              );
+        }
+
+
+      }
+
+
     }
     public void DriveWheels(float LeftSide, float RightSide)
     {
