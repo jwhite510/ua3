@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 6527601582277720053}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameralocation: {fileID: 1630894429351418272}
+  vehicle_base: {fileID: 204607318340976041}
   team: 0
   player_controlled: 0
 --- !u!1 &6514630341382143453

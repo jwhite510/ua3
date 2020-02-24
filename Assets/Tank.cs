@@ -12,7 +12,6 @@ public class Tank : VehicleBase
      public Wheel RightWheel2;
      public Wheel RightWheel3;
      // public Transform camera_location;
-     public GameObject vehicle_base;
      public NavMeshAgent agent;
      public Transform tank_barrel;
 
@@ -161,100 +160,24 @@ public class Tank : VehicleBase
       // move barrel to ai at nearest enemy
       if(!player_controlled)
       {
-        // Debug.Log(name+" find nearest enemy");
-        GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("Vehicle");
-        float closest_distance = 1000.0f;
-        GameObject closestobject = null;
 
-        foreach(GameObject gameo in gameobjects)
-        {
-          float dist = Vector3.Distance(vehicle_base.transform.position, gameo.transform.position);
-          // Debug.Log(name+"  dist"+dist);
-          // Debug.Log(name+"  closest_distance"+closest_distance);
-          // Debug.Log(dist < closest_distance);
-          if(dist < closest_distance && gameo.transform!=vehicle_base.transform)
-          {
-
-            Tank thisTank = gameo.GetComponentInParent<Tank>();
-            if(thisTank && thisTank.team != team)
-            {
-              closestobject = gameo;
-              closest_distance = dist;
-            }
-
-          }
-        }
-
+        GameObject closestobject = FindNearestEnemyVehicle();
         if(closestobject)
         {
-          // Debug.DrawLine(
-              // closestobject.transform.position,
-              // vehicle_base.transform.position,
-              // Color.red,
-              // 0.0f
-              // );
-
-
-          // move torret roward target
-          // barrel aim direction
-          // Debug.DrawLine(
-              // tank_barrel.position,
-              // tank_barrel.position+(-3)*tank_barrel.up,
-              // Color.red,
-              // 0.0f
-              // );
-
-          // barrel up and right
-          // Debug.DrawLine(
-              // tank_barrel.position,
-              // tank_barrel.position+(-1)*tank_barrel.right,
-              // Color.blue,
-              // 0.0f
-              // );
-          // barrel up and right
-          // Debug.DrawLine(
-              // tank_barrel.position,
-              // tank_barrel.position+(-1)*tank_barrel.forward,
-              // Color.blue,
-              // 0.0f
-              // );
 
           Vector3 current_barrel_direction = -1*tank_barrel.up;
           // direction to target
           Vector3 intend_aim_direction = closestobject.transform.position - tank_barrel.position;
           intend_aim_direction.Normalize();
 
-          // Debug.DrawLine(
-              // tank_barrel.position,
-              // tank_barrel.position+(3)*intend_aim_direction,
-              // Color.blue,
-              // 0.0f
-              // );
-
           float right_dot = Vector3.Dot(intend_aim_direction, tank_barrel.right);
           float forward_dot = Vector3.Dot(intend_aim_direction, tank_barrel.forward);
           float on_target = -Vector3.Dot(intend_aim_direction, tank_barrel.up);
 
-
-          // Debug.Log("on_target: "+on_target);
           if(on_target > 0.9)
           {
             // FireCannon();
           }
-
-
-          // float VerticalAim = (Vector3.Scale(tank_barrel.forward, intend_aim_direction)).magnitude;
-          // Debug.Log("HorizontalAim"+HorizontalAim);
-          // Debug.Log("VerticalAim"+VerticalAim);
-
-          // Vector3 intend_aim_r = Quaternion.LookRotation(intend_aim_direction).eulerAngles;
-          // Vector3 current_barrel_r = Quaternion.LookRotation(current_barrel_direction).eulerAngles;
-
-          // RotateTurret()
-          // Debug.Log("right_dot: "+right_dot);
-
-          // Debug.Log("forward_dot: "+forward_dot); // right or left
-          // Debug.Log("on_target: "+on_target); // is the target in front of or behind the barrel
 
           RotateTurret(-300*forward_dot*Time.deltaTime, 300*right_dot*Time.deltaTime);
 
