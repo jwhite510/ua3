@@ -103,6 +103,11 @@ public class PlayerController : MonoBehaviour
         Tank controlled_tank = (Tank)controlled_vehicle;
         controlled_tank.thistankturret.FireCannon();
       }
+      else if(controlled_vehicle is battlestation)
+      {
+        battlestation controlled_battlestation = (battlestation)controlled_vehicle;
+        controlled_battlestation.turret.FireCannon();
+      }
     }
   }
 
@@ -137,6 +142,20 @@ public class PlayerController : MonoBehaviour
         // drotx+=mouseX;
         // droty+=mouseY;
         controlled_tank.thistankturret.RotateTurret(mouseX, mouseY);
+      }
+    }
+    else if(controlled_vehicle is battlestation)
+    {
+      battlestation controlled_battlestation = (battlestation)controlled_vehicle;
+      if(!ControlModeMouse)
+      {
+        // Debug.Log("get mouse axis");
+        // Debug.Log(Input.mousePosition);
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        // drotx+=mouseX;
+        // droty+=mouseY;
+        controlled_battlestation.turret.RotateTurret(mouseX, mouseY);
       }
     }
 

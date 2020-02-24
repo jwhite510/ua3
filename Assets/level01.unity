@@ -1333,6 +1333,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8696527357618199224, guid: d855de9d9474c6442a7987f148a0a909,
+        type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4392722578050654172, guid: b4299ba695e91a44a9af2ae1f4a48743,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d855de9d9474c6442a7987f148a0a909, type: 3}
 --- !u!1 &1935575286
@@ -1602,6 +1608,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleStation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517633058802903253, guid: 79cdef30f1a0d4f4d849f06d3c39139a,
+        type: 3}
+      propertyPath: team
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6940841930945429020, guid: 79cdef30f1a0d4f4d849f06d3c39139a,
         type: 3}

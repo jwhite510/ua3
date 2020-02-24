@@ -454,6 +454,7 @@ MonoBehaviour:
   team: 0
   player_controlled: 0
   turret: {fileID: 4642316921787112629}
+  turret_base: {fileID: 6514630341382143453}
 --- !u!114 &4642316921787112629
 MonoBehaviour:
   m_ObjectHideFlags: 0
