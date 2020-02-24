@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 
   public Transform playerCamera;
-  public Tank controlled_tank;
+  public VehicleBase controlled_vehicle;
   public Camera cam;
   public Text SelectedVehicleText;
   public Tank SelectedTank;
@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     // FindObjectOfType<GameManager>()
     Cursor.lockState = CursorLockMode.Locked;
     ControlModeMouse = false; // locked
-    SelectedVehicleText.text = controlled_tank.name;
-    controlled_tank.player_controlled = true;
+    SelectedVehicleText.text = controlled_vehicle.name;
+    controlled_vehicle.player_controlled = true;
 
   }
 
@@ -36,9 +36,9 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
 
-    // playerCamera.position = controlled_tank.camera_location.position;
-    playerCamera.position = controlled_tank.camera_location.transform.position;
-    playerCamera.rotation = controlled_tank.camera_location.transform.rotation;
+    // playerCamera.position = controlled_vehicle.cameralocation.position;
+    playerCamera.position = controlled_vehicle.cameralocation.transform.position;
+    playerCamera.rotation = controlled_vehicle.cameralocation.transform.rotation;
     // pgameolayerCamera.forward = playerCamera.right;
 
     // Vector3 rotcamera = playerCamera.rotation.eulerAngles;
@@ -98,41 +98,48 @@ public class PlayerController : MonoBehaviour
     // mouse click
     if(Input.GetMouseButtonDown(0) && !ControlModeMouse)
     {
-      controlled_tank.FireCannon();
+      if(controlled_vehicle is Tank)
+      {
+        Tank controlled_tank = (Tank)controlled_vehicle;
+        controlled_tank.FireCannon();
+      }
     }
   }
 
   void FixedUpdate()
   {
+    if(controlled_vehicle is Tank)
+    {
+      Tank controlled_tank = (Tank)controlled_vehicle;
+      if(Input.GetKey("w"))
+      {
+        controlled_tank.DriveWheels(10,10);
+      }
+      else if(Input.GetKey("s"))
+      {
+        controlled_tank.DriveWheels(-10,-10);
+      }
+      else if(Input.GetKey("d"))
+      {
+        controlled_tank.DriveWheels(10,-10);
+      }
+      else if(Input.GetKey("a"))
+      {
+        controlled_tank.DriveWheels(-10,10);
+      }
+      // if in no mouse mode
+      if(!ControlModeMouse)
+      {
+        // Debug.Log("get mouse axis");
+        // Debug.Log(Input.mousePosition);
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        // drotx+=mouseX;
+        // droty+=mouseY;
+        controlled_tank.RotateTurret(mouseX, mouseY);
+      }
+    }
 
-    if(Input.GetKey("w"))
-    {
-      controlled_tank.DriveWheels(10,10);
-    }
-    else if(Input.GetKey("s"))
-    {
-      controlled_tank.DriveWheels(-10,-10);
-    }
-    else if(Input.GetKey("d"))
-    {
-      controlled_tank.DriveWheels(10,-10);
-    }
-    else if(Input.GetKey("a"))
-    {
-      controlled_tank.DriveWheels(-10,10);
-    }
-
-    // if in no mouse mode
-    if(!ControlModeMouse)
-    {
-      // Debug.Log("get mouse axis");
-      // Debug.Log(Input.mousePosition);
-      float mouseX = Input.GetAxis("Mouse X");
-      float mouseY = Input.GetAxis("Mouse Y");
-      // drotx+=mouseX;
-      // droty+=mouseY;
-      controlled_tank.RotateTurret(mouseX, mouseY);
-    }
   }
 
   void HandleSingleClick()
@@ -164,14 +171,12 @@ public class PlayerController : MonoBehaviour
     bool HitSomething = Physics.Raycast(ray, out hit);
     if(HitSomething)
     {
-      Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
-      if(tankclicked)
+      VehicleBase vehicle_clicked = hit.transform.gameObject.GetComponentInParent<VehicleBase>();
+      if(vehicle_clicked)
       {
-        controlled_tank.player_controlled = false;
-        controlled_tank = tankclicked;
-        controlled_tank.player_controlled = true;
-        // drotx = 0;
-        // droty = 0;
+        controlled_vehicle.player_controlled = false;
+        controlled_vehicle = vehicle_clicked;
+        controlled_vehicle.player_controlled = true;
         ControlModeMouse = false; // locked
         Cursor.lockState = CursorLockMode.Locked;
       }

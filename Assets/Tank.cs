@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Tank : MonoBehaviour
+public class Tank : VehicleBase
 {
      public Wheel LeftWheel1;
      public Wheel LeftWheel2;
@@ -11,7 +11,7 @@ public class Tank : MonoBehaviour
      public Wheel RightWheel1;
      public Wheel RightWheel2;
      public Wheel RightWheel3;
-     public Transform camera_location;
+     // public Transform camera_location;
      public GameObject vehicle_base;
      public NavMeshAgent agent;
      public Transform tank_barrel;
@@ -29,11 +29,9 @@ public class Tank : MonoBehaviour
 
 
      public bool MoveToWayPoint = false;
-     public bool player_controlled = false;
-
      public Transform projectile_spawn_point;
 
-     public int team = 0;
+     // public int team = 0;
 
      private float last_fire_time = 0;
 

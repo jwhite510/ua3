@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class battlestation : MonoBehaviour
+public class battlestation : VehicleBase
 {
     // Start is called before the first frame update
     void Start()

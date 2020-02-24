@@ -501,13 +501,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383febe167b622643a8bbf82537a5c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameralocation: {fileID: 8161826319151989919}
+  team: 0
   LeftWheel1: {fileID: 3848578322993102573}
   LeftWheel2: {fileID: 8302347167621152976}
   LeftWheel3: {fileID: 3839503408123995513}
   RightWheel1: {fileID: 4171081189106609009}
   RightWheel2: {fileID: 534882508903458987}
   RightWheel3: {fileID: 5148066011081217299}
-  camera_location: {fileID: 8161826319151989919}
   vehicle_base: {fileID: 4698241908946553900}
   agent: {fileID: 7016847808983475144}
   tank_barrel: {fileID: 930919051392052103}
