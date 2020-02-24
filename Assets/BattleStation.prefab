@@ -31,6 +31,7 @@ Transform:
   - {fileID: 6787747715801308588}
   - {fileID: 317250717624761863}
   - {fileID: 1630894429351418272}
+  - {fileID: 5361138458779342464}
   m_Father: {fileID: 6940841930945429020}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,7 +48,7 @@ GameObject:
   - component: {fileID: 2708055134679296954}
   - component: {fileID: 6527601582277720053}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: VehicleBase
   m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,6 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6940841930945429020}
   - component: {fileID: 5517633058802903253}
+  - component: {fileID: 4642316921787112629}
   m_Layer: 0
   m_Name: BattleStation
   m_TagString: Untagged
@@ -451,6 +453,25 @@ MonoBehaviour:
   vehicle_base: {fileID: 204607318340976041}
   team: 0
   player_controlled: 0
+  turret: {fileID: 4642316921787112629}
+--- !u!114 &4642316921787112629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352492811351886187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3038195d864037f408989829e6dc798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret_hinge: {fileID: 198390963525994595}
+  tank_barrel: {fileID: 6787747715801308588}
+  projectile_spawn_point: {fileID: 5361138458779342464}
+  projectile: {fileID: 4392722578050654172, guid: b4299ba695e91a44a9af2ae1f4a48743,
+    type: 3}
+  vehicle_base: {fileID: 204607318340976041}
 --- !u!1 &6514630341382143453
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +563,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6576740803579371213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5361138458779342464}
+  m_Layer: 0
+  m_Name: projectile_spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5361138458779342464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576740803579371213}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2725738986209269673}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
 --- !u!1 &7350281054186907134
 GameObject:
   m_ObjectHideFlags: 0

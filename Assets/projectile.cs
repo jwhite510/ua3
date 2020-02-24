@@ -33,7 +33,7 @@ public class projectile : MonoBehaviour
       Tank tankhit = collisionInfo.collider.GetComponentInParent<Tank>();
       if(tankhit)
       {
-        Debug.Log("hit tank:"+tankhit.name);
+        // Debug.Log("hit tank:"+tankhit.name);
       }
 
       collisionTime = Time.time;

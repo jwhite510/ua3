@@ -69,7 +69,18 @@ public class Turret : MonoBehaviour
     if((Time.time - last_fire_time) > 1)
     {
       GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
-      proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
+
+
+      if(vehicle_base.GetComponent<Rigidbody>())
+      {
+        proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
+      }
+      else
+      {
+        proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right;
+      }
+
+
       last_fire_time = Time.time;
     }
   }
