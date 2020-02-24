@@ -459,6 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2418393539771133893}
   - component: {fileID: 850117804028765121}
+  - component: {fileID: 8696527357618199224}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
@@ -502,28 +503,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameralocation: {fileID: 8161826319151989919}
+  vehicle_base: {fileID: 4698241908946553900}
   team: 0
+  player_controlled: 0
   LeftWheel1: {fileID: 3848578322993102573}
   LeftWheel2: {fileID: 8302347167621152976}
   LeftWheel3: {fileID: 3839503408123995513}
   RightWheel1: {fileID: 4171081189106609009}
   RightWheel2: {fileID: 534882508903458987}
   RightWheel3: {fileID: 5148066011081217299}
-  vehicle_base: {fileID: 4698241908946553900}
   agent: {fileID: 7016847808983475144}
   tank_barrel: {fileID: 930919051392052103}
   turret_hinge: {fileID: 8807765625745087054}
-  projectile: {fileID: 4392722578050654172, guid: b4299ba695e91a44a9af2ae1f4a48743,
-    type: 3}
   LeftWheel1Renderer: {fileID: 540768465004197768}
   LeftWheel2Renderer: {fileID: 4746243526626167221}
   LeftWheel3Renderer: {fileID: 549860903368698908}
   RightWheel1Renderer: {fileID: 795870119229661716}
   RightWheel2Renderer: {fileID: 3856663869334872526}
   RightWheel3Renderer: {fileID: 8473607735773584502}
+  thistankturret: {fileID: 8696527357618199224}
   MoveToWayPoint: 0
-  player_controlled: 0
+--- !u!114 &8696527357618199224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130507275127741014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3038195d864037f408989829e6dc798e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret_hinge: {fileID: 8807765625745087054}
+  tank_barrel: {fileID: 930919051392052103}
   projectile_spawn_point: {fileID: 4357807983626840035}
+  projectile: {fileID: 4392722578050654172, guid: b4299ba695e91a44a9af2ae1f4a48743,
+    type: 3}
+  vehicle_base: {fileID: 4698241908946553900}
 --- !u!1 &8807765625745087054
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,12 +889,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3658188310834869170}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &4746243527221764912 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 8294071081409482882, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
-    type: 3}
-  m_PrefabInstance: {fileID: 3658188310834869170}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &4746243526626167221 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8294071080696461831, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
@@ -896,6 +907,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b37a3b3e55e984bbbbe34e0f1768e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &4746243527221764912 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8294071081409482882, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3658188310834869170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5089044417093393353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -985,18 +1002,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
---- !u!114 &534882508903458987 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4752320298262197090, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+--- !u!23 &3856663869334872526 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8294071080696461831, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
     type: 3}
   m_PrefabInstance: {fileID: 5089044417093393353}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52b37a3b3e55e984bbbbe34e0f1768e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &3856663870484106059 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 8294071081409482882, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
@@ -1009,12 +1020,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5089044417093393353}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &3856663869334872526 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8294071080696461831, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+--- !u!114 &534882508903458987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4752320298262197090, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
     type: 3}
   m_PrefabInstance: {fileID: 5089044417093393353}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b37a3b3e55e984bbbbe34e0f1768e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8402388393921498511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1342,6 +1359,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0ff6145934ab74d85d26f9dbbf400e, type: 3}
+--- !u!23 &795870119229661716 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8294071080696461831, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8651707474980149267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &795870120831879312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8294071081409482883, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
@@ -1366,9 +1389,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b37a3b3e55e984bbbbe34e0f1768e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &795870119229661716 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8294071080696461831, guid: 1d0ff6145934ab74d85d26f9dbbf400e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8651707474980149267}
-  m_PrefabAsset: {fileID: 0}

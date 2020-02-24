@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
       if(controlled_vehicle is Tank)
       {
         Tank controlled_tank = (Tank)controlled_vehicle;
-        controlled_tank.FireCannon();
+        controlled_tank.thistankturret.FireCannon();
       }
     }
   }
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
         // drotx+=mouseX;
         // droty+=mouseY;
-        controlled_tank.RotateTurret(mouseX, mouseY);
+        controlled_tank.thistankturret.RotateTurret(mouseX, mouseY);
       }
     }
 
