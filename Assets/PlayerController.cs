@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,7 +53,10 @@ public class PlayerController : MonoBehaviour
   {
     if(SpawnUnitsCursor.active)
     {
-      SpawnUnitsCursor.transform.position = Input.mousePosition;
+      Vector3 SpawnUnitsCursor_position = Input.mousePosition;
+      SpawnUnitsCursor_position.x +=30;
+      SpawnUnitsCursor_position.y -=30;
+      SpawnUnitsCursor.transform.position = SpawnUnitsCursor_position;
     }
 
     // playerCamera.position = controlled_vehicle.cameralocation.position;
@@ -103,7 +107,7 @@ public class PlayerController : MonoBehaviour
       }
     }
     // if cursor toggle key is pressed
-    if(Input.GetKeyDown("space"))
+    if(Input.GetKeyDown("e"))
     {
       // Debug.Log("unlock cursor");
       if(Cursor.lockState == CursorLockMode.Locked)
@@ -115,6 +119,7 @@ public class PlayerController : MonoBehaviour
       {
         Cursor.lockState = CursorLockMode.Locked;
         ControlModeMouse = false; // locked
+        SpawnUnitsCursor.active = false;
       }
     }
   }
@@ -171,60 +176,97 @@ public class PlayerController : MonoBehaviour
 
   void HandleSingleLeftClick()
   {
-    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
-    bool HitSomething = Physics.Raycast(ray, out hit);
-    if(HitSomething)
+    if(EventSystem.current.IsPointerOverGameObject())
     {
-      // Debug.Log(hit.point.ToString());
-      // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
-      // Debug.Log("draw debug line");
-      // Debug.Log(hit.transform.gameObject.name);
-      Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
-
-      if(tankclicked)
+      return;
+    }
+    if(!SpawnUnitsCursor.active)
+    {
+      Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+      RaycastHit hit;
+      bool HitSomething = Physics.Raycast(ray, out hit);
+      if(HitSomething)
       {
-        // Debug.Log(tankclicked.name);
-        SelectedVehicleText.text = tankclicked.name;
-        SelectedTank = tankclicked;
+        // Debug.Log(hit.point.ToString());
+        // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+        // Debug.Log("draw debug line");
+        // Debug.Log(hit.transform.gameObject.name);
+        Tank tankclicked = hit.transform.gameObject.GetComponentInParent<Tank>();
+
+        if(tankclicked)
+        {
+          // Debug.Log(tankclicked.name);
+          SelectedVehicleText.text = tankclicked.name;
+          SelectedTank = tankclicked;
+        }
       }
+    }
+    else if(SpawnUnitsCursor.active)
+    {
+      Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+      RaycastHit hit;
+      bool HitSomething = Physics.Raycast(ray, out hit);
+      if(HitSomething)
+      {
+        Debug.Log("hit.point.ToString()"+hit.point.ToString());
+        Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+      }
+
     }
   }
   void HandleDoubleLeftClick()
   {
-    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
-    bool HitSomething = Physics.Raycast(ray, out hit);
-    if(HitSomething)
+    if(EventSystem.current.IsPointerOverGameObject())
     {
-      VehicleBase vehicle_clicked = hit.transform.gameObject.GetComponentInParent<VehicleBase>();
-      if(vehicle_clicked)
+      return;
+    }
+    if(!SpawnUnitsCursor.active)
+    {
+      Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+      RaycastHit hit;
+      bool HitSomething = Physics.Raycast(ray, out hit);
+      if(HitSomething)
       {
-        controlled_vehicle.player_controlled = false;
-        controlled_vehicle = vehicle_clicked;
-        controlled_vehicle.player_controlled = true;
-        ControlModeMouse = false; // locked
-        Cursor.lockState = CursorLockMode.Locked;
-        SetPlayerUI(controlled_vehicle);
+        VehicleBase vehicle_clicked = hit.transform.gameObject.GetComponentInParent<VehicleBase>();
+        if(vehicle_clicked)
+        {
+          controlled_vehicle.player_controlled = false;
+          controlled_vehicle = vehicle_clicked;
+          controlled_vehicle.player_controlled = true;
+          ControlModeMouse = false; // locked
+          Cursor.lockState = CursorLockMode.Locked;
+          SetPlayerUI(controlled_vehicle);
+        }
       }
     }
   }
   void HandleSingleRightClick()
   {
-    // Debug.Log("Right Click");
-    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
-    bool HitSomething = Physics.Raycast(ray, out hit);
-    if(HitSomething)
+    if(EventSystem.current.IsPointerOverGameObject())
     {
-      // Debug.Log(hit.point.ToString());
-      // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
-      if(SelectedTank)
+      return;
+    }
+    if(!SpawnUnitsCursor.active)
+    {
+      // Debug.Log("Right Click");
+      Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+      RaycastHit hit;
+      bool HitSomething = Physics.Raycast(ray, out hit);
+      if(HitSomething)
       {
-        SelectedTank.MoveToWayPoint = true;
-        SelectedTank.agent.SetDestination(hit.point);
-      }
+        // Debug.Log(hit.point.ToString());
+        // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+        if(SelectedTank)
+        {
+          SelectedTank.MoveToWayPoint = true;
+          SelectedTank.agent.SetDestination(hit.point);
+        }
 
+      }
+    }
+    else if(SpawnUnitsCursor.active)
+    {
+      SpawnUnitsCursor.active = false;
     }
   }
 
