@@ -39,41 +39,48 @@ public class PlayerController : MonoBehaviour
     // playerCamera.position = controlled_vehicle.cameralocation.position;
     playerCamera.position = controlled_vehicle.cameralocation.transform.position;
     playerCamera.rotation = controlled_vehicle.cameralocation.transform.rotation;
-    // pgameolayerCamera.forward = playerCamera.right;
-
-    // Vector3 rotcamera = playerCamera.rotation.eulerAngles;
-    // rotcamera.y += drotx;
-    // rotcamera.x -= droty;
-
-    // playerCamera.rotation = Quaternion.Euler(rotcamera);
-    // check for player mouse button click
-    // Debug.Log("ControlModeMouse"+ControlModeMouse);
-
-    // Debug.Log(Time.time);
-    if(Input.GetMouseButtonDown(0) && ControlModeMouse)
+    if(ControlModeMouse)
     {
-      // Debug.Log("mouse down");
-      if(!handling_mouseclick)
+      if(Input.GetMouseButtonDown(0))
       {
-        ClickTime = Time.time;
-        handling_mouseclick = true;
+        if(!handling_mouseclick)
+        {
+          ClickTime = Time.time;
+          handling_mouseclick = true;
+        }
+        else if(handling_mouseclick)
+        {
+          HandleDoubleLeftClick();
+          handling_mouseclick = false;
+        }
       }
-      else if(handling_mouseclick)
+      if(handling_mouseclick)
       {
-        // Debug.Log("Handle Double Click");
-        // possess the clicked unit
-        HandleDoubleClick();
-        handling_mouseclick = false;
+        if(Time.time > (ClickTime + 0.2))
+        {
+          HandleSingleLeftClick();
+          handling_mouseclick = false;
+        }
+      }
+      if(Input.GetMouseButtonDown(1))
+      {
+        HandleSingleRightClick();
       }
     }
-    if(handling_mouseclick)
+    else if(!ControlModeMouse)
     {
-      if(Time.time > (ClickTime + 0.2))
+      if(Input.GetMouseButtonDown(0))
       {
-        // Debug.Log("Handle Single Click");
-        // select the clicked unit
-        HandleSingleClick();
-        handling_mouseclick = false;
+        if(controlled_vehicle is Tank)
+        {
+          Tank controlled_tank = (Tank)controlled_vehicle;
+          controlled_tank.thistankturret.FireCannon();
+        }
+        else if(controlled_vehicle is battlestation)
+        {
+          battlestation controlled_battlestation = (battlestation)controlled_vehicle;
+          controlled_battlestation.turret.FireCannon();
+        }
       }
     }
     // if cursor toggle key is pressed
@@ -89,24 +96,6 @@ public class PlayerController : MonoBehaviour
       {
         Cursor.lockState = CursorLockMode.Locked;
         ControlModeMouse = false; // locked
-      }
-    }
-    if(Input.GetMouseButtonDown(1) && ControlModeMouse)
-    {
-      HandleSingleRightClick();
-    }
-    // mouse click
-    if(Input.GetMouseButtonDown(0) && !ControlModeMouse)
-    {
-      if(controlled_vehicle is Tank)
-      {
-        Tank controlled_tank = (Tank)controlled_vehicle;
-        controlled_tank.thistankturret.FireCannon();
-      }
-      else if(controlled_vehicle is battlestation)
-      {
-        battlestation controlled_battlestation = (battlestation)controlled_vehicle;
-        controlled_battlestation.turret.FireCannon();
       }
     }
   }
@@ -161,9 +150,8 @@ public class PlayerController : MonoBehaviour
 
   }
 
-  void HandleSingleClick()
+  void HandleSingleLeftClick()
   {
-
     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
     RaycastHit hit;
     bool HitSomething = Physics.Raycast(ray, out hit);
@@ -183,7 +171,7 @@ public class PlayerController : MonoBehaviour
       }
     }
   }
-  void HandleDoubleClick()
+  void HandleDoubleLeftClick()
   {
     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
     RaycastHit hit;
