@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
   public Camera cam;
   public Text SelectedVehicleText;
   public Tank SelectedTank;
+  public GameObject PlayerUI;
 
   bool ControlModeMouse;
   // the delta rotation
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     ControlModeMouse = false; // locked
     SelectedVehicleText.text = controlled_vehicle.name;
     controlled_vehicle.player_controlled = true;
+    SetPlayerUI(controlled_vehicle);
 
   }
 
@@ -186,6 +188,7 @@ public class PlayerController : MonoBehaviour
         controlled_vehicle.player_controlled = true;
         ControlModeMouse = false; // locked
         Cursor.lockState = CursorLockMode.Locked;
+        SetPlayerUI(controlled_vehicle);
       }
     }
   }
@@ -205,6 +208,46 @@ public class PlayerController : MonoBehaviour
         SelectedTank.agent.SetDestination(hit.point);
       }
 
+    }
+  }
+
+  public void SpawnUnitsButtonClicked()
+  {
+    Debug.Log("SpawnUnitsButtonClicked called");
+
+
+    // Debug.Log("SpawnUnitsButtonClicked called");
+    // Transform pui = PlayerUI.transform.Find("SpawnUnitsButton");
+    // Debug.Log("pui.name"+pui.name);
+  }
+
+  void SetPlayerUI(VehicleBase vehiclebase)
+  {
+    if(vehiclebase is Tank)
+    {
+      ActivateButton(PlayerUI, "spawnUnitsButton", false);
+    }
+    else if(vehiclebase is battlestation)
+    {
+      // enable spawnint vehicles button
+      ActivateButton(PlayerUI, "spawnUnitsButton", true);
+    }
+  }
+  void ActivateButton(GameObject UIObject, string buttonName, bool status)
+  {
+    Transform[] ts = UIObject.transform.GetComponentsInChildren<Transform>(true);
+    GameObject spawnUnitsButton = null;
+    foreach(Transform t in ts)
+    {
+      if (t.gameObject.name == "SpawnUnitsButton")
+      {
+        spawnUnitsButton = t.gameObject;
+      }
+    }
+    if(spawnUnitsButton)
+    {
+      Debug.Log("spawnUnitsButton.name => "+spawnUnitsButton.name);
+      spawnUnitsButton.active = status;
     }
   }
 }
