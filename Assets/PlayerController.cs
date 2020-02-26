@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
   public Text SelectedVehicleText;
   public Tank SelectedTank;
   public GameObject PlayerUI;
+  private GameObject SpawnUnitsCursor;
 
   bool ControlModeMouse;
   // the delta rotation
@@ -32,11 +33,27 @@ public class PlayerController : MonoBehaviour
     controlled_vehicle.player_controlled = true;
     SetPlayerUI(controlled_vehicle);
 
+    // find the spawn units cursor
+    Transform[] ts = PlayerUI.transform.GetComponentsInChildren<Transform>(true);
+    foreach(Transform t in ts)
+    {
+      if (t.gameObject.name == "SpawnUnitsCursor")
+      {
+        SpawnUnitsCursor = t.gameObject;
+        break;
+      }
+    }
+    SpawnUnitsCursor.active = false;
+    // SpawnUnitsCursor.transform.position = new Vector3(50,50,0);
   }
 
   // Update is called once per frame
   void Update()
   {
+    if(SpawnUnitsCursor.active)
+    {
+      SpawnUnitsCursor.transform.position = Input.mousePosition;
+    }
 
     // playerCamera.position = controlled_vehicle.cameralocation.position;
     playerCamera.position = controlled_vehicle.cameralocation.transform.position;
@@ -214,6 +231,14 @@ public class PlayerController : MonoBehaviour
   public void SpawnUnitsButtonClicked()
   {
     Debug.Log("SpawnUnitsButtonClicked called");
+    if(SpawnUnitsCursor.active)
+    {
+      SpawnUnitsCursor.active = false;
+    }
+    else
+    {
+      SpawnUnitsCursor.active = true;
+    }
 
 
     // Debug.Log("SpawnUnitsButtonClicked called");
