@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
   public Text SelectedVehicleText;
   public Tank SelectedTank;
   public GameObject PlayerUI;
+  public GameObject SpawnVehicle;
   private GameObject SpawnUnitsCursor;
 
   bool ControlModeMouse;
@@ -210,6 +211,14 @@ public class PlayerController : MonoBehaviour
       {
         Debug.Log("hit.point.ToString()"+hit.point.ToString());
         Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+
+        Quaternion e1 = new Quaternion(0,0,0,0);
+        e1.eulerAngles = new Vector3(0,0,0);
+        GameObject spawnVehicle = Instantiate(SpawnVehicle, hit.point + new Vector3(0,3,0), e1);
+        Tank tanks = spawnVehicle.GetComponent<Tank>();
+        // set the tank to this host station team
+        tanks.team = controlled_vehicle.team;
+        // Debug.Log("tanks.team => "+tanks.team);
       }
 
     }
