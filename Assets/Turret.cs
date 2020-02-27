@@ -60,7 +60,7 @@ public class Turret : MonoBehaviour
 
     if(on_target > 0.9)
     {
-      FireCannon();
+      // FireCannon();
     }
     RotateTurret(-300*forward_dot*Time.deltaTime, 300*right_dot*Time.deltaTime);
   }
