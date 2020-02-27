@@ -71,7 +71,12 @@ MonoBehaviour:
   vehicle_base: {fileID: 0}
   team: 0
   player_controlled: 0
-  legjoint: {fileID: 3927077501566334979}
+  L1_leg: {fileID: 3927077501566334979}
+  L2_leg: {fileID: 4081137202901667337}
+  L3_leg: {fileID: 8585784849463078472}
+  R1_leg: {fileID: 7171584890265054619}
+  R2_leg: {fileID: 5004539695036282752}
+  R3_leg: {fileID: 2172093988519457065}
 --- !u!1 &5977935929076998301
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 1461383717188637478, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_Name
-      value: Leg (2)
+      value: R2_Leg
       objectReference: {fileID: 0}
     - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
@@ -263,6 +268,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 795277977899898681}
   m_PrefabAsset: {fileID: 0}
+--- !u!153 &5004539695036282752 stripped
+ConfigurableJoint:
+  m_CorrespondingSourceObject: {fileID: 5655069008241664185, guid: 78553cb3a498cb54086de27abc4d8663,
+    type: 3}
+  m_PrefabInstance: {fileID: 795277977899898681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3313595147972644130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273,7 +284,7 @@ PrefabInstance:
     - target: {fileID: 1461383717188637478, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_Name
-      value: Leg (1)
+      value: R1_Leg
       objectReference: {fileID: 0}
     - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
@@ -363,6 +374,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3313595147972644130}
   m_PrefabAsset: {fileID: 0}
+--- !u!153 &7171584890265054619 stripped
+ConfigurableJoint:
+  m_CorrespondingSourceObject: {fileID: 5655069008241664185, guid: 78553cb3a498cb54086de27abc4d8663,
+    type: 3}
+  m_PrefabInstance: {fileID: 3313595147972644130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4133181417909505777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,7 +390,7 @@ PrefabInstance:
     - target: {fileID: 1461383717188637478, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_Name
-      value: Leg (4)
+      value: L3_Leg
       objectReference: {fileID: 0}
     - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
@@ -463,6 +480,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4133181417909505777}
   m_PrefabAsset: {fileID: 0}
+--- !u!153 &8585784849463078472 stripped
+ConfigurableJoint:
+  m_CorrespondingSourceObject: {fileID: 5655069008241664185, guid: 78553cb3a498cb54086de27abc4d8663,
+    type: 3}
+  m_PrefabInstance: {fileID: 4133181417909505777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5791071343946895760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 1461383717188637478, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_Name
-      value: Leg
+      value: R3_Leg
       objectReference: {fileID: 0}
     - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
@@ -563,6 +586,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5791071343946895760}
   m_PrefabAsset: {fileID: 0}
+--- !u!153 &2172093988519457065 stripped
+ConfigurableJoint:
+  m_CorrespondingSourceObject: {fileID: 5655069008241664185, guid: 78553cb3a498cb54086de27abc4d8663,
+    type: 3}
+  m_PrefabInstance: {fileID: 5791071343946895760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8564100350058262192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -573,7 +602,7 @@ PrefabInstance:
     - target: {fileID: 1461383717188637478, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_Name
-      value: Leg (3)
+      value: L2_Leg
       objectReference: {fileID: 0}
     - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
@@ -663,6 +692,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8564100350058262192}
   m_PrefabAsset: {fileID: 0}
+--- !u!153 &4081137202901667337 stripped
+ConfigurableJoint:
+  m_CorrespondingSourceObject: {fileID: 5655069008241664185, guid: 78553cb3a498cb54086de27abc4d8663,
+    type: 3}
+  m_PrefabInstance: {fileID: 8564100350058262192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8648353170685860026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -673,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 1461383717188637478, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_Name
-      value: Leg (5)
+      value: L1_Leg
       objectReference: {fileID: 0}
     - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
