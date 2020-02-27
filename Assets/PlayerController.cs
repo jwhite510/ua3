@@ -191,6 +191,10 @@ public class PlayerController : MonoBehaviour
       {
         controlled_mech.DriveLegs(1.0f,-1.0f);
       }
+      else
+      {
+        controlled_mech.StopLegs();
+      }
 
     }
 

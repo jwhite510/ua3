@@ -38,8 +38,8 @@ public class Mech : VehicleBase
       float leftspeed_scalar = Left;
 
 
-      float sinval = Mathf.Sin(leftspeed_scalar*movescalar*Time.time);
-      float cosval = Mathf.Cos(leftspeed_scalar*movescalar*Time.time);
+      float sinval = Mathf.Sin(leftspeed_scalar*movescalar*Time.time + Mathf.PI);
+      float cosval = Mathf.Cos(leftspeed_scalar*movescalar*Time.time + Mathf.PI);
       sinval*=stridescalar;
       cosval*=stridescalar;
       Quaternion e1 = new Quaternion(0,0,0,0);
@@ -47,8 +47,8 @@ public class Mech : VehicleBase
       L1_leg.targetRotation = e1;
       L3_leg.targetRotation = e1;
 
-      sinval = Mathf.Sin((leftspeed_scalar*movescalar*Time.time) + Mathf.PI);
-      cosval = Mathf.Cos((leftspeed_scalar*movescalar*Time.time) + Mathf.PI);
+      sinval = Mathf.Sin((leftspeed_scalar*movescalar*Time.time));
+      cosval = Mathf.Cos((leftspeed_scalar*movescalar*Time.time));
       sinval*=stridescalar;
       cosval*=stridescalar;
       e1 = new Quaternion(0,0,0,0);
@@ -74,11 +74,16 @@ public class Mech : VehicleBase
       R1_leg.targetRotation = e1;
       R3_leg.targetRotation = e1;
 
-
-
-
-
-
-
+    }
+    public void StopLegs()
+    {
+      Quaternion e1 = new Quaternion(0,0,0,0);
+      e1.eulerAngles = new Vector3(0,0,0);
+      L1_leg.targetRotation = e1;
+      L3_leg.targetRotation = e1;
+      L2_leg.targetRotation = e1;
+      R2_leg.targetRotation = e1;
+      R1_leg.targetRotation = e1;
+      R3_leg.targetRotation = e1;
     }
 }
