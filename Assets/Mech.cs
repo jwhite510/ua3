@@ -28,28 +28,51 @@ public class Mech : VehicleBase
     void FixedUpdate()
     {
 
-      float movescalar = 5.5f;
-      float sinval = Mathf.Sin(movescalar*Time.time);
-      float cosval = Mathf.Cos(movescalar*Time.time);
-      sinval*=15;
-      cosval*=15;
-      // Debug.Log("sinval => "+sinval);
+      float movescalar = 9.0f;
+      float stridescalar = 15;
+      float rightspeed_scalar = 1.0f;
+      float leftspeed_scalar = 1.0f;
 
+
+      float sinval = Mathf.Sin(leftspeed_scalar*movescalar*Time.time);
+      float cosval = Mathf.Cos(leftspeed_scalar*movescalar*Time.time);
+      sinval*=stridescalar;
+      cosval*=stridescalar;
       Quaternion e1 = new Quaternion(0,0,0,0);
       e1.eulerAngles = new Vector3(sinval,cosval,0);
       L1_leg.targetRotation = e1;
       L3_leg.targetRotation = e1;
-      R1_leg.targetRotation = e1;
-      R3_leg.targetRotation = e1;
 
-      sinval = Mathf.Sin((movescalar*Time.time) + Mathf.PI);
-      cosval = Mathf.Cos((movescalar*Time.time) + Mathf.PI);
-      sinval*=15;
-      cosval*=15;
+      sinval = Mathf.Sin((leftspeed_scalar*movescalar*Time.time) + Mathf.PI);
+      cosval = Mathf.Cos((leftspeed_scalar*movescalar*Time.time) + Mathf.PI);
+      sinval*=stridescalar;
+      cosval*=stridescalar;
       e1 = new Quaternion(0,0,0,0);
       e1.eulerAngles = new Vector3(sinval,cosval,0);
       L2_leg.targetRotation = e1;
+
+
+      sinval = Mathf.Sin(-((rightspeed_scalar*movescalar*Time.time)));
+      cosval = Mathf.Cos(-((rightspeed_scalar*movescalar*Time.time)));
+      sinval*=stridescalar;
+      cosval*=stridescalar;
+      e1 = new Quaternion(0,0,0,0);
+      e1.eulerAngles = new Vector3(sinval,cosval,0);
       R2_leg.targetRotation = e1;
+
+
+      sinval = Mathf.Sin(-((rightspeed_scalar*movescalar*Time.time)) + Mathf.PI);
+      cosval = Mathf.Cos(-((rightspeed_scalar*movescalar*Time.time)) + Mathf.PI);
+      sinval*=stridescalar;
+      cosval*=stridescalar;
+      e1 = new Quaternion(0,0,0,0);
+      e1.eulerAngles = new Vector3(sinval,cosval,0);
+      R1_leg.targetRotation = e1;
+      R3_leg.targetRotation = e1;
+
+
+
+
 
 
     }
