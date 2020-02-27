@@ -157,6 +157,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5035037023296666091}
     - target: {fileID: 2218929236430208394, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -232,6 +237,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5035037023296666091}
     - target: {fileID: 2218929236430208394, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -307,6 +317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5035037023296666091}
     - target: {fileID: 2218929236430208394, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -382,6 +397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg
       objectReference: {fileID: 0}
+    - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5035037023296666091}
     - target: {fileID: 2218929236430208394, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -457,6 +477,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5035037023296666091}
     - target: {fileID: 2218929236430208394, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -532,6 +557,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1890311328166407210, guid: 78553cb3a498cb54086de27abc4d8663,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5035037023296666091}
     - target: {fileID: 2218929236430208394, guid: 78553cb3a498cb54086de27abc4d8663,
         type: 3}
       propertyPath: m_LocalPosition.x
