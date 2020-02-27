@@ -27,11 +27,15 @@ public class Mech : VehicleBase
 
     void FixedUpdate()
     {
+    }
+
+    public void DriveLegs(float Right, float Left)
+    {
 
       float movescalar = 9.0f;
       float stridescalar = 15;
-      float rightspeed_scalar = 1.0f;
-      float leftspeed_scalar = 1.0f;
+      float rightspeed_scalar = Right;
+      float leftspeed_scalar = Left;
 
 
       float sinval = Mathf.Sin(leftspeed_scalar*movescalar*Time.time);
@@ -69,6 +73,7 @@ public class Mech : VehicleBase
       e1.eulerAngles = new Vector3(sinval,cosval,0);
       R1_leg.targetRotation = e1;
       R3_leg.targetRotation = e1;
+
 
 
 

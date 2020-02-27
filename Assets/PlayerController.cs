@@ -172,6 +172,27 @@ public class PlayerController : MonoBehaviour
         controlled_battlestation.turret.RotateTurret(mouseX, mouseY);
       }
     }
+    else if(controlled_vehicle is Mech)
+    {
+      Mech controlled_mech = (Mech)controlled_vehicle;
+      if(Input.GetKey("w"))
+      {
+        controlled_mech.DriveLegs(1.0f,1.0f);
+      }
+      else if(Input.GetKey("s"))
+      {
+        controlled_mech.DriveLegs(-1.0f,-1.0f);
+      }
+      else if(Input.GetKey("d"))
+      {
+        controlled_mech.DriveLegs(-1.0f,1.0f);
+      }
+      else if(Input.GetKey("a"))
+      {
+        controlled_mech.DriveLegs(1.0f,-1.0f);
+      }
+
+    }
 
   }
 
