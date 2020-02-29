@@ -72,6 +72,7 @@ public class Mech : VehicleBase
           float turnvalue = Vector3.Dot(vehicle_base.transform.up, crossprod);
 
           // Debug.Log("turnvalue => "+turnvalue);
+          Debug.Log("waypoint_distance => "+waypoint_distance);
           if(!mech_start_turn)
           {
             if(turnvalue>0.3)
@@ -87,11 +88,11 @@ public class Mech : VehicleBase
             else
             {
               // get distance to target
-              if(dotprod>0 && waypoint_distance > 1)
+              if(dotprod>0 && waypoint_distance > 2)
               {
                 DriveLegs(1, 1);
               }
-              else if(dotprod<0 && waypoint_distance > 1)
+              else if(dotprod<0 && waypoint_distance > 2)
               {
                 DriveLegs(-1, -1);
               }
