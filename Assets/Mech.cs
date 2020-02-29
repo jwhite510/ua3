@@ -61,7 +61,9 @@ public class Mech : VehicleBase
           Vector3 move_direction = agent.path.corners[1] - vehicle_base.transform.position;
           move_direction.Normalize();
 
-          float dotprod = Vector3.Dot(move_direction, vehicle_base.transform.right);
+          float waypoint_distance = Vector3.Distance(agent.path.corners[1], vehicle_base.transform.position);
+
+          float dotprod = -Vector3.Dot(move_direction, vehicle_base.transform.right);
           Vector3 crossprod = Vector3.Cross(move_direction, vehicle_base.transform.right);
 
           // Debug.Log("dotprod => "+dotprod);
@@ -84,7 +86,19 @@ public class Mech : VehicleBase
             }
             else
             {
-              StopLegs();
+              // get distance to target
+              if(dotprod>0 && waypoint_distance > 1)
+              {
+                DriveLegs(1, 1);
+              }
+              else if(dotprod<0 && waypoint_distance > 1)
+              {
+                DriveLegs(-1, -1);
+              }
+              else
+              {
+                StopLegs();
+              }
             }
           }
           if(mech_start_turn)
