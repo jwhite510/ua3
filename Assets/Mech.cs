@@ -26,6 +26,9 @@ public class Mech : VehicleBase
     public bool MoveToWayPoint = false;
     private float last_fire_time;
     private bool last_fire_side_right = false;
+    private bool mech_start_turn = false;
+    private enum TurnDirection {None, Left, Right};
+    private TurnDirection turnDirection = TurnDirection.None;
 
     // Start is called before the first frame update
     void Start()
@@ -67,20 +70,64 @@ public class Mech : VehicleBase
           float turnvalue = Vector3.Dot(vehicle_base.transform.up, crossprod);
 
           // Debug.Log("turnvalue => "+turnvalue);
-          if(turnvalue>0.3)
+          if(!mech_start_turn)
           {
-            DriveLegs(-1, 1);
+            if(turnvalue>0.3)
+            {
+              // DriveLegs(-1, 1);
+              mech_start_turn = true;
+            }
+            else if(turnvalue < -0.3)
+            {
+              // DriveLegs(1, -1);
+              mech_start_turn = true;
+            }
+            else
+            {
+              StopLegs();
+            }
           }
-          else if(turnvalue < -0.3)
+          if(mech_start_turn)
           {
-            DriveLegs(1, -1);
+            if(turnvalue > 0)
+            {
+              turnDirection = TurnDirection.Left;
+              mech_start_turn = false;
+              // DriveLegs(-1, 1);
+            }
+            else if(turnvalue < 0)
+            {
+              turnDirection = TurnDirection.Right;
+              mech_start_turn = false;
+              // DriveLegs(1, -1);
+            }
           }
-          else
+          if(turnDirection!=TurnDirection.None)
           {
-            DriveLegs(0, 0);
-          }
+            if(turnDirection==TurnDirection.Left)
+            {
+              if(turnvalue > 0)
+              {
+                DriveLegs(-1, 1);
+              }
+              else
+              {
+                turnDirection = TurnDirection.None;
+              }
+            }
+            else if(turnDirection==TurnDirection.Right)
+            {
+              if(turnvalue < 0)
+              {
+                DriveLegs(1, -1);
+              }
+              else
+              {
+                turnDirection = TurnDirection.None;
+              }
+            }
 
-          // DriveLegs(turnvalue, 0);
+          }
 
         }
       }
