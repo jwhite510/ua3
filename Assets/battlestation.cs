@@ -68,13 +68,20 @@ public class battlestation : VehicleBase
               Color.green,
               0.0f
               );
-          Vector3 move_direction = navagent.path.corners[1] - transform.position;
-          if(true)
+          Vector3 move_direction = navagent.path.corners[1] - navagent_transform.position;
+
+
+          float dist = Vector3.Distance(navagent.path.corners[1], navagent_transform.position);
+
+          Debug.Log("dist => "+dist);
+          move_direction.y = 0;
+          move_direction.Normalize();
+          if(dist > 1)
           {
-            move_direction.Normalize();
-            move_direction.y = 0;
-            transform.position += move_direction;
+            transform.position += (move_direction * 0.1f);
           }
+
+
           // else if(navagent.path.corners.Length>2)
           // {
             // move_direction = navagent.path.corners[2] - transform.position;
