@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
       {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-        controlled_mech.RotateTurret(mouseX, mouseY);
+        controlled_mech.RotateMechTurret(mouseX, mouseY);
       }
     }
 

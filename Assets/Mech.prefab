@@ -318,6 +318,9 @@ MonoBehaviour:
   turretJoint: {fileID: 5547096383554797369}
   turretBarrelJoint1: {fileID: 1672389497061895964}
   turretBarrelJoint2: {fileID: 7315370109323527512}
+  turretBase: {fileID: 9093233124995911214}
+  lturretBarrelMarker: {fileID: 8553104183276429867}
+  rturretBarrelMarker: {fileID: 452545694472730314}
 --- !u!1 &3465931527172721953
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +334,7 @@ GameObject:
   - component: {fileID: 1691837357487612643}
   - component: {fileID: 7916641874079713507}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

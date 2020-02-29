@@ -17,6 +17,9 @@ public class Mech : VehicleBase
     public ConfigurableJoint turretJoint;
     public ConfigurableJoint turretBarrelJoint1;
     public ConfigurableJoint turretBarrelJoint2;
+    public Transform turretBase;
+    public Transform lturretBarrelMarker;
+    public Transform rturretBarrelMarker;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,50 @@ public class Mech : VehicleBase
 
     void FixedUpdate()
     {
+      if(!player_controlled)
+      {
+        Debug.Log("mech aim at target");
+        GameObject closestobject = FindNearestEnemyVehicle();
+        if(closestobject)
+        {
+          // turretBase.position
+          Debug.DrawLine(
+            turretBase.position,
+            turretBase.position + (-4*turretBase.right),
+            Color.blue,
+            0.0f
+              );
+          Debug.DrawLine(
+            lturretBarrelMarker.position,
+            lturretBarrelMarker.position + (-4*lturretBarrelMarker.up),
+            Color.red,
+            0.0f
+              );
+          Debug.DrawLine(
+            lturretBarrelMarker.position,
+            lturretBarrelMarker.position + (-4*lturretBarrelMarker.right),
+            Color.yellow,
+            0.0f
+              );
+
+          Vector3 intend_aim_direction = closestobject.transform.position - turretBase.position;
+          intend_aim_direction.Normalize();
+
+          float left_right = Vector3.Dot(intend_aim_direction, turretBase.forward);
+
+          // from barrel tip
+          float up_down = Vector3.Dot(intend_aim_direction, lturretBarrelMarker.right);
+
+
+          // Debug.Log("right_dot => "+right_dot);
+          // Debug.Log("left_right => "+left_right);
+          Debug.Log("up_down => "+up_down);
+          RotateMechTurret(left_right, -up_down);
+
+        }
+
+
+      }
     }
 
     public void DriveLegs(float Right, float Left)
@@ -91,12 +138,12 @@ public class Mech : VehicleBase
       R3_leg.targetRotation = e1;
     }
 
-    public void RotateTurret(float x, float y)
+    public void RotateMechTurret(float x, float y)
     {
-      Debug.Log("mech RotateTurrret"+x+" "+y);
+      // Debug.Log("mech RotateTurrret"+x+" "+y);
       Quaternion e1 = turretJoint.targetRotation;
 
-      Debug.Log("e1.eulerAngles.ToString() => "+e1.eulerAngles.ToString());
+      // Debug.Log("e1.eulerAngles.ToString() => "+e1.eulerAngles.ToString());
       Vector3 newTargetRotation = e1.eulerAngles;
       // newTargetRotation.z += y;
       newTargetRotation.y -= x;
