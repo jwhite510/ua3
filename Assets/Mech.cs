@@ -36,42 +36,39 @@ public class Mech : VehicleBase
     {
       if(!player_controlled)
       {
-        Debug.Log("mech aim at target");
+        // Debug.Log("mech aim at target");
         GameObject closestobject = FindNearestEnemyVehicle();
         if(closestobject)
         {
-          // turretBase.position
-          Debug.DrawLine(
-            turretBase.position,
-            turretBase.position + (-4*turretBase.right),
-            Color.blue,
-            0.0f
-              );
           Debug.DrawLine(
             lturretBarrelMarker.position,
             lturretBarrelMarker.position + (-4*lturretBarrelMarker.up),
             Color.red,
             0.0f
               );
-          Debug.DrawLine(
-            lturretBarrelMarker.position,
-            lturretBarrelMarker.position + (-4*lturretBarrelMarker.right),
-            Color.yellow,
-            0.0f
-              );
 
           Vector3 intend_aim_direction = closestobject.transform.position - turretBase.position;
           intend_aim_direction.Normalize();
+
+          Debug.DrawLine(
+            lturretBarrelMarker.position,
+            lturretBarrelMarker.position + (4*intend_aim_direction),
+            Color.yellow,
+            0.0f
+              );
 
           float left_right = Vector3.Dot(intend_aim_direction, turretBase.forward);
 
           // from barrel tip
           float up_down = Vector3.Dot(intend_aim_direction, lturretBarrelMarker.right);
 
+          float aim_dot_prod = Vector3.Dot(intend_aim_direction, (-lturretBarrelMarker.up));
 
-          // Debug.Log("right_dot => "+right_dot);
-          // Debug.Log("left_right => "+left_right);
-          Debug.Log("up_down => "+up_down);
+          if(aim_dot_prod)
+          {
+            Debug.Log("mech fire cannon");
+          }
+
           RotateMechTurret(left_right, -up_down);
 
         }
