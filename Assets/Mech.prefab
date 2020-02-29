@@ -321,6 +321,8 @@ MonoBehaviour:
   turretBase: {fileID: 9093233124995911214}
   lturretBarrelMarker: {fileID: 8553104183276429867}
   rturretBarrelMarker: {fileID: 452545694472730314}
+  projectile: {fileID: 4392722578050654172, guid: b4299ba695e91a44a9af2ae1f4a48743,
+    type: 3}
 --- !u!1 &3465931527172721953
 GameObject:
   m_ObjectHideFlags: 0

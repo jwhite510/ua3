@@ -20,6 +20,10 @@ public class Mech : VehicleBase
     public Transform turretBase;
     public Transform lturretBarrelMarker;
     public Transform rturretBarrelMarker;
+    public GameObject projectile;
+    private float last_fire_time;
+    private bool last_fire_side_right = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,9 +68,10 @@ public class Mech : VehicleBase
 
           float aim_dot_prod = Vector3.Dot(intend_aim_direction, (-lturretBarrelMarker.up));
 
-          if(aim_dot_prod)
+          if(aim_dot_prod > 0.95)
           {
             Debug.Log("mech fire cannon");
+            FireCannons();
           }
 
           RotateMechTurret(left_right, -up_down);
@@ -159,5 +164,28 @@ public class Mech : VehicleBase
       turretBarrelJoint2.targetRotation = e2;
 
 
+    }
+    public void FireCannons()
+    {
+
+      if((Time.time - last_fire_time) > 0.4)
+      {
+        last_fire_time = Time.time;
+        if(last_fire_side_right == true)
+        {
+          GameObject proj = Instantiate(projectile, lturretBarrelMarker.position-1*lturretBarrelMarker.up, lturretBarrelMarker.rotation);
+          // rturretBarrelMarker.position + 1*rturretBarrelMarker.up
+          proj.GetComponent<Rigidbody>().velocity = -20*lturretBarrelMarker.up;
+          last_fire_side_right = false;
+        }
+        else{
+          GameObject proj = Instantiate(projectile, rturretBarrelMarker.position-1*rturretBarrelMarker.up, rturretBarrelMarker.rotation);
+          // rturretBarrelMarker.position + 1*rturretBarrelMarker.up
+          proj.GetComponent<Rigidbody>().velocity = -20*rturretBarrelMarker.up;
+          last_fire_side_right = true;
+        }
+
+
+      }
     }
 }
