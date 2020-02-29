@@ -105,6 +105,12 @@ public class PlayerController : MonoBehaviour
           battlestation controlled_battlestation = (battlestation)controlled_vehicle;
           controlled_battlestation.turret.FireCannon();
         }
+        else if(controlled_vehicle is Mech)
+        {
+          Mech controlledMech = (Mech)controlled_vehicle;
+          controlledMech.FireCannons();
+
+        }
       }
     }
     // if cursor toggle key is pressed
@@ -314,6 +320,15 @@ public class PlayerController : MonoBehaviour
             {
               Selectedbattlestation.MoveToWayPoint = true;
               Selectedbattlestation.navagent.SetDestination(hit.point);
+            }
+          }
+          else if(selectedVehicle is Mech)
+          {
+            Mech selectedMech = (Mech)selectedVehicle;
+            if(selectedMech)
+            {
+              selectedMech.MoveToWayPoint = true;
+              selectedMech.agent.SetDestination(hit.point);
             }
           }
         }

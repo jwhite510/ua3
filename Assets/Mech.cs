@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Mech : VehicleBase
 {
@@ -21,6 +22,8 @@ public class Mech : VehicleBase
     public Transform lturretBarrelMarker;
     public Transform rturretBarrelMarker;
     public GameObject projectile;
+    public NavMeshAgent agent;
+    public bool MoveToWayPoint = false;
     private float last_fire_time;
     private bool last_fire_side_right = false;
 
@@ -38,6 +41,49 @@ public class Mech : VehicleBase
 
     void FixedUpdate()
     {
+      if(MoveToWayPoint && !player_controlled)
+      {
+        // Debug.Log("mech move to target");
+        if(agent.path.corners.Length>1)
+        {
+          // move to this point
+          Debug.DrawLine(
+              agent.path.corners[1],
+              agent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
+              Color.green,
+              0.0f
+              );
+
+          // movement direction
+          Vector3 move_direction = agent.path.corners[1] - vehicle_base.transform.position;
+          move_direction.Normalize();
+
+          float dotprod = Vector3.Dot(move_direction, vehicle_base.transform.right);
+          Vector3 crossprod = Vector3.Cross(move_direction, vehicle_base.transform.right);
+
+          // Debug.Log("dotprod => "+dotprod);
+          // Debug.Log("crossprod => "+crossprod.ToString());
+
+          float turnvalue = Vector3.Dot(vehicle_base.transform.up, crossprod);
+
+          // Debug.Log("turnvalue => "+turnvalue);
+          if(turnvalue>0.3)
+          {
+            DriveLegs(-1, 1);
+          }
+          else if(turnvalue < -0.3)
+          {
+            DriveLegs(1, -1);
+          }
+          else
+          {
+            DriveLegs(0, 0);
+          }
+
+          // DriveLegs(turnvalue, 0);
+
+        }
+      }
       if(!player_controlled)
       {
         // Debug.Log("mech aim at target");
@@ -70,8 +116,8 @@ public class Mech : VehicleBase
 
           if(aim_dot_prod > 0.95)
           {
-            Debug.Log("mech fire cannon");
-            FireCannons();
+            // Debug.Log("mech fire cannon");
+            // FireCannons();
           }
 
           RotateMechTurret(left_right, -up_down);
