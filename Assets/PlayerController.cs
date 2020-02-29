@@ -361,14 +361,13 @@ public class PlayerController : MonoBehaviour
 
   void SetPlayerUI(VehicleBase vehiclebase)
   {
-    if(vehiclebase is Tank)
+    if(vehiclebase is battlestation)
+    {
+      ActivateButton(PlayerUI, "spawnUnitsButton", true);
+    }
+    else
     {
       ActivateButton(PlayerUI, "spawnUnitsButton", false);
-    }
-    else if(vehiclebase is battlestation)
-    {
-      // enable spawnint vehicles button
-      ActivateButton(PlayerUI, "spawnUnitsButton", true);
     }
   }
   void ActivateButton(GameObject UIObject, string buttonName, bool status)
