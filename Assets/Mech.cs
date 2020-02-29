@@ -30,9 +30,41 @@ public class Mech : VehicleBase
     private enum TurnDirection {None, Left, Right};
     private TurnDirection turnDirection = TurnDirection.None;
 
+    public Renderer BaseRenderer;
+    public Renderer L1_joint;
+    public Renderer L2_joint;
+    public Renderer L3_joint;
+    public Renderer R1_joint;
+    public Renderer R2_joint;
+    public Renderer R3_joint;
+    public Renderer turret_base_render;
+
     // Start is called before the first frame update
     void Start()
     {
+      if(team == 1)
+      {
+        BaseRenderer.GetComponent<Renderer>().material.color = Color.green;
+        L1_joint.GetComponent<Renderer>().material.color = Color.green;
+        L2_joint.GetComponent<Renderer>().material.color = Color.green;
+        L3_joint.GetComponent<Renderer>().material.color = Color.green;
+        R1_joint.GetComponent<Renderer>().material.color = Color.green;
+        R2_joint.GetComponent<Renderer>().material.color = Color.green;
+        R3_joint.GetComponent<Renderer>().material.color = Color.green;
+        turret_base_render.GetComponent<Renderer>().material.color = Color.green;
+      }
+      else if(team == 2)
+      {
+         BaseRenderer.GetComponent<Renderer>().material.color = Color.red;
+        L1_joint.GetComponent<Renderer>().material.color = Color.red;
+        L2_joint.GetComponent<Renderer>().material.color = Color.red;
+        L3_joint.GetComponent<Renderer>().material.color = Color.red;
+        R1_joint.GetComponent<Renderer>().material.color = Color.red;
+        R2_joint.GetComponent<Renderer>().material.color = Color.red;
+        R3_joint.GetComponent<Renderer>().material.color = Color.red;
+        turret_base_render.GetComponent<Renderer>().material.color = Color.red;
+       
+      }
 
     }
 
