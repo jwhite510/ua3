@@ -196,6 +196,12 @@ public class PlayerController : MonoBehaviour
         controlled_mech.StopLegs();
       }
 
+      if(!ControlModeMouse)
+      {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        controlled_mech.RotateTurret(mouseX, mouseY);
+      }
     }
 
   }

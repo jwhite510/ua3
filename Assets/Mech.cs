@@ -13,6 +13,10 @@ public class Mech : VehicleBase
     public ConfigurableJoint R1_leg;
     public ConfigurableJoint R2_leg;
     public ConfigurableJoint R3_leg;
+
+    public ConfigurableJoint turretJoint;
+    public ConfigurableJoint turretBarrelJoint1;
+    public ConfigurableJoint turretBarrelJoint2;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,5 +89,31 @@ public class Mech : VehicleBase
       R2_leg.targetRotation = e1;
       R1_leg.targetRotation = e1;
       R3_leg.targetRotation = e1;
+    }
+
+    public void RotateTurret(float x, float y)
+    {
+      Debug.Log("mech RotateTurrret"+x+" "+y);
+      Quaternion e1 = turretJoint.targetRotation;
+
+      Debug.Log("e1.eulerAngles.ToString() => "+e1.eulerAngles.ToString());
+      Vector3 newTargetRotation = e1.eulerAngles;
+      // newTargetRotation.z += y;
+      newTargetRotation.y -= x;
+
+      Quaternion e2 = new Quaternion(0,0,0,0);
+      e2.eulerAngles = newTargetRotation;
+
+      turretJoint.targetRotation = e2;
+
+      // rotate barrel up and down
+      e1 = turretBarrelJoint1.targetRotation;
+      newTargetRotation = e1.eulerAngles;
+      newTargetRotation.z += y;
+      e2.eulerAngles = newTargetRotation;
+      turretBarrelJoint1.targetRotation = e2;
+      turretBarrelJoint2.targetRotation = e2;
+
+
     }
 }
