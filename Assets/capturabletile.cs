@@ -29,6 +29,49 @@ public class capturabletile : MonoBehaviour
     }
     void FixedUpdate()
     {
+
+
+      if(owningteam==0)
+      {
+        Debug.DrawLine(
+          transform.position,
+          transform.position + new Vector3(1.0f,10.0f,1.0f),
+          Color.red,
+          0.0f
+            );
+      }
+      else if(owningteam==1)
+      {
+        Debug.DrawLine(
+          transform.position,
+          transform.position + new Vector3(1.0f,10.0f,1.0f),
+          Color.green,
+          0.0f
+            );
+      }
+      else if(owningteam==2)
+      {
+        Debug.DrawLine(
+          transform.position,
+          transform.position + new Vector3(1.0f,10.0f,1.0f),
+          Color.blue,
+          0.0f
+            );
+
+      }
+      if(captured)
+      {
+
+        Debug.DrawLine(
+          transform.position,
+          transform.position + new Vector3(-1.0f,10.0f,-1.0f),
+          Color.yellow,
+          0.0f
+            );
+      }
+
+
+
       // Debug.Log("vehicles_on_tile:");
       int team1 = 0;
       int team2 = 0;
@@ -57,6 +100,8 @@ public class capturabletile : MonoBehaviour
 
       if(!captured)
       {
+        Debug.Log("target_color => "+target_color);
+        Debug.Log("current_color => "+current_color);
         if(current_color < target_color)
         {
           current_color += 0.1f*Time.deltaTime;
@@ -65,15 +110,17 @@ public class capturabletile : MonoBehaviour
         {
           current_color -= 0.1f*Time.deltaTime;
         }
-        if(current_color>1)
+        if(current_color>=1)
         {
           captured = true;
+          Debug.Log("captured");
           current_color = 1;
           owningteam = 2; // red team
         }
-        else if(current_color < 0)
+        else if(current_color <= 0)
         {
           captured = true;
+          Debug.Log("captured");
           current_color = 0;
           owningteam = 1; // green team
         }
@@ -90,10 +137,14 @@ public class capturabletile : MonoBehaviour
         if(owningteam == 1 && team1 == 0 && team2>0)
         {
           captured = false;
+          owningteam = 0;
+          Debug.Log("uncaptured");
         }
         else if(owningteam == 2 && team2 == 0 && team1>0)
         {
           captured = false;
+          owningteam = 0;
+          Debug.Log("uncaptured");
         }
       }
     }

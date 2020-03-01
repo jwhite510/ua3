@@ -54,12 +54,12 @@ public class battlestation : VehicleBase
       bool HitSomething = Physics.Raycast(ray, out hit);
       if(HitSomething)
       {
-        Debug.DrawLine(
-            downReference.position,
-            hit.point,
-            Color.green,
-            0.0f
-            );
+        // Debug.DrawLine(
+            // downReference.position,
+            // hit.point,
+            // Color.green,
+            // 0.0f
+            // );
       }
       navagent_transform.position = hit.point;
 
@@ -67,12 +67,12 @@ public class battlestation : VehicleBase
       {
         if(navagent.path.corners.Length>1)
         {
-          Debug.DrawLine(
-              navagent.path.corners[1],
-              navagent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
-              Color.green,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // navagent.path.corners[1],
+              // navagent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
+              // Color.green,
+              // 0.0f
+              // );
           Vector3 move_direction = navagent.path.corners[1] - navagent_transform.position;
 
 
@@ -112,7 +112,7 @@ public class battlestation : VehicleBase
     }
     void AI_Control()
     {
-      Debug.Log("AI_Control running "+team);
+      // Debug.Log("AI_Control running "+team);
       // get all vehicles
       VehicleBase[] all_vehicles = FindObjectsOfType<VehicleBase>();
       List<VehicleBase> teamvehicles = new List<VehicleBase>();
@@ -133,24 +133,24 @@ public class battlestation : VehicleBase
       }
       foreach(VehicleBase veh in teamvehicles)
       {
-        Debug.Log("veh.name => "+veh.name);
+        // Debug.Log("veh.name => "+veh.name);
         // get vehicle location
         GameObject closesttile = veh.FindNearestCapturableTile();
         if(closesttile)
         {
-          Debug.DrawLine(
-              closesttile.transform.position,
-              closesttile.transform.position + new Vector3(0.1f,5.0f,0.1f),
-              Color.red,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // closesttile.transform.position,
+              // closesttile.transform.position + new Vector3(0.1f,5.0f,0.1f),
+              // Color.red,
+              // 0.0f
+              // );
 
-          Debug.DrawLine(
-              veh.transform.position,
-              veh.transform.position + new Vector3(0.1f,5.0f,0.1f),
-              Color.red,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // veh.transform.position,
+              // veh.transform.position + new Vector3(0.1f,5.0f,0.1f),
+              // Color.red,
+              // 0.0f
+              // );
           if(veh is Tank)
           {
             Tank thistank = (Tank)veh;

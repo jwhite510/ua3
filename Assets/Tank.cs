@@ -76,7 +76,7 @@ public class Tank : VehicleBase
         foreach(Vector3 vec in agent.path.corners)
         {
           // Debug.Log(vec.ToString());
-          Debug.DrawLine(vec, vec + new Vector3(0,height,0), Color.red, 0.0f);
+          // Debug.DrawLine(vec, vec + new Vector3(0,height,0), Color.red, 0.0f);
           height *= 0.7f;
         }
 
@@ -84,12 +84,12 @@ public class Tank : VehicleBase
 
         // drive wheels to this location
         // agent.path.corners[0]
-        Debug.DrawLine(
-          vehicle_base.transform.position,
-          vehicle_base.transform.position + 10*vehicle_base.transform.right,
-          Color.blue,
-          0.0f
-            );
+        // Debug.DrawLine(
+          // vehicle_base.transform.position,
+          // vehicle_base.transform.position + 10*vehicle_base.transform.right,
+          // Color.blue,
+          // 0.0f
+            // );
 
         // get direction from current position
         // agent.path.corners[0] // nearest point to move to
@@ -97,12 +97,12 @@ public class Tank : VehicleBase
         if(agent.path.corners.Length>1)
         {
           // move to this point
-          Debug.DrawLine(
-              agent.path.corners[1],
-              agent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
-              Color.green,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // agent.path.corners[1],
+              // agent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
+              // Color.green,
+              // 0.0f
+              // );
 
           // movement direction
           Vector3 move_direction = agent.path.corners[1] - vehicle_base.transform.position;

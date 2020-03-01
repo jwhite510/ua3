@@ -57,6 +57,13 @@ public class VehicleBase : MonoBehaviour
       foreach(GameObject gameo in gameobjects)
       {
 
+        // Debug.DrawLine(
+            // gameo.transform.position + new Vector3(0.5f, 0.0f, 0.5f),
+            // gameo.transform.position + new Vector3(0.5f,5.0f,0.5f),
+            // Color.red,
+            // 0.0f
+            // );
+
         float dist = Vector3.Distance(vehicle_base.transform.position, gameo.transform.position);
 
         if(dist < closest_distance)
@@ -64,6 +71,14 @@ public class VehicleBase : MonoBehaviour
           capturabletile thiscapturabletile = gameo.GetComponentInParent<capturabletile>();
           if(thiscapturabletile.owningteam != team)
           {
+
+            Debug.DrawLine(
+                gameo.transform.position + new Vector3(-0.5f, 0.0f, -0.5f),
+                gameo.transform.position + new Vector3(-0.5f,5.0f,-0.5f),
+                Color.yellow,
+                0.0f
+                );
+
             closestobject = gameo;
             closest_distance = dist;
           }

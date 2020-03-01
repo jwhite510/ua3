@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
       if(HitSomething)
       {
         Debug.Log("hit.point.ToString()"+hit.point.ToString());
-        Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
+        // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
 
         Quaternion e1 = new Quaternion(0,0,0,0);
         e1.eulerAngles = new Vector3(0,0,0);

@@ -82,12 +82,12 @@ public class Mech : VehicleBase
         if(agent.path.corners.Length>1)
         {
           // move to this point
-          Debug.DrawLine(
-              agent.path.corners[1],
-              agent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
-              Color.green,
-              0.0f
-              );
+          // Debug.DrawLine(
+              // agent.path.corners[1],
+              // agent.path.corners[1] + new Vector3(0.1f,10.0f,0.1f),
+              // Color.green,
+              // 0.0f
+              // );
 
           // movement direction
           Vector3 move_direction = agent.path.corners[1] - vehicle_base.transform.position;
@@ -104,7 +104,7 @@ public class Mech : VehicleBase
           float turnvalue = Vector3.Dot(vehicle_base.transform.up, crossprod);
 
           // Debug.Log("turnvalue => "+turnvalue);
-          Debug.Log("waypoint_distance => "+waypoint_distance);
+          // Debug.Log("waypoint_distance => "+waypoint_distance);
           if(!mech_start_turn)
           {
             if(turnvalue>0.3)
@@ -184,22 +184,22 @@ public class Mech : VehicleBase
         GameObject closestobject = FindNearestEnemyVehicle();
         if(closestobject)
         {
-          Debug.DrawLine(
-            lturretBarrelMarker.position,
-            lturretBarrelMarker.position + (-4*lturretBarrelMarker.up),
-            Color.red,
-            0.0f
-              );
+          // Debug.DrawLine(
+            // lturretBarrelMarker.position,
+            // lturretBarrelMarker.position + (-4*lturretBarrelMarker.up),
+            // Color.red,
+            // 0.0f
+              // );
 
           Vector3 intend_aim_direction = closestobject.transform.position - turretBase.position;
           intend_aim_direction.Normalize();
 
-          Debug.DrawLine(
-            lturretBarrelMarker.position,
-            lturretBarrelMarker.position + (4*intend_aim_direction),
-            Color.yellow,
-            0.0f
-              );
+          // Debug.DrawLine(
+            // lturretBarrelMarker.position,
+            // lturretBarrelMarker.position + (4*intend_aim_direction),
+            // Color.yellow,
+            // 0.0f
+              // );
 
           float left_right = Vector3.Dot(intend_aim_direction, turretBase.forward);
 
