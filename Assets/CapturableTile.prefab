@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7878800295333569612}
   m_Layer: 10
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: CapturableTileTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

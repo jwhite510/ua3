@@ -47,6 +47,30 @@ public class VehicleBase : MonoBehaviour
       }
       return closestobject;
     }
+    public GameObject FindNearestCapturableTile()
+    {
+      // Debug.Log(name+" find nearest enemy");
+      GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("CapturableTileTag");
+      float closest_distance = 1000.0f;
+      GameObject closestobject = null;
+
+      foreach(GameObject gameo in gameobjects)
+      {
+
+        float dist = Vector3.Distance(vehicle_base.transform.position, gameo.transform.position);
+
+        if(dist < closest_distance)
+        {
+          capturabletile thiscapturabletile = gameo.GetComponentInParent<capturabletile>();
+          if(thiscapturabletile.owningteam != team)
+          {
+            closestobject = gameo;
+            closest_distance = dist;
+          }
+        }
+      }
+      return closestobject;
+    }
 
 
 }

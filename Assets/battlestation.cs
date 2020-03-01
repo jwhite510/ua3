@@ -12,6 +12,7 @@ public class battlestation : VehicleBase
 
     public Transform downReference;
     public bool MoveToWayPoint = false;
+    public bool AI_controlled;
     private RaycastHit hit;
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,10 @@ public class battlestation : VehicleBase
     }
     void FixedUpdate()
     {
+      if(AI_controlled)
+      {
+        AI_Control();
+      }
       if(!player_controlled)
       {
         GameObject closestobject = FindNearestEnemyVehicle();
@@ -104,5 +109,65 @@ public class battlestation : VehicleBase
     {
       Gizmos.color = Color.red;
       Gizmos.DrawSphere(hit.point, 1);
+    }
+    void AI_Control()
+    {
+      Debug.Log("AI_Control running "+team);
+      // get all vehicles
+      VehicleBase[] all_vehicles = FindObjectsOfType<VehicleBase>();
+      List<VehicleBase> teamvehicles = new List<VehicleBase>();
+      foreach(VehicleBase veh in all_vehicles)
+      {
+        // Debug.Log("veh.name => "+veh.name);
+        if(veh.team == team)
+        {
+          if(veh is battlestation)
+          {
+            // Debug.Log(veh.name+" is battlestation");
+          }
+          else
+          {
+            teamvehicles.Add(veh);
+          }
+        }
+      }
+      foreach(VehicleBase veh in teamvehicles)
+      {
+        Debug.Log("veh.name => "+veh.name);
+        // get vehicle location
+        GameObject closesttile = veh.FindNearestCapturableTile();
+        if(closesttile)
+        {
+          Debug.DrawLine(
+              closesttile.transform.position,
+              closesttile.transform.position + new Vector3(0.1f,5.0f,0.1f),
+              Color.red,
+              0.0f
+              );
+
+          Debug.DrawLine(
+              veh.transform.position,
+              veh.transform.position + new Vector3(0.1f,5.0f,0.1f),
+              Color.red,
+              0.0f
+              );
+          if(veh is Tank)
+          {
+            Tank thistank = (Tank)veh;
+            thistank.MoveToWayPoint = true;
+            thistank.agent.SetDestination(closesttile.transform.position);
+          }
+          else if(veh is Mech)
+          {
+            Mech thismech = (Mech)veh;
+            thismech.MoveToWayPoint = true;
+            thismech.agent.SetDestination(closesttile.transform.position);
+          }
+        }
+
+
+      }
+
+
     }
 }
