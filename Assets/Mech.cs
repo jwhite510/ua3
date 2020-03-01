@@ -40,6 +40,10 @@ public class Mech : VehicleBase
     public Renderer R2_joint;
     public Renderer R3_joint;
     public Renderer turret_base_render;
+    public Renderer detail1;
+    public Renderer detail2;
+    public Renderer detail3;
+    public Renderer detail4;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +58,12 @@ public class Mech : VehicleBase
         R2_joint.GetComponent<Renderer>().material.color = Color.green;
         R3_joint.GetComponent<Renderer>().material.color = Color.green;
         turret_base_render.GetComponent<Renderer>().material.color = Color.green;
+        detail1.GetComponent<Renderer>().material.color = Color.green;
+        detail2.GetComponent<Renderer>().material.color = Color.green;
+        detail3.GetComponent<Renderer>().material.color = Color.green;
+        detail4.GetComponent<Renderer>().material.color = Color.green;
+
+
       }
       else if(team == 2)
       {
@@ -65,6 +75,10 @@ public class Mech : VehicleBase
         R2_joint.GetComponent<Renderer>().material.color = Color.red;
         R3_joint.GetComponent<Renderer>().material.color = Color.red;
         turret_base_render.GetComponent<Renderer>().material.color = Color.red;
+        detail1.GetComponent<Renderer>().material.color = Color.red;
+        detail2.GetComponent<Renderer>().material.color = Color.red;
+        detail3.GetComponent<Renderer>().material.color = Color.red;
+        detail4.GetComponent<Renderer>().material.color = Color.red;
        
       }
 
