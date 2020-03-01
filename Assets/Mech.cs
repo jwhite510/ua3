@@ -30,6 +30,8 @@ public class Mech : VehicleBase
     private enum TurnDirection {None, Left, Right};
     private TurnDirection turnDirection = TurnDirection.None;
 
+    public healthbar thehealthbar;
+
     public Renderer BaseRenderer;
     public Renderer L1_joint;
     public Renderer L2_joint;
@@ -308,7 +310,7 @@ public class Mech : VehicleBase
     public void FireCannons()
     {
 
-      if((Time.time - last_fire_time) > 0.4)
+      if((Time.time - last_fire_time) > 0.01)
       {
         last_fire_time = Time.time;
         if(last_fire_side_right == true)

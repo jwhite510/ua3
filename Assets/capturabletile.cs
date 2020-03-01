@@ -100,8 +100,8 @@ public class capturabletile : MonoBehaviour
 
       if(!captured)
       {
-        Debug.Log("target_color => "+target_color);
-        Debug.Log("current_color => "+current_color);
+        // Debug.Log("target_color => "+target_color);
+        // Debug.Log("current_color => "+current_color);
         if(current_color < target_color)
         {
           current_color += 0.1f*Time.deltaTime;
@@ -113,14 +113,14 @@ public class capturabletile : MonoBehaviour
         if(current_color>=1)
         {
           captured = true;
-          Debug.Log("captured");
+          // Debug.Log("captured");
           current_color = 1;
           owningteam = 2; // red team
         }
         else if(current_color <= 0)
         {
           captured = true;
-          Debug.Log("captured");
+          // Debug.Log("captured");
           current_color = 0;
           owningteam = 1; // green team
         }

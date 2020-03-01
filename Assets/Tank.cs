@@ -27,6 +27,8 @@ public class Tank : VehicleBase
      public Turret thistankturret;
      public bool MoveToWayPoint = false;
 
+     public healthbar thehealthbar;
+
      // public int team = 0;
 
 
