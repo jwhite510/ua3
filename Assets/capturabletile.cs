@@ -10,8 +10,12 @@ public class capturabletile : MonoBehaviour
     private List<VehicleBase> vehicles_on_tile = new List<VehicleBase>();
     public Renderer TileBaseRender;
 
+    private float target_color = 0.5f;
+    private float current_color = 0.5f;
+    private bool captured = false;
     Color greenc = Color.green;
     Color redc = Color.red;
+    public int owningteam = 0;
 
 
     // Start is called before the first frame update
@@ -21,6 +25,9 @@ public class capturabletile : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
+    {
+    }
+    void FixedUpdate()
     {
       // Debug.Log("vehicles_on_tile:");
       int team1 = 0;
@@ -37,20 +44,58 @@ public class capturabletile : MonoBehaviour
           team2++;
         }
       }
-      // make weighted average
       if(vehicles_on_tile.Count > 0)
       {
-        Debug.Log("team1 => "+team1);
-        Debug.Log("team2 => "+team2);
-        Debug.Log("vehicles_on_tile.Count => "+vehicles_on_tile.Count);
-        float wtsum = (team1*0 + team2*1);
-        wtsum /= vehicles_on_tile.Count;
-        Debug.Log("wtsum => "+wtsum);
-        Color tilecolor = Color.Lerp(greenc, redc, wtsum);
-        TileBaseRender.GetComponent<Renderer>().material.color = tilecolor;
+        // make weighted average
+        target_color = (team1*0 + team2*1);
+        target_color /= vehicles_on_tile.Count;
+      }
+      else
+      {
+        target_color = 0.5f;
       }
 
-
+      if(!captured)
+      {
+        if(current_color < target_color)
+        {
+          current_color += 0.1f*Time.deltaTime;
+        }
+        else if(current_color > target_color)
+        {
+          current_color -= 0.1f*Time.deltaTime;
+        }
+        if(current_color>1)
+        {
+          captured = true;
+          current_color = 1;
+          owningteam = 2; // red team
+        }
+        else if(current_color < 0)
+        {
+          captured = true;
+          current_color = 0;
+          owningteam = 1; // green team
+        }
+        Color tilecolortarget = Color.Lerp(greenc, redc, current_color);
+        Color tilecolor = Color.Lerp(tilecolortarget, Color.white, 0.5f);
+        TileBaseRender.GetComponent<Renderer>().material.color = tilecolor;
+      }
+      else if(captured)
+      {
+        // Debug.Log("i am captured and owned by "+owningteam);
+        // Debug.Log("team1 vehicles on me:"+team1);
+        // Debug.Log("team2 vehicles on me:"+team2);
+        // if there are no owning vehicles and atleast one enemy vehicle
+        if(owningteam == 1 && team1 == 0 && team2>0)
+        {
+          captured = false;
+        }
+        else if(owningteam == 2 && team2 == 0 && team1>0)
+        {
+          captured = false;
+        }
+      }
     }
     public void VehicleEnteredTile(VehicleBase vehicle)
     {
