@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1487580429012252986}
   - component: {fileID: 206026086096279067}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CapturableTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileBaseRender: {fileID: 8496511083221892210}
+  owningteam: 0
 --- !u!1 &5463250855094647897
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +60,7 @@ GameObject:
   - component: {fileID: 7099389846116345158}
   - component: {fileID: 5582152565494500515}
   - component: {fileID: 7957427042905012891}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CaptureArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +164,7 @@ GameObject:
   - component: {fileID: 470448042138158727}
   - component: {fileID: 8496511083221892210}
   - component: {fileID: 7878800295333569612}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
