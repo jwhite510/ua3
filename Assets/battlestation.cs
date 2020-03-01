@@ -17,6 +17,7 @@ public class battlestation : VehicleBase
     // Start is called before the first frame update
     void Start()
     {
+      base.Start();
       if(team == 1)
       {
         vehicle_base.GetComponent<Renderer>().material.color = Color.green;

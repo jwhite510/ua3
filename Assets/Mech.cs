@@ -48,6 +48,7 @@ public class Mech : VehicleBase
     // Start is called before the first frame update
     void Start()
     {
+      base.Start();
       if(team == 1)
       {
         BaseRenderer.GetComponent<Renderer>().material.color = Color.green;
@@ -324,7 +325,7 @@ public class Mech : VehicleBase
     public void FireCannons()
     {
 
-      if((Time.time - last_fire_time) > 0.01)
+      if((Time.time - last_fire_time) > 0.8)
       {
         last_fire_time = Time.time;
         if(last_fire_side_right == true)
@@ -332,12 +333,14 @@ public class Mech : VehicleBase
           GameObject proj = Instantiate(projectile, lturretBarrelMarker.position-1*lturretBarrelMarker.up, lturretBarrelMarker.rotation);
           // rturretBarrelMarker.position + 1*rturretBarrelMarker.up
           proj.GetComponent<Rigidbody>().velocity = -20*lturretBarrelMarker.up;
+          proj.GetComponent<projectile>().whoshotthis = this;
           last_fire_side_right = false;
         }
         else{
           GameObject proj = Instantiate(projectile, rturretBarrelMarker.position-1*rturretBarrelMarker.up, rturretBarrelMarker.rotation);
           // rturretBarrelMarker.position + 1*rturretBarrelMarker.up
           proj.GetComponent<Rigidbody>().velocity = -20*rturretBarrelMarker.up;
+          proj.GetComponent<projectile>().whoshotthis = this;
           last_fire_side_right = true;
         }
 

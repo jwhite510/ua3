@@ -456,6 +456,8 @@ MonoBehaviour:
   vehicle_base: {fileID: 204607318340976041}
   team: 0
   player_controlled: 0
+  thishealthbar: {fileID: 6818856108916265079}
+  current_health: 0
   turret: {fileID: 4642316921787112629}
   turret_base: {fileID: 6514630341382143453}
   navagent_transform: {fileID: 7789007212554212291}
@@ -481,6 +483,7 @@ MonoBehaviour:
   projectile: {fileID: 4392722578050654172, guid: b4299ba695e91a44a9af2ae1f4a48743,
     type: 3}
   vehicle_base: {fileID: 204607318340976041}
+  ownerOfThisTurret: {fileID: 5517633058802903253}
 --- !u!1 &5481711215476613361
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,3 +853,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8579558058087595349}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6818856108916265079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3004401333338008866, guid: dd1d2ded006ae1447ac1ad34a1961392,
+    type: 3}
+  m_PrefabInstance: {fileID: 8579558058087595349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3d2b1ebfae0df4cbe7c961105e2ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

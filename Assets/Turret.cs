@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour
   public Transform projectile_spawn_point;
   public GameObject projectile;
   public GameObject vehicle_base;
+  public VehicleBase ownerOfThisTurret;
   private float last_fire_time = 0;
 
   // Start is called before the first frame update
@@ -74,10 +75,12 @@ public class Turret : MonoBehaviour
       if(vehicle_base.GetComponent<Rigidbody>())
       {
         proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
+        proj.GetComponent<projectile>().whoshotthis = ownerOfThisTurret;
       }
       else
       {
         proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right;
+        proj.GetComponent<projectile>().whoshotthis = ownerOfThisTurret;
       }
 
 

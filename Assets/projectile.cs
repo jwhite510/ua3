@@ -6,6 +6,7 @@ public class projectile : MonoBehaviour
 {
     private float collisionTime;
     private bool firstCollisionHappened = false;
+    public VehicleBase whoshotthis;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +31,17 @@ public class projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collisionInfo)
     {
-      Tank tankhit = collisionInfo.collider.GetComponentInParent<Tank>();
-      if(tankhit)
+      VehicleBase vehiclehit = collisionInfo.collider.GetComponentInParent<VehicleBase>();
+      if(vehiclehit)
       {
-        // Debug.Log("hit tank:"+tankhit.name);
+        Debug.Log(whoshotthis.name+"(TEAM)["+whoshotthis.team+"]hit vehicle:"+vehiclehit.name+"(TEAM)["+vehiclehit.team+"]");
+        // apply damage
+        if(vehiclehit.team != whoshotthis.team)
+        {
+          vehiclehit.current_health -= 0.1f;
+          vehiclehit.thishealthbar.SetHealth(vehiclehit.current_health);
+        }
+
       }
 
       collisionTime = Time.time;

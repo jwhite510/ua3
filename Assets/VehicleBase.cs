@@ -5,13 +5,18 @@ using UnityEngine.AI;
 
 public class VehicleBase : MonoBehaviour
 {
-     public Transform cameralocation;
-     public GameObject vehicle_base;
-     public int team = 0;
-     public bool player_controlled = false;
+    public Transform cameralocation;
+    public GameObject vehicle_base;
+    public int team = 0;
+    public bool player_controlled = false;
+    public healthbar thishealthbar;
+    public float current_health;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+      // Debug.Log("VehicleBase Start called");
+      current_health = 1.0f;
+      thishealthbar.SetHealth(current_health);
     }
     // Update is called once per frame
     void Update()
