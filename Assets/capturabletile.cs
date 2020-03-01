@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class capturabletile : MonoBehaviour
 {
@@ -159,6 +160,15 @@ public class capturabletile : MonoBehaviour
       // Debug.Log("capturabletile VehicleExitTile called");
       // Debug.Log("vehicle.name => "+vehicle.name);
       vehicles_on_tile.Remove(vehicle);
+    }
+    void OnDrawGizmos()
+    {
+      string vehiclenames = "";
+      foreach(VehicleBase veh in vehicles_on_tile)
+      {
+        vehiclenames+=veh.name;
+      }
+      Handles.Label(transform.position, vehiclenames);
     }
 
 }

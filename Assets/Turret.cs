@@ -61,7 +61,7 @@ public class Turret : MonoBehaviour
 
     if(on_target > 0.9)
     {
-      // FireCannon();
+      FireCannon();
     }
     RotateTurret(-300*forward_dot*Time.deltaTime, 300*right_dot*Time.deltaTime);
   }
@@ -75,12 +75,12 @@ public class Turret : MonoBehaviour
       if(vehicle_base.GetComponent<Rigidbody>())
       {
         proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
-        proj.GetComponent<projectile>().whoshotthis = ownerOfThisTurret;
+        proj.GetComponent<projectile>().owningteam = ownerOfThisTurret.team;
       }
       else
       {
         proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right;
-        proj.GetComponent<projectile>().whoshotthis = ownerOfThisTurret;
+        proj.GetComponent<projectile>().owningteam = ownerOfThisTurret.team;
       }
 
 

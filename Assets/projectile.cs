@@ -6,7 +6,7 @@ public class projectile : MonoBehaviour
 {
     private float collisionTime;
     private bool firstCollisionHappened = false;
-    public VehicleBase whoshotthis;
+    public int owningteam = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +34,22 @@ public class projectile : MonoBehaviour
       VehicleBase vehiclehit = collisionInfo.collider.GetComponentInParent<VehicleBase>();
       if(vehiclehit)
       {
-        Debug.Log(whoshotthis.name+"(TEAM)["+whoshotthis.team+"]hit vehicle:"+vehiclehit.name+"(TEAM)["+vehiclehit.team+"]");
         // apply damage
-        if(vehiclehit.team != whoshotthis.team)
+        if(vehiclehit.team != owningteam)
         {
-          vehiclehit.current_health -= 0.1f;
+          vehiclehit.current_health -= 0.05f;
           vehiclehit.thishealthbar.SetHealth(vehiclehit.current_health);
+          if(vehiclehit.current_health < 0)
+          {
+            // if the vehicle is player controlled
+            if(vehiclehit.player_controlled == true)
+            {
+              PlayerController playercontroller = FindObjectOfType<PlayerController>();
+              battlestation[] battlestations = FindObjectsOfType<battlestation>();
+              playercontroller.ControlVehicle(battlestations[0]);
+            }
+            vehiclehit.gameObject.transform.position = new Vector3(0,100,0);
+          }
         }
 
       }

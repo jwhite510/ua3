@@ -276,12 +276,7 @@ public class PlayerController : MonoBehaviour
         VehicleBase vehicle_clicked = hit.transform.gameObject.GetComponentInParent<VehicleBase>();
         if(vehicle_clicked)
         {
-          controlled_vehicle.player_controlled = false;
-          controlled_vehicle = vehicle_clicked;
-          controlled_vehicle.player_controlled = true;
-          ControlModeMouse = false; // locked
-          Cursor.lockState = CursorLockMode.Locked;
-          SetPlayerUI(controlled_vehicle);
+          ControlVehicle(vehicle_clicked);
         }
       }
     }
@@ -386,6 +381,15 @@ public class PlayerController : MonoBehaviour
       Debug.Log("spawnUnitsButton.name => "+spawnUnitsButton.name);
       spawnUnitsButton.active = status;
     }
+  }
+  public void ControlVehicle(VehicleBase controlthisvehicle)
+  {
+    controlled_vehicle.player_controlled = false;
+    controlled_vehicle = controlthisvehicle;
+    controlled_vehicle.player_controlled = true;
+    ControlModeMouse = false; // locked
+    Cursor.lockState = CursorLockMode.Locked;
+    SetPlayerUI(controlled_vehicle);
   }
 }
 

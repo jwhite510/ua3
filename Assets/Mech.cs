@@ -228,7 +228,7 @@ public class Mech : VehicleBase
           if(aim_dot_prod > 0.95)
           {
             // Debug.Log("mech fire cannon");
-            // FireCannons();
+            FireCannons();
           }
 
           RotateMechTurret(left_right, -up_down);
@@ -333,14 +333,14 @@ public class Mech : VehicleBase
           GameObject proj = Instantiate(projectile, lturretBarrelMarker.position-1*lturretBarrelMarker.up, lturretBarrelMarker.rotation);
           // rturretBarrelMarker.position + 1*rturretBarrelMarker.up
           proj.GetComponent<Rigidbody>().velocity = -20*lturretBarrelMarker.up;
-          proj.GetComponent<projectile>().whoshotthis = this;
+          proj.GetComponent<projectile>().owningteam = this.team;
           last_fire_side_right = false;
         }
         else{
           GameObject proj = Instantiate(projectile, rturretBarrelMarker.position-1*rturretBarrelMarker.up, rturretBarrelMarker.rotation);
           // rturretBarrelMarker.position + 1*rturretBarrelMarker.up
           proj.GetComponent<Rigidbody>().velocity = -20*rturretBarrelMarker.up;
-          proj.GetComponent<projectile>().whoshotthis = this;
+          proj.GetComponent<projectile>().owningteam = this.team;
           last_fire_side_right = true;
         }
 
