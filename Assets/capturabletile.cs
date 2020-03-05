@@ -117,6 +117,8 @@ public class capturabletile : MonoBehaviour
           // Debug.Log("captured");
           current_color = 1;
           owningteam = 2; // red team
+          AdjustBattlestationTiles(1);
+          // add to the host station
         }
         else if(current_color <= 0)
         {
@@ -124,6 +126,9 @@ public class capturabletile : MonoBehaviour
           // Debug.Log("captured");
           current_color = 0;
           owningteam = 1; // green team
+          // add to the host station
+          AdjustBattlestationTiles(1);
+
         }
         Color tilecolortarget = Color.Lerp(greenc, redc, current_color);
         Color tilecolor = Color.Lerp(tilecolortarget, Color.white, 0.5f);
@@ -137,12 +142,14 @@ public class capturabletile : MonoBehaviour
         // if there are no owning vehicles and atleast one enemy vehicle
         if(owningteam == 1 && team1 == 0 && team2>0)
         {
+          AdjustBattlestationTiles(-1);
           captured = false;
           owningteam = 0;
           Debug.Log("uncaptured");
         }
         else if(owningteam == 2 && team2 == 0 && team1>0)
         {
+          AdjustBattlestationTiles(-1);
           captured = false;
           owningteam = 0;
           Debug.Log("uncaptured");
@@ -169,6 +176,18 @@ public class capturabletile : MonoBehaviour
         vehiclenames+=veh.name;
       }
       Handles.Label(transform.position, vehiclenames);
+    }
+    private void AdjustBattlestationTiles(int delta)
+    {
+
+      battlestation[] battlestations = FindObjectsOfType<battlestation>();
+      foreach(battlestation bat in battlestations)
+      {
+        if(bat.team == owningteam)
+        {
+          bat.ownedtiles+=delta;
+        }
+      }
     }
 
 }

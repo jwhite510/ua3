@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 
 public class battlestation : VehicleBase
 {
@@ -13,7 +14,11 @@ public class battlestation : VehicleBase
     public Transform downReference;
     public bool MoveToWayPoint = false;
     public bool AI_controlled;
+    public float energy = 0;
+    public int ownedtiles = 0;
+    public GameObject SpawnVehicle;
     private RaycastHit hit;
+    private float last_resources_collected_time = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +42,8 @@ public class battlestation : VehicleBase
     }
     void FixedUpdate()
     {
+      CollectResources();
+
       if(AI_controlled)
       {
         AI_Control();
@@ -110,6 +117,7 @@ public class battlestation : VehicleBase
     {
       Gizmos.color = Color.red;
       Gizmos.DrawSphere(hit.point, 1);
+      Handles.Label(transform.position, "energy:"+energy);
     }
     void AI_Control()
     {
@@ -170,5 +178,28 @@ public class battlestation : VehicleBase
       }
 
 
+    }
+    public void spawnTank(Vector3 spawnLocation)
+    {
+      if(energy >= 10)
+      {
+        energy -= 10;
+        Quaternion e1 = new Quaternion(0,0,0,0);
+        e1.eulerAngles = new Vector3(0,0,0);
+        GameObject spawnVehicle = Instantiate(SpawnVehicle, spawnLocation + new Vector3(0,3,0), e1);
+        Tank tanks = spawnVehicle.GetComponent<Tank>();
+        // set the tank to this host station team
+        tanks.team = team;
+      }
+
+    }
+    private void CollectResources()
+    {
+      if((Time.time - last_resources_collected_time) > 3.0)
+      {
+        energy += 1;
+        energy += 1*ownedtiles;
+        last_resources_collected_time = Time.time;
+      }
     }
 }

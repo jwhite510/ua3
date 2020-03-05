@@ -458,6 +458,7 @@ MonoBehaviour:
   player_controlled: 0
   thishealthbar: {fileID: 6818856108916265079}
   current_health: 0
+  isBeingDestroyed: 0
   turret: {fileID: 4642316921787112629}
   turret_base: {fileID: 6514630341382143453}
   navagent_transform: {fileID: 7789007212554212291}
@@ -465,6 +466,10 @@ MonoBehaviour:
   downReference: {fileID: 1879334544217567452}
   MoveToWayPoint: 0
   AI_controlled: 0
+  energy: 0
+  ownedtiles: 0
+  SpawnVehicle: {fileID: 6130507275127741014, guid: d855de9d9474c6442a7987f148a0a909,
+    type: 3}
 --- !u!114 &4642316921787112629
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -67,19 +67,19 @@ public class Turret : MonoBehaviour
   }
   public void FireCannon()
   {
-    if((Time.time - last_fire_time) > 1)
+    if((Time.time - last_fire_time) > 0.1)
     {
       GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
 
 
       if(vehicle_base.GetComponent<Rigidbody>())
       {
-        proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
+        proj.GetComponent<Rigidbody>().velocity = 100*projectile_spawn_point.right + vehicle_base.GetComponent<Rigidbody>().velocity;
         proj.GetComponent<projectile>().owningteam = ownerOfThisTurret.team;
       }
       else
       {
-        proj.GetComponent<Rigidbody>().velocity = 20*projectile_spawn_point.right;
+        proj.GetComponent<Rigidbody>().velocity = 100*projectile_spawn_point.right;
         proj.GetComponent<projectile>().owningteam = ownerOfThisTurret.team;
       }
 
