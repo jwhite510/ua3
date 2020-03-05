@@ -61,13 +61,13 @@ public class Turret : MonoBehaviour
 
     if(on_target > 0.9)
     {
-      // FireCannon();
+      FireCannon();
     }
     RotateTurret(-300*forward_dot*Time.deltaTime, 300*right_dot*Time.deltaTime);
   }
   public void FireCannon()
   {
-    if((Time.time - last_fire_time) > 0.1)
+    if((Time.time - last_fire_time) > 1.0)
     {
       GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
 

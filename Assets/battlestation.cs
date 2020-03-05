@@ -17,7 +17,7 @@ public class battlestation : VehicleBase
     public float energy = 0;
     public int ownedtiles = 0;
     public GameObject SpawnVehicle;
-    private RaycastHit hit;
+    private RaycastHit point_below_station;
     private float last_resources_collected_time = 0;
     // Start is called before the first frame update
     void Start()
@@ -58,18 +58,18 @@ public class battlestation : VehicleBase
       }
       // update position of nav mesh
       Ray ray = new Ray(downReference.position, new Vector3(0,-1,0));
-      // RaycastHit hit;
-      bool HitSomething = Physics.Raycast(ray, out hit);
+      // RaycastHit point_below_station;
+      bool HitSomething = Physics.Raycast(ray, out point_below_station);
       if(HitSomething)
       {
         // Debug.DrawLine(
             // downReference.position,
-            // hit.point,
+            // point_below_station.point,
             // Color.green,
             // 0.0f
             // );
       }
-      navagent_transform.position = hit.point;
+      navagent_transform.position = point_below_station.point;
 
       if(MoveToWayPoint)
       {
@@ -116,7 +116,7 @@ public class battlestation : VehicleBase
     void OnDrawGizmos()
     {
       Gizmos.color = Color.red;
-      Gizmos.DrawSphere(hit.point, 1);
+      Gizmos.DrawSphere(point_below_station.point, 1);
       Handles.Label(transform.position, "energy:"+energy);
     }
     void AI_Control()
@@ -176,6 +176,14 @@ public class battlestation : VehicleBase
 
 
       }
+      // spawn vehicles
+      if(energy > 10)
+      {
+        float r1 = Random.Range(-3,3);
+        float r2 = Random.Range(-3,3);
+        spawnTank(point_below_station.point + new Vector3(r1, 0, r2));
+      }
+
 
 
     }

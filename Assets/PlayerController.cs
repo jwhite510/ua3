@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
   public VehicleBase controlled_vehicle;
   public Camera cam;
   public Text SelectedVehicleText;
+  public Text ResourcesText;
   public VehicleBase selectedVehicle;
   public GameObject PlayerUI;
   private GameObject SpawnUnitsCursor;
+  public battlestation playerBattleStation;
 
   bool ControlModeMouse;
   // the delta rotation
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    UpdateUI();
     if(SpawnUnitsCursor.active)
     {
       Vector3 SpawnUnitsCursor_position = Input.mousePosition;
@@ -387,6 +390,11 @@ public class PlayerController : MonoBehaviour
     ControlModeMouse = false; // locked
     Cursor.lockState = CursorLockMode.Locked;
     SetPlayerUI(controlled_vehicle);
+  }
+  private void UpdateUI()
+  {
+    ResourcesText.text = "energy: "+playerBattleStation.energy;
+
   }
 }
 
