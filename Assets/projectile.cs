@@ -48,7 +48,10 @@ public class projectile : MonoBehaviour
               battlestation[] battlestations = FindObjectsOfType<battlestation>();
               playercontroller.ControlVehicle(battlestations[0]);
             }
-            vehiclehit.gameObject.transform.position = new Vector3(0,100,0);
+            vehiclehit.gameObject.transform.position = new Vector3(0,-100,0);
+            // Debug.Log("Destroy vehiclehit Invoked");
+            vehiclehit.Invoke("DestroyThisVehicle", 5);
+            vehiclehit.isBeingDestroyed = true;
           }
         }
 

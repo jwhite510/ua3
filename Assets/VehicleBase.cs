@@ -11,6 +11,7 @@ public class VehicleBase : MonoBehaviour
     public bool player_controlled = false;
     public healthbar thishealthbar;
     public float current_health;
+    public bool isBeingDestroyed = false;
     // Start is called before the first frame update
     public void Start()
     {
@@ -90,6 +91,11 @@ public class VehicleBase : MonoBehaviour
         }
       }
       return closestobject;
+    }
+    public void DestroyThisVehicle()
+    {
+      Debug.Log("DestroyThisVehicle called");
+      Destroy(gameObject);
     }
 
 

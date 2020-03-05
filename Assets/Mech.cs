@@ -228,7 +228,7 @@ public class Mech : VehicleBase
           if(aim_dot_prod > 0.95)
           {
             // Debug.Log("mech fire cannon");
-            FireCannons();
+            // FireCannons();
           }
 
           RotateMechTurret(left_right, -up_down);
