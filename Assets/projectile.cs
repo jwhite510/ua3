@@ -40,7 +40,7 @@ public class projectile : MonoBehaviour
 
           if(vehiclehit is Tank)
           {
-            vehiclehit.current_health -= 0.50f;
+            vehiclehit.current_health -= 0.05f;
           }
           else if(vehiclehit is battlestation)
           {

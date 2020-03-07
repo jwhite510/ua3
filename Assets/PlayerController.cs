@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     ControlModeMouse = false; // locked
     SelectedVehicleText.text = "";
     controlled_vehicle.player_controlled = true;
+    ControlledVehicleText.text = controlled_vehicle.name;
     SetPlayerUI(controlled_vehicle);
 
     // find the spawn units cursor
@@ -389,7 +390,7 @@ public class PlayerController : MonoBehaviour
     controlled_vehicle.player_controlled = false;
     controlled_vehicle = controlthisvehicle;
     controlled_vehicle.player_controlled = true;
-    ControlledVehicleText.text =controlled_vehicle.name;
+    ControlledVehicleText.text = controlled_vehicle.name;
     ControlModeMouse = false; // locked
     Cursor.lockState = CursorLockMode.Locked;
     SetPlayerUI(controlled_vehicle);
