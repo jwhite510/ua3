@@ -52,12 +52,6 @@ public class projectile : MonoBehaviour
           if(vehiclehit.current_health < 0)
           {
             // if the vehicle is player controlled
-            if(vehiclehit.player_controlled == true)
-            {
-              PlayerController playercontroller = FindObjectOfType<PlayerController>();
-              battlestation[] battlestations = FindObjectsOfType<battlestation>();
-              playercontroller.ControlVehicle(battlestations[0]);
-            }
             vehiclehit.gameObject.transform.position = new Vector3(0,-100,0);
             // Debug.Log("Destroy vehiclehit Invoked");
             vehiclehit.Invoke("DestroyThisVehicle", 5);

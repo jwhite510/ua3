@@ -24,8 +24,22 @@ public class VehicleBase : MonoBehaviour
     {
       // Debug.Log("tank update called");
     }
-    void FixedUpdate()
+    public void FixedUpdate()
     {
+      // Debug.Log("VehicleBase FixedUpdate called");
+      if(isBeingDestroyed && player_controlled)
+      {
+        PlayerController playercontroller = FindObjectOfType<PlayerController>();
+        battlestation[] battlestations = FindObjectsOfType<battlestation>();
+        foreach(battlestation bat in battlestations)
+        {
+          if(bat.team == 1)
+          {
+            playercontroller.ControlVehicle(bat);
+            break;
+          }
+        }
+      }
     }
 
     public GameObject FindNearestEnemyVehicle()

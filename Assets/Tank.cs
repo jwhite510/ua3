@@ -71,6 +71,7 @@ public class Tank : VehicleBase
     }
     void FixedUpdate()
     {
+      base.FixedUpdate();
       // set tank position
       // transform.position = vehicle_base.transform.position;
       if(MoveToWayPoint && !player_controlled)
