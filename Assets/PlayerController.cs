@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
   public battlestation playerBattleStation;
   public healthbar playeruihealthbar;
 
+  public GameObject VehicleReferenceButton;
+  public GameObject VehicleReferenceButtonList;
+
   bool ControlModeMouse;
   // the delta rotation
   // float drotx = 0;
@@ -138,6 +141,31 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
+
+    // delete child components
+    VehicleListItemS[] childitems = VehicleReferenceButtonList.GetComponentsInChildren<VehicleListItemS>();
+    Debug.Log("GetComponentsInChildren called ==============================================");
+    foreach(VehicleListItemS t in childitems)
+    {
+      Debug.Log("t.gameObject.name => "+t.gameObject.name);
+      Destroy(t.gameObject);
+    }
+
+    // append buttons list
+    GameObject childbutton = Instantiate(VehicleReferenceButton) as GameObject;
+    childbutton.transform.parent = VehicleReferenceButtonList.transform;
+    VehicleListItemS v = childbutton.GetComponent<VehicleListItemS>();
+    v.SetText("set the vehicle name");
+
+    // TODO put this in the right place, add a function on button click
+
+    // append buttons list
+    childbutton = Instantiate(VehicleReferenceButton) as GameObject;
+    childbutton.transform.parent = VehicleReferenceButtonList.transform;
+    v = childbutton.GetComponent<VehicleListItemS>();
+    v.SetText("set the other vehicle name");
+
+
     if(controlled_vehicle is Tank)
     {
       Tank controlled_tank = (Tank)controlled_vehicle;
