@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
   public VehicleBase controlled_vehicle;
   public Camera cam;
   public Text SelectedVehicleText;
+  public Text ControlledVehicleText;
   public Text ResourcesText;
   public VehicleBase selectedVehicle;
   public GameObject PlayerUI;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     // FindObjectOfType<GameManager>()
     Cursor.lockState = CursorLockMode.Locked;
     ControlModeMouse = false; // locked
-    SelectedVehicleText.text = controlled_vehicle.name;
+    SelectedVehicleText.text = "";
     controlled_vehicle.player_controlled = true;
     SetPlayerUI(controlled_vehicle);
 
@@ -388,6 +389,7 @@ public class PlayerController : MonoBehaviour
     controlled_vehicle.player_controlled = false;
     controlled_vehicle = controlthisvehicle;
     controlled_vehicle.player_controlled = true;
+    ControlledVehicleText.text =controlled_vehicle.name;
     ControlModeMouse = false; // locked
     Cursor.lockState = CursorLockMode.Locked;
     SetPlayerUI(controlled_vehicle);
