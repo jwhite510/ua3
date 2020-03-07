@@ -31,6 +31,9 @@ public class projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collisionInfo)
     {
+
+      // Debug.Log("OnCollisionEnter called");
+      // Debug.Log("collisionInfo.transform.gameObject.name => "+collisionInfo.transform.gameObject.name);
       VehicleBase vehiclehit = collisionInfo.collider.GetComponentInParent<VehicleBase>();
       if(vehiclehit)
       {
