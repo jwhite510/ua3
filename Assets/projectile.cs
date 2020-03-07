@@ -37,8 +37,18 @@ public class projectile : MonoBehaviour
         // apply damage
         if(vehiclehit.team != owningteam)
         {
-          vehiclehit.current_health -= 0.05f;
+
+          if(vehiclehit is Tank)
+          {
+            vehiclehit.current_health -= 0.50f;
+          }
+          else if(vehiclehit is battlestation)
+          {
+            vehiclehit.current_health -= 0.01f;
+          }
+
           vehiclehit.thishealthbar.SetHealth(vehiclehit.current_health);
+          // if the vehicle is destroyed
           if(vehiclehit.current_health < 0)
           {
             // if the vehicle is player controlled

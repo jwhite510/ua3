@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
   public GameObject PlayerUI;
   private GameObject SpawnUnitsCursor;
   public battlestation playerBattleStation;
+  public healthbar playeruihealthbar;
 
   bool ControlModeMouse;
   // the delta rotation
@@ -394,6 +395,7 @@ public class PlayerController : MonoBehaviour
   private void UpdateUI()
   {
     ResourcesText.text = "energy: "+playerBattleStation.energy;
+    playeruihealthbar.SetHealth(controlled_vehicle.current_health);
 
   }
 }

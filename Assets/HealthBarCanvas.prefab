@@ -146,7 +146,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 682256644711150526}
   m_HandleRect: {fileID: 0}
@@ -280,7 +280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.325, y: 2.72}
+  m_AnchoredPosition: {x: 0.3250122, y: 2.7200012}
   m_SizeDelta: {x: 272.521, y: 60.366}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2429648828721048675
