@@ -114,7 +114,22 @@ public class MiniMap : MonoBehaviour
       mouseDeltaPosition = GetMousePosition() - mapMousePosition;
 
       // miniMapCamera.transform.position+= new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]);
-      miniMapCamera.transform.position = cameraOriginalLocation + 20*(new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]));
+
+      Vector3 deltaCameraPosition = new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]);
+      deltaCameraPosition *= miniMapCamera.GetComponent<Camera>().orthographicSize;
+
+      miniMapCamera.transform.position = cameraOriginalLocation + 5*deltaCameraPosition;
+
+    }
+    public void MiniMapScroll(BaseEventData baseData)
+    {
+      // Debug.Log("MiniMouseScroll");
+      PointerEventData pointerEventData = baseData as PointerEventData;
+      Vector2 scrollDelta = pointerEventData.scrollDelta;
+      Debug.Log("scrollDelta => "+scrollDelta);
+      miniMapCamera.transform.position += new Vector3(0,0,0);
+      miniMapCamera.GetComponent<Camera>().orthographicSize-=scrollDelta[1];
+
 
     }
 }
