@@ -12,6 +12,10 @@ public class MiniMap : MonoBehaviour
     public GameObject miniMapCamera;
     public GameObject minimapImage;
     private RectTransform rectTransform;
+    private Vector2 mapMousePosition;
+    private bool handling_mouseclick = false;
+    private float mouseDownTime = 0;
+    private bool isMouseDragging = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,16 @@ public class MiniMap : MonoBehaviour
     void Update()
     {
       // miniMapCamera.transform.position+= new Vector3(0,0,30);
+      if(handling_mouseclick)
+      {
+        if((Time.time - mouseDownTime) > 0.2)
+        {
+          // mouse is dragging
+          // Debug.Log("mouse is dragging");
+          isMouseDragging = true;
+          HandleMouseDrag();
+        }
+      }
     }
 
     public void MiniMapMouseDown(BaseEventData baseData)
@@ -31,12 +45,14 @@ public class MiniMap : MonoBehaviour
 
       if(pointerEventData.button == PointerEventData.InputButton.Left)
       {
-        Debug.Log("left mouse click");
-        Vector2 mapMousePosition = GetMousePosition();
-        Debug.Log("mapMousePosition => "+mapMousePosition);
+        // LEFT mouse down
+        mapMousePosition = GetMousePosition();
+        mouseDownTime = Time.time;
+        handling_mouseclick = true;
       }
       else
       {
+        // RIGHT mouse down
         Debug.Log("right mouse click");
       }
     }
@@ -45,6 +61,16 @@ public class MiniMap : MonoBehaviour
     public void MiniMapMouseUp()
     {
       Debug.Log("mouse up");
+      if(isMouseDragging)
+      {
+        // Debug.Log("handled isMouseDragging true");
+      }
+      else
+      {
+        HandleSingleMouseClick();
+      }
+      handling_mouseclick = false;
+      isMouseDragging = false;
     }
 
     private Vector2 GetMousePosition()
@@ -71,5 +97,21 @@ public class MiniMap : MonoBehaviour
 
       // Debug.Log("mapPosition => "+mapPosition);
       return mapPosition;
+    }
+
+    private void HandleSingleMouseClick()
+    {
+      Debug.Log("HandleSingleMouseClick called");
+      Debug.Log("mapMousePosition => "+mapMousePosition);
+    }
+    private void HandleMouseDrag()
+    {
+      Debug.Log("HandleMouseDrag called");
+      // mapMousePosition
+      Vector2 mouseDeltaPosition = new Vector2(0,0);
+      mouseDeltaPosition = GetMousePosition() - mapMousePosition;
+
+      miniMapCamera.transform.position+= new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]);
+
     }
 }
