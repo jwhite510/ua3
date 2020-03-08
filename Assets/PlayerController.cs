@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour
     }
     SpawnUnitsCursor.active = false;
     // SpawnUnitsCursor.transform.position = new Vector3(50,50,0);
+
+
+    // update units available
+    UpdateUnitsUI();
+
   }
 
   // Update is called once per frame
@@ -141,31 +146,6 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
-
-    // delete child components
-    VehicleListItemS[] childitems = VehicleReferenceButtonList.GetComponentsInChildren<VehicleListItemS>();
-    Debug.Log("GetComponentsInChildren called ==============================================");
-    foreach(VehicleListItemS t in childitems)
-    {
-      Debug.Log("t.gameObject.name => "+t.gameObject.name);
-      Destroy(t.gameObject);
-    }
-
-    // append buttons list
-    GameObject childbutton = Instantiate(VehicleReferenceButton) as GameObject;
-    childbutton.transform.parent = VehicleReferenceButtonList.transform;
-    VehicleListItemS v = childbutton.GetComponent<VehicleListItemS>();
-    v.SetText("set the vehicle name");
-
-    // TODO put this in the right place, add a function on button click
-
-    // append buttons list
-    childbutton = Instantiate(VehicleReferenceButton) as GameObject;
-    childbutton.transform.parent = VehicleReferenceButtonList.transform;
-    v = childbutton.GetComponent<VehicleListItemS>();
-    v.SetText("set the other vehicle name");
-
-
     if(controlled_vehicle is Tank)
     {
       Tank controlled_tank = (Tank)controlled_vehicle;
@@ -429,5 +409,42 @@ public class PlayerController : MonoBehaviour
     playeruihealthbar.SetHealth(controlled_vehicle.current_health);
 
   }
+  public void UpdateUnitsUI()
+  {
+
+    Debug.Log("updating units ui");
+
+    // delete child components
+    VehicleListItemS[] childitems = VehicleReferenceButtonList.GetComponentsInChildren<VehicleListItemS>();
+    // Debug.Log("GetComponentsInChildren called ==============================================");
+    foreach(VehicleListItemS t in childitems)
+    {
+      // Debug.Log("t.gameObject.name => "+t.gameObject.name);
+      Destroy(t.gameObject);
+    }
+
+    // find all vehicles on team
+    VehicleBase[] all_vehicles = FindObjectsOfType<VehicleBase>();
+    List<VehicleBase> teamvehicles = new List<VehicleBase>();
+    foreach(VehicleBase veh in all_vehicles)
+    {
+      // Debug.Log("veh.name => "+veh.name);
+      if(veh.team == 1)
+      {
+        Debug.Log("veh.name => "+veh.name);
+        teamvehicles.Add(veh);
+        // append buttons list
+
+        GameObject childbutton = Instantiate(VehicleReferenceButton) as GameObject;
+        childbutton.transform.parent = VehicleReferenceButtonList.transform;
+        VehicleListItemS v = childbutton.GetComponent<VehicleListItemS>();
+        v.SetText(veh.name);
+        v.SetVehicle(veh, this);
+      }
+    }
+
+
+  }
+  
 }
 

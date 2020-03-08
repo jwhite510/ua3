@@ -198,6 +198,13 @@ public class battlestation : VehicleBase
         Tank tanks = spawnVehicle.GetComponent<Tank>();
         // set the tank to this host station team
         tanks.team = team;
+        if(team == 1)
+        {
+          // update player ui
+          PlayerController playerController = FindObjectOfType<PlayerController>();
+          playerController.UpdateUnitsUI();
+
+        }
       }
 
     }

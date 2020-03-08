@@ -9,6 +9,7 @@ public class VehicleListItemS : MonoBehaviour
 
     public Text buttonText;
     public VehicleBase vehicleReference;
+    public PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,10 @@ public class VehicleListItemS : MonoBehaviour
     }
 
 
-    void SetVehicle(VehicleBase vehicleReferenceIn)
+    public void SetVehicle(VehicleBase vehicleReferenceIn, PlayerController playerControllerIn)
     {
       vehicleReference = vehicleReferenceIn;
+      playerController = playerControllerIn;
     }
 
     public void SetText(string text)
@@ -36,5 +38,11 @@ public class VehicleListItemS : MonoBehaviour
     public void SetButtonText(string buttontext)
     {
 
+    }
+
+    public void ButtonClicked()
+    {
+      Debug.Log("possess " + vehicleReference.name);
+      playerController.ControlVehicle(vehicleReference);
     }
 }
