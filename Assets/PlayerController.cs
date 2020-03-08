@@ -429,7 +429,7 @@ public class PlayerController : MonoBehaviour
     foreach(VehicleBase veh in all_vehicles)
     {
       // Debug.Log("veh.name => "+veh.name);
-      if(veh.team == 1)
+      if(veh.team == 1 && veh.isBeingDestroyed == false)
       {
         Debug.Log("veh.name => "+veh.name);
         teamvehicles.Add(veh);

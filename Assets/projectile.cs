@@ -59,6 +59,11 @@ public class projectile : MonoBehaviour
             // Debug.Log("Destroy vehiclehit Invoked");
             vehiclehit.Invoke("DestroyThisVehicle", 5);
             vehiclehit.isBeingDestroyed = true;
+            if(vehiclehit.team == 1)
+            {
+              PlayerController playerController = FindObjectOfType<PlayerController>();
+              playerController.UpdateUnitsUI();
+            }
           }
         }
 
