@@ -16,6 +16,7 @@ public class MiniMap : MonoBehaviour
     private bool handling_mouseclick = false;
     private float mouseDownTime = 0;
     private bool isMouseDragging = false;
+    private Vector3 cameraOriginalLocation;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,7 @@ public class MiniMap : MonoBehaviour
       {
         // LEFT mouse down
         mapMousePosition = GetMousePosition();
+        cameraOriginalLocation = miniMapCamera.transform.position;
         mouseDownTime = Time.time;
         handling_mouseclick = true;
       }
@@ -111,7 +113,8 @@ public class MiniMap : MonoBehaviour
       Vector2 mouseDeltaPosition = new Vector2(0,0);
       mouseDeltaPosition = GetMousePosition() - mapMousePosition;
 
-      miniMapCamera.transform.position+= new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]);
+      // miniMapCamera.transform.position+= new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]);
+      miniMapCamera.transform.position = cameraOriginalLocation + 20*(new Vector3(-mouseDeltaPosition[0],0,mouseDeltaPosition[1]));
 
     }
 }
