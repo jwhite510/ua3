@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class MiniMap : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MiniMap : MonoBehaviour
     private float mouseDownTime = 0;
     private bool isMouseDragging = false;
     private Vector3 cameraOriginalLocation;
+    private Vector3 spherePosition = new Vector3(0,0,0);
+    private Vector3 rayCastPosition = new Vector3(0, 0, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -103,12 +106,28 @@ public class MiniMap : MonoBehaviour
 
     private void HandleSingleMouseClick()
     {
-      Debug.Log("HandleSingleMouseClick called");
-      Debug.Log("mapMousePosition => "+mapMousePosition);
+      // Debug.Log("HandleSingleMouseClick called");
+      // Debug.Log("mapMousePosition => "+mapMousePosition);
+      // Debug.Log("miniMapCamera.transform.position => "+miniMapCamera.transform.position);
+
+      // get position of camera
+      rayCastPosition = miniMapCamera.transform.position;
+      rayCastPosition[0] += 2*mapMousePosition[0] * miniMapCamera.GetComponent<Camera>().orthographicSize;
+      rayCastPosition[2] -= 2*mapMousePosition[1] * miniMapCamera.GetComponent<Camera>().orthographicSize;
+
+      Ray ray = new Ray(rayCastPosition, new Vector3(0,-1,0));
+
+      RaycastHit hit;
+      bool HitSomething = Physics.Raycast(ray, out hit);
+      if(HitSomething)
+      {
+        // Debug.Log("hit.transform.position => "+hit.transform.position);
+        spherePosition = hit.point;
+      }
     }
     private void HandleMouseDrag()
     {
-      Debug.Log("HandleMouseDrag called");
+      // Debug.Log("HandleMouseDrag called");
       // mapMousePosition
       Vector2 mouseDeltaPosition = new Vector2(0,0);
       mouseDeltaPosition = GetMousePosition() - mapMousePosition;
@@ -131,5 +150,10 @@ public class MiniMap : MonoBehaviour
       miniMapCamera.GetComponent<Camera>().orthographicSize-=scrollDelta[1];
 
 
+    }
+    void OnDrawGizmos()
+    {
+      Gizmos.color = Color.blue;
+      Gizmos.DrawSphere(spherePosition, 0.2f);
     }
 }
