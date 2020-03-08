@@ -246,9 +246,7 @@ public class PlayerController : MonoBehaviour
 
         if(vehicleclicked)
         {
-          // Debug.Log(vehicleclicked.name);
-          SelectedVehicleText.text = vehicleclicked.name;
-          selectedVehicle = vehicleclicked;
+          SelectVehicle(vehicleclicked);
         }
       }
     }
@@ -443,7 +441,18 @@ public class PlayerController : MonoBehaviour
       }
     }
 
+    // check if the selected vehilce is destroyed
+    if(selectedVehicle && selectedVehicle.isBeingDestroyed == true)
+    {
+      SelectedVehicleText.text = "None";
+    }
 
+
+  }
+  public void SelectVehicle(VehicleBase vehicleBaseIn)
+  {
+    SelectedVehicleText.text = vehicleBaseIn.name;
+    selectedVehicle = vehicleBaseIn;
   }
   
 }

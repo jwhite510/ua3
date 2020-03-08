@@ -10,6 +10,9 @@ public class VehicleListItemS : MonoBehaviour
     public Text buttonText;
     public VehicleBase vehicleReference;
     public PlayerController playerController;
+
+    private bool isHandlingClick = false;
+    private float buttonClickTime = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,16 @@ public class VehicleListItemS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      if(isHandlingClick == true)
+      {
+        if((Time.time - buttonClickTime) > 0.2)
+        {
+          HandleSingleClick();
+          isHandlingClick = false;
+        }
+
+      }
 
     }
 
@@ -31,7 +44,6 @@ public class VehicleListItemS : MonoBehaviour
 
     public void SetText(string text)
     {
-      // Debug.Log("button did something DoSomething");
       buttonText.text = text;
     }
 
@@ -42,7 +54,24 @@ public class VehicleListItemS : MonoBehaviour
 
     public void ButtonClicked()
     {
-      Debug.Log("possess " + vehicleReference.name);
+      if(isHandlingClick == true)
+      {
+        HandleDoubleClick();
+        isHandlingClick = false;
+      }
+      else
+      {
+        buttonClickTime = Time.time;
+        // Debug.Log("possess " + vehicleReference.name);
+        isHandlingClick = true;
+      }
+    }
+    private void HandleDoubleClick()
+    {
       playerController.ControlVehicle(vehicleReference);
+    }
+    private void HandleSingleClick()
+    {
+      playerController.SelectVehicle(vehicleReference);
     }
 }
