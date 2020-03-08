@@ -67,7 +67,7 @@ public class Turret : MonoBehaviour
   }
   public void FireCannon()
   {
-    if((Time.time - last_fire_time) > 1.0)
+    if((Time.time - last_fire_time) > 0.1)
     {
       GameObject proj = Instantiate(projectile, projectile_spawn_point.position, projectile_spawn_point.rotation);
 

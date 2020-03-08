@@ -12,6 +12,7 @@ public class MiniMap : MonoBehaviour
     private bool isDraggingMap;
     public GameObject miniMapCamera;
     public GameObject minimapImage;
+    public PlayerController playerController;
     private RectTransform rectTransform;
     private Vector2 mapMousePosition;
     private bool handling_mouseclick = false;
@@ -59,6 +60,8 @@ public class MiniMap : MonoBehaviour
       {
         // RIGHT mouse down
         Debug.Log("right mouse click");
+        mapMousePosition = GetMousePosition();
+        HandleSingleMouseClick(1);
       }
     }
 
@@ -72,7 +75,7 @@ public class MiniMap : MonoBehaviour
       }
       else
       {
-        HandleSingleMouseClick();
+        HandleSingleMouseClick(0);
       }
       handling_mouseclick = false;
       isMouseDragging = false;
@@ -104,17 +107,32 @@ public class MiniMap : MonoBehaviour
       return mapPosition;
     }
 
-    private void HandleSingleMouseClick()
+    private void HandleSingleMouseClick(int mouseButton)
     {
-      // Debug.Log("HandleSingleMouseClick called");
-      // Debug.Log("mapMousePosition => "+mapMousePosition);
-      // Debug.Log("miniMapCamera.transform.position => "+miniMapCamera.transform.position);
-
-
       RaycastHit hit;
       if(ProjectMouseToMiniMapWorldLocation(mapMousePosition, out hit))
       {
         spherePosition = hit.point;
+
+
+        if(mouseButton == 0){
+          // LEFT CLICK
+          VehicleBase vehicleclicked = hit.transform.gameObject.GetComponentInParent<VehicleBase>();
+          if(vehicleclicked)
+          {
+            playerController.SelectVehicle(vehicleclicked);
+          }
+        }
+        else if(mouseButton == 1)
+        {
+          // RIGHT CLICK
+          playerController.MoveOrderSelectedVehicle(hit.point);
+
+        }
+
+
+
+
       }
     }
     private void HandleMouseDrag()

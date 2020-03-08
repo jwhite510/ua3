@@ -304,38 +304,7 @@ public class PlayerController : MonoBehaviour
       bool HitSomething = Physics.Raycast(ray, out hit);
       if(HitSomething)
       {
-        // Debug.Log(hit.point.ToString());
-        // Debug.DrawLine(hit.point, hit.point+new Vector3(0,1,0), Color.red, 1.0f);
-        if(selectedVehicle)
-        {
-          if(selectedVehicle is Tank)
-          {
-            Tank SelectedTank = (Tank)selectedVehicle;
-            if(SelectedTank)
-            {
-              SelectedTank.MoveToWayPoint = true;
-              SelectedTank.agent.SetDestination(hit.point);
-            }
-          }
-          else if(selectedVehicle is battlestation)
-          {
-            battlestation Selectedbattlestation = (battlestation)selectedVehicle;
-            if(Selectedbattlestation)
-            {
-              Selectedbattlestation.MoveToWayPoint = true;
-              Selectedbattlestation.navagent.SetDestination(hit.point);
-            }
-          }
-          else if(selectedVehicle is Mech)
-          {
-            Mech selectedMech = (Mech)selectedVehicle;
-            if(selectedMech)
-            {
-              selectedMech.MoveToWayPoint = true;
-              selectedMech.agent.SetDestination(hit.point);
-            }
-          }
-        }
+        MoveOrderSelectedVehicle(hit.point);
 
       }
     }
@@ -454,6 +423,39 @@ public class PlayerController : MonoBehaviour
     SelectedVehicleText.text = vehicleBaseIn.name;
     selectedVehicle = vehicleBaseIn;
   }
-  
+  public void MoveOrderSelectedVehicle(Vector3 locationIn)
+  {
+
+    if(selectedVehicle)
+    {
+      if(selectedVehicle is Tank)
+      {
+        Tank SelectedTank = (Tank)selectedVehicle;
+        if(SelectedTank)
+        {
+          SelectedTank.MoveToWayPoint = true;
+          SelectedTank.agent.SetDestination(locationIn);
+        }
+      }
+      else if(selectedVehicle is battlestation)
+      {
+        battlestation Selectedbattlestation = (battlestation)selectedVehicle;
+        if(Selectedbattlestation)
+        {
+          Selectedbattlestation.MoveToWayPoint = true;
+          Selectedbattlestation.navagent.SetDestination(locationIn);
+        }
+      }
+      else if(selectedVehicle is Mech)
+      {
+        Mech selectedMech = (Mech)selectedVehicle;
+        if(selectedMech)
+        {
+          selectedMech.MoveToWayPoint = true;
+          selectedMech.agent.SetDestination(locationIn);
+        }
+      }
+    }
+  }
 }
 
