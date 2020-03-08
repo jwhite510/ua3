@@ -110,18 +110,10 @@ public class MiniMap : MonoBehaviour
       // Debug.Log("mapMousePosition => "+mapMousePosition);
       // Debug.Log("miniMapCamera.transform.position => "+miniMapCamera.transform.position);
 
-      // get position of camera
-      rayCastPosition = miniMapCamera.transform.position;
-      rayCastPosition[0] += 2*mapMousePosition[0] * miniMapCamera.GetComponent<Camera>().orthographicSize;
-      rayCastPosition[2] -= 2*mapMousePosition[1] * miniMapCamera.GetComponent<Camera>().orthographicSize;
-
-      Ray ray = new Ray(rayCastPosition, new Vector3(0,-1,0));
 
       RaycastHit hit;
-      bool HitSomething = Physics.Raycast(ray, out hit);
-      if(HitSomething)
+      if(ProjectMouseToMiniMapWorldLocation(mapMousePosition, out hit))
       {
-        // Debug.Log("hit.transform.position => "+hit.transform.position);
         spherePosition = hit.point;
       }
     }
@@ -148,8 +140,26 @@ public class MiniMap : MonoBehaviour
       Debug.Log("scrollDelta => "+scrollDelta);
       miniMapCamera.transform.position += new Vector3(0,0,0);
       miniMapCamera.GetComponent<Camera>().orthographicSize-=scrollDelta[1];
+    }
+    private bool ProjectMouseToMiniMapWorldLocation(Vector2 mapLocation, out RaycastHit hit)
+    {
+      // get position of camera
+      rayCastPosition = miniMapCamera.transform.position;
+      rayCastPosition[0] += 2*mapLocation[0] * miniMapCamera.GetComponent<Camera>().orthographicSize;
+      rayCastPosition[2] -= 2*mapLocation[1] * miniMapCamera.GetComponent<Camera>().orthographicSize;
 
+      Ray ray = new Ray(rayCastPosition, new Vector3(0,-1,0));
 
+      bool HitSomething = Physics.Raycast(ray, out hit);
+
+      if(HitSomething)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
     }
     void OnDrawGizmos()
     {
