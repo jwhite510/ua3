@@ -952,6 +952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d31149069e11f846b6461319d5c3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miniMapCamera: {fileID: 167157739}
+  minimapImage: {fileID: 71249738}
 --- !u!1 &427587667
 GameObject:
   m_ObjectHideFlags: 0
