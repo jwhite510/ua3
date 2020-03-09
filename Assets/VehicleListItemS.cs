@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class VehicleListItemS : MonoBehaviour
+public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
 
@@ -13,6 +14,50 @@ public class VehicleListItemS : MonoBehaviour
 
     private bool isHandlingClick = false;
     private float buttonClickTime = 0.0f;
+    private RectTransform rectTransform;
+
+    private void Awake()
+    {
+      rectTransform = GetComponent<RectTransform>();
+    }
+
+
+    public void OnDrag(PointerEventData eventData)
+    {
+      Debug.Log("OnDrag test");
+      rectTransform.anchoredPosition += eventData.delta;
+
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+      // Debug.Log("OnBeginDrag test");
+      // get handle on UI
+      PlayerController playercontroller = FindObjectOfType<PlayerController>();
+      
+      Transform canvasTransform;
+      Transform[] ts = playercontroller.PlayerUI.transform.GetComponentsInChildren<Transform>(true);
+      foreach(Transform t in ts)
+      {
+        if (t.gameObject.name == "Canvas")
+        {
+          transform.parent = t;
+          break;
+        }
+      }
+      // SpawnUnitsCursor.active = false;
+      // transform.parent = canvasTransform;
+
+
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+      Debug.Log("OnEndDrag test");
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+      Debug.Log("OnPointerDown test");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
