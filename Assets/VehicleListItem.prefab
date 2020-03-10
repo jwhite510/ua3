@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 3407438853419387750}
   - component: {fileID: 3407438853419387751}
   - component: {fileID: 8052688425883281505}
+  - component: {fileID: 6590362162055224211}
   m_Layer: 5
   m_Name: VehicleListItem
   m_TagString: Untagged
@@ -217,3 +218,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 3407438853283865748}
   vehicleReference: {fileID: 0}
+  playerController: {fileID: 0}
+--- !u!225 &6590362162055224211
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407438853419387745}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
