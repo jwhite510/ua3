@@ -216,9 +216,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099c9d1eeef413f4081d5998fbcb3eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SquadListItemO: {fileID: 4288929731110336587, guid: 29d8c742a9341b0499c3e1722fdec065,
+    type: 3}
   buttonText: {fileID: 3407438853283865748}
   vehicleReference: {fileID: 0}
   playerController: {fileID: 0}
+  originalParent: {fileID: 0}
 --- !u!225 &6590362162055224211
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class SquadListItem : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-      Debug.Log("OnDrop called");
+      // Debug.Log("OnDrop called");
       // get the object that was dropped
       if(eventData.pointerDrag != null)
       {

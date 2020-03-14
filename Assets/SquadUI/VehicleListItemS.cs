@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
 
 
+    public GameObject SquadListItemO;
     public Text buttonText;
     public VehicleBase vehicleReference;
     public PlayerController playerController;
@@ -51,8 +52,6 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
       }
       // SpawnUnitsCursor.active = false;
       // transform.parent = canvasTransform;
-
-
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -60,6 +59,23 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
       transform.parent = originalParent;
       canvasGroup.alpha = 1.0f;
       canvasGroup.blocksRaycasts = true;
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
+      if(eventData.pointerDrag != null)
+      {
+        Debug.Log("OnDrop called on VehicleListItemS");
+        Debug.Log("vehicleReference.name => "+vehicleReference.name);
+        VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
+        Debug.Log("v.vehicleReference.name => "+v.vehicleReference.name);
+
+        // create a squad
+        GameObject newSquad = Instantiate(SquadListItemO, new Vector3(0,0,0), new Quaternion(0,0,0,0));
+
+        GameObject playercontroller = FindObjectOfType<PlayerController>().gameObject;
+        newSquad.transform.parent = playercontroller.GetComponent<PlayerController>().VehicleReferenceButtonList.transform;
+
+      }
     }
     public void OnPointerDown(PointerEventData eventData)
     {
