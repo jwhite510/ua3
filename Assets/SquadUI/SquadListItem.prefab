@@ -267,7 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2758ba155462cb4180ca2d44b459607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vehicleReference: {fileID: 0}
+  squadLeaderVehicle: {fileID: 0}
+  squadLeaderButton: {fileID: 4288929730239096069}
   SquadMember: {fileID: 7215244590205336785, guid: 004d38c513d94ea46b94cc2f5d209dad,
     type: 3}
 --- !u!114 &4288929731110336591

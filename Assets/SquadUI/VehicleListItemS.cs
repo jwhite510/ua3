@@ -64,8 +64,10 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
     {
       if(eventData.pointerDrag != null)
       {
-        Debug.Log("OnDrop called on VehicleListItemS");
+        // squad leader
         Debug.Log("vehicleReference.name => "+vehicleReference.name);
+
+        // new squad member
         VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
         Debug.Log("v.vehicleReference.name => "+v.vehicleReference.name);
 
@@ -74,7 +76,10 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
 
         GameObject playercontroller = FindObjectOfType<PlayerController>().gameObject;
         newSquad.transform.parent = playercontroller.GetComponent<PlayerController>().VehicleReferenceButtonList.transform;
+        newSquad.GetComponent<SquadListItem>().SetSquadLeader(vehicleReference);
 
+        Destroy(eventData.pointerDrag.gameObject);
+        Destroy(gameObject);
       }
     }
     public void OnPointerDown(PointerEventData eventData)
