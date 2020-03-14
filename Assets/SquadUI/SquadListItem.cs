@@ -39,7 +39,7 @@ public class SquadListItem : MonoBehaviour, IDropHandler
         proj.GetComponent<SquadMemberS>().SetName(vehicleBase.name);
         proj.transform.parent = this.gameObject.transform;
         PlayerController playerController = FindObjectOfType<PlayerController>();
-        playerController.UpdateUnitsUI();
+        // playerController.UpdateUnitsUI();
     }
     public void SetSquadLeader(VehicleBase vehicleBase)
     {
