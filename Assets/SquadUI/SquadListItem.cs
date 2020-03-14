@@ -101,10 +101,25 @@ public class SquadListItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void SetSquadLeader(VehicleBase vehicleBase)
     {
+
+      // set parent
+      GameObject playercontroller = FindObjectOfType<PlayerController>().gameObject;
+      playercontroller.GetComponent<PlayerController>().playerSquads.Add(gameObject.GetComponent<SquadListItem>());
+      transform.parent = playercontroller.GetComponent<PlayerController>().VehicleReferenceButtonList.transform;
+
       squadLeaderVehicle = vehicleBase;
       // find the button text
       Text squadLeaderText = squadLeaderButton.GetComponentInChildren<Text>();
       squadLeaderText.text = vehicleBase.name;
+      originalParent = transform.parent;
+
+
+      vehicleBase.ui_element = gameObject;
+      vehicleBase.ui_element_name = "SquadListItemO";
+
+
+
+
 
     }
     public void ButtonClicked()
