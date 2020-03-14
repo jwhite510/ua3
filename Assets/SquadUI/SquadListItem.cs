@@ -38,9 +38,11 @@ public class SquadListItem : MonoBehaviour, IDropHandler
         // Debug.Log("vehicleReference.name => "+vehicleReference.name);
         GameObject proj = Instantiate(SquadMember, new Vector3(0,0,0), new Quaternion(0,0,0,0));
         proj.GetComponent<SquadMemberS>().SetName(vehicleBase.name);
+        proj.GetComponent<SquadMemberS>().squadListItem = this;
         proj.transform.parent = this.gameObject.transform;
         squadMembersList.Add(vehicleBase);
         vehicleBase.ui_element = proj;
+        vehicleBase.ui_element_name = "SquadMember";
 
     }
     public void SetSquadLeader(VehicleBase vehicleBase)

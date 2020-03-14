@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 
 public class VehicleBase : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class VehicleBase : MonoBehaviour
     public float current_health;
     public bool isBeingDestroyed = false;
     public GameObject ui_element;
+    public string ui_element_name = "";
+    private bool destroy_vehicle_has_been_called = false;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -24,9 +28,9 @@ public class VehicleBase : MonoBehaviour
          PlayerController playerController = FindObjectOfType<PlayerController>();
          playerController.playerSingleVehicles.Add(this);
          playerController.AddSingleVehicleToUI(this);
-         Debug.Log("playerController.playerSingleVehicles.Count => "+playerController.playerSingleVehicles.Count);
+         // Debug.Log("playerController.playerSingleVehicles.Count => "+playerController.playerSingleVehicles.Count);
       }
-      Debug.Log("add vehilce to hud if on player team");
+      // Debug.Log("add vehilce to hud if on player team");
     }
     // Update is called once per frame
     void Update()
@@ -117,11 +121,68 @@ public class VehicleBase : MonoBehaviour
     }
     public void DestroyThisVehicle()
     {
-      // remove this vehicle from UI
-      Destroy(ui_element);
-      PlayerController playercontroller = FindObjectOfType<PlayerController>();
-      Debug.Log("DestroyThisVehicle called");
-      Destroy(gameObject);
+      // this function must run only once
+      if(!destroy_vehicle_has_been_called)
+      {
+        // squad leader destroyed
+        if(ui_element_name == "SquadListItemO")
+        {
+          // if there is only one other vehicle, set it to a single vehicle
+          if(ui_element.GetComponent<SquadListItem>().squadMembersList.Count > 1)
+          {
+
+            // destroy ui element of squad member
+            VehicleBase squad_member = ui_element.GetComponent<SquadListItem>().squadMembersList[0];
+            Destroy(squad_member.ui_element);
+            squad_member.ui_element = ui_element;
+            squad_member.ui_element_name = "SquadListItemO";
+
+            // set squad member as squad leader
+            ui_element.GetComponent<SquadListItem>().SetSquadLeader(squad_member);
+            ui_element.GetComponent<SquadListItem>().squadMembersList.Remove(squad_member);
+
+          }
+          else // there is only one other squad member
+          {
+            VehicleBase squad_member = ui_element.GetComponent<SquadListItem>().squadMembersList[0];
+            Destroy(ui_element);
+            PlayerController playercontroller = FindObjectOfType<PlayerController>();
+            playercontroller.AddSingleVehicleToUI(squad_member);
+          }
+          // if there is more than one vehicle, set one as the new leader
+        }
+        // squad member destroyed
+        else if(ui_element_name == "SquadMember")
+        {
+          // if there is more than one squad member
+          if(ui_element.GetComponent<SquadMemberS>().squadListItem.squadMembersList.Count > 1)
+          {
+            ui_element.GetComponent<SquadMemberS>().squadListItem.squadMembersList.Remove(this);
+            Destroy(ui_element);
+          }
+          else // set the squad leader to a single vehicle
+          {
+            Destroy(ui_element.GetComponent<SquadMemberS>().squadListItem.squadLeaderVehicle.ui_element);
+            PlayerController playercontroller = FindObjectOfType<PlayerController>();
+            playercontroller.AddSingleVehicleToUI(ui_element.GetComponent<SquadMemberS>().squadListItem.squadLeaderVehicle);
+          }
+        }
+        // single vehicle destroyed
+        else if(ui_element_name == "VehicleReferenceButton")
+        {
+          Debug.Log("VehicleReferenceButton");
+          Destroy(ui_element);
+        }
+
+        // if there is only one vehicle left, demote to a single vehicle button
+        Destroy(gameObject);
+        destroy_vehicle_has_been_called = true;
+      }
+
+    }
+    void OnDrawGizmos()
+    {
+      Handles.Label(transform.position, gameObject.name);
     }
 
 

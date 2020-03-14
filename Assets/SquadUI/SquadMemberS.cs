@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class SquadMemberS : MonoBehaviour
 {
 
+    public SquadListItem squadListItem;
+
     public Text SquadMemberName;
     // Start is called before the first frame update
     void Start()

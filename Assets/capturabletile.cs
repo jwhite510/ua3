@@ -175,7 +175,7 @@ public class capturabletile : MonoBehaviour
       {
         vehiclenames+=veh.name;
       }
-      Handles.Label(transform.position, vehiclenames);
+      // Handles.Label(transform.position, vehiclenames);
     }
     private void AdjustBattlestationTiles(int delta)
     {

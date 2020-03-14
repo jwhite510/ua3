@@ -43,11 +43,11 @@ public class projectile : MonoBehaviour
 
           if(vehiclehit is Tank)
           {
-            vehiclehit.current_health -= 0.05f;
+            vehiclehit.current_health -= 0.95f;
           }
           else if(vehiclehit is battlestation)
           {
-            vehiclehit.current_health -= 0.01f;
+            vehiclehit.current_health -= 0.91f;
           }
 
           vehiclehit.thishealthbar.SetHealth(vehiclehit.current_health);

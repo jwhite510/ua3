@@ -354,7 +354,7 @@ public class PlayerController : MonoBehaviour
     }
     if(spawnUnitsButton)
     {
-      Debug.Log("spawnUnitsButton.name => "+spawnUnitsButton.name);
+      // Debug.Log("spawnUnitsButton.name => "+spawnUnitsButton.name);
       spawnUnitsButton.active = status;
     }
   }
@@ -437,6 +437,7 @@ public class PlayerController : MonoBehaviour
     v.SetVehicle(vehicleBase, this);
     v.originalParent = childbutton.transform.parent;
     vehicleBase.ui_element = childbutton;
+    vehicleBase.ui_element_name = "VehicleReferenceButton";
   }
 }
 

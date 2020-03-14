@@ -46,7 +46,7 @@ public class battlestation : VehicleBase
 
       if(AI_controlled)
       {
-        AI_Control();
+        // AI_Control();
       }
       if(!player_controlled)
       {

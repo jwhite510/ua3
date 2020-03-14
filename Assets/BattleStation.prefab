@@ -459,6 +459,13 @@ MonoBehaviour:
   thishealthbar: {fileID: 6818856108916265079}
   current_health: 0
   isBeingDestroyed: 0
+  ui_element: {fileID: 0}
+  VehicleReferenceButton: {fileID: 3407438853419387745, guid: b5533ee176b4eb048a2a9ea7915d101f,
+    type: 3}
+  SquadListItemO: {fileID: 4288929731110336587, guid: 29d8c742a9341b0499c3e1722fdec065,
+    type: 3}
+  SquadMember: {fileID: 7215244590205336785, guid: 004d38c513d94ea46b94cc2f5d209dad,
+    type: 3}
   turret: {fileID: 4642316921787112629}
   turret_base: {fileID: 6514630341382143453}
   navagent_transform: {fileID: 7789007212554212291}
