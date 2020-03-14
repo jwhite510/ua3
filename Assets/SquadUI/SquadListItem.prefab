@@ -113,7 +113,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4288929730239096070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4288929731110336588}
+        m_MethodName: ButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4288929730641706767
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squadLeaderVehicle: {fileID: 0}
   squadLeaderButton: {fileID: 4288929730239096069}
+  squadMembersList: []
   SquadMember: {fileID: 7215244590205336785, guid: 004d38c513d94ea46b94cc2f5d209dad,
     type: 3}
 --- !u!114 &4288929731110336591

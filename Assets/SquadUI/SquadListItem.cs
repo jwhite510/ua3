@@ -9,6 +9,8 @@ public class SquadListItem : MonoBehaviour, IDropHandler
     public VehicleBase squadLeaderVehicle;
     public GameObject squadLeaderButton;
     public List<VehicleBase> squadMembersList = new List<VehicleBase>();
+    private bool isHandlingClick = false;
+    private float buttonClickTime = 0.0f;
 
     public GameObject SquadMember;
     // Start is called before the first frame update
@@ -19,6 +21,15 @@ public class SquadListItem : MonoBehaviour, IDropHandler
     // Update is called once per frame
     void Update()
     {
+      if(isHandlingClick == true)
+      {
+        if((Time.time - buttonClickTime) > 0.2)
+        {
+          HandleSingleClick();
+          isHandlingClick = false;
+        }
+
+      }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -53,5 +64,28 @@ public class SquadListItem : MonoBehaviour, IDropHandler
       squadLeaderText.text = vehicleBase.name;
 
     }
+    public void ButtonClicked()
+    {
+      if(isHandlingClick == true)
+      {
+        HandleDoubleClick();
+        isHandlingClick = false;
+      }
+      else
+      {
+        buttonClickTime = Time.time;
+        isHandlingClick = true;
+      }
+    }
+    private void HandleDoubleClick()
+    {
 
+      PlayerController playercontroller = FindObjectOfType<PlayerController>();
+      playercontroller.ControlVehicle(squadLeaderVehicle);
+    }
+    private void HandleSingleClick()
+    {
+      PlayerController playercontroller = FindObjectOfType<PlayerController>();
+      playercontroller.SelectVehicle(squadLeaderVehicle);
+    }
 }
