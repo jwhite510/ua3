@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class SquadListItem : MonoBehaviour, IDropHandler
 {
+    public VehicleBase vehicleReference;
 
     public GameObject SquadMember;
     // Start is called before the first frame update
@@ -27,12 +28,11 @@ public class SquadListItem : MonoBehaviour, IDropHandler
       if(eventData.pointerDrag != null)
       {
         VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
-        Debug.Log("v.buttonText => "+v.buttonText.text);
-        Debug.Log("v.gameObject.name => "+v.gameObject.name);
+        vehicleReference = v.vehicleReference;
         Destroy(v.gameObject);
       }
       GameObject proj = Instantiate(SquadMember, new Vector3(0,0,0), new Quaternion(0,0,0,0));
-      // proj.transform.parent = this.gameObject;
+      SquadMember.GetComponent<SquadMemberS>().SetName(vehicleReference.name);
       proj.transform.parent = this.gameObject.transform;
       PlayerController playerController = FindObjectOfType<PlayerController>();
       playerController.UpdateUnitsUI();
