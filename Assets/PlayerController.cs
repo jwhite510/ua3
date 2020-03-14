@@ -407,6 +407,7 @@ public class PlayerController : MonoBehaviour
         VehicleListItemS v = childbutton.GetComponent<VehicleListItemS>();
         v.SetText(veh.name);
         v.SetVehicle(veh, this);
+        v.originalParent = childbutton.transform.parent;
       }
     }
 

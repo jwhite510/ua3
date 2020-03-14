@@ -18,7 +18,7 @@ public class SquadMemberS : MonoBehaviour
     }
     public void SetName(string name)
     {
-      Debug.Log("setting name to "+name);
+      // Debug.Log("setting name to "+name);
       // SquadMemberName = GetComponent<Text>();
       SquadMemberName.text = name;
     }

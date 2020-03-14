@@ -28,7 +28,7 @@ public class SquadListItem : MonoBehaviour, IDropHandler
         VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
         vehicleReference = v.vehicleReference;
         Destroy(v.gameObject);
-        Debug.Log("vehicleReference.name => "+vehicleReference.name);
+        // Debug.Log("vehicleReference.name => "+vehicleReference.name);
         GameObject proj = Instantiate(SquadMember, new Vector3(0,0,0), new Quaternion(0,0,0,0));
         proj.GetComponent<SquadMemberS>().SetName(vehicleReference.name);
         proj.transform.parent = this.gameObject.transform;

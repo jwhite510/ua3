@@ -16,6 +16,7 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
     private float buttonClickTime = 0.0f;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    public Transform originalParent;
 
     private void Awake()
     {
@@ -55,7 +56,8 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-      // Debug.Log("OnEndDrag test");
+      Debug.Log("OnEndDrag test");
+      transform.parent = originalParent;
       canvasGroup.alpha = 1.0f;
       canvasGroup.blocksRaycasts = true;
     }
