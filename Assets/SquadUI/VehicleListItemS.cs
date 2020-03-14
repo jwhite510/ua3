@@ -68,25 +68,39 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
         Debug.Log("vehicleReference.name => "+vehicleReference.name);
 
         // new squad member
-        VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
-        Debug.Log("v.vehicleReference.name => "+v.vehicleReference.name);
+        if(eventData.pointerDrag.GetComponent<VehicleListItemS>())
+        {
+          VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
+          Debug.Log("v.vehicleReference.name => "+v.vehicleReference.name);
 
-        // create a squad
-        GameObject newSquad = Instantiate(SquadListItemO, new Vector3(0,0,0), new Quaternion(0,0,0,0));
+          // create a squad
+          GameObject newSquad = Instantiate(SquadListItemO, new Vector3(0,0,0), new Quaternion(0,0,0,0));
 
-        GameObject playercontroller = FindObjectOfType<PlayerController>().gameObject;
-        newSquad.transform.parent = playercontroller.GetComponent<PlayerController>().VehicleReferenceButtonList.transform;
-        newSquad.GetComponent<SquadListItem>().SetSquadLeader(vehicleReference);
-        newSquad.GetComponent<SquadListItem>().originalParent = newSquad.transform.parent;
-        vehicleReference.ui_element = newSquad;
-        vehicleReference.ui_element_name = "SquadListItemO";
+          GameObject playercontroller = FindObjectOfType<PlayerController>().gameObject;
+          newSquad.transform.parent = playercontroller.GetComponent<PlayerController>().VehicleReferenceButtonList.transform;
+          newSquad.GetComponent<SquadListItem>().SetSquadLeader(vehicleReference);
+          newSquad.GetComponent<SquadListItem>().originalParent = newSquad.transform.parent;
+          vehicleReference.ui_element = newSquad;
+          vehicleReference.ui_element_name = "SquadListItemO";
 
-        newSquad.GetComponent<SquadListItem>().AddSquadMember(v.vehicleReference);
-        playercontroller.GetComponent<PlayerController>().playerSquads.Add(newSquad.GetComponent<SquadListItem>());
-        PlayerController playerController = FindObjectOfType<PlayerController>();
+          newSquad.GetComponent<SquadListItem>().AddSquadMember(v.vehicleReference);
+          playercontroller.GetComponent<PlayerController>().playerSquads.Add(newSquad.GetComponent<SquadListItem>());
+          PlayerController playerController = FindObjectOfType<PlayerController>();
 
-        Destroy(eventData.pointerDrag.gameObject);
-        Destroy(gameObject);
+          Destroy(eventData.pointerDrag.gameObject);
+          Destroy(gameObject);
+        }
+        else if(eventData.pointerDrag.GetComponent<SquadListItem>())
+        {
+          // TODO create squad from another squad
+          Debug.Log("create squad from another squad");
+          
+        }
+
+
+
+
+
       }
     }
     public void OnPointerDown(PointerEventData eventData)
