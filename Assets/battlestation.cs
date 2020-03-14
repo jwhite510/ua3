@@ -202,7 +202,6 @@ public class battlestation : VehicleBase
         {
           // update player ui
           PlayerController playerController = FindObjectOfType<PlayerController>();
-          playerController.UpdateUnitsUI();
 
         }
       }

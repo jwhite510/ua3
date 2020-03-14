@@ -8,6 +8,7 @@ public class SquadListItem : MonoBehaviour, IDropHandler
 {
     public VehicleBase squadLeaderVehicle;
     public GameObject squadLeaderButton;
+    public List<VehicleBase> squadMembersList = new List<VehicleBase>();
 
     public GameObject SquadMember;
     // Start is called before the first frame update
@@ -38,8 +39,9 @@ public class SquadListItem : MonoBehaviour, IDropHandler
         GameObject proj = Instantiate(SquadMember, new Vector3(0,0,0), new Quaternion(0,0,0,0));
         proj.GetComponent<SquadMemberS>().SetName(vehicleBase.name);
         proj.transform.parent = this.gameObject.transform;
-        PlayerController playerController = FindObjectOfType<PlayerController>();
-        // playerController.UpdateUnitsUI();
+        squadMembersList.Add(vehicleBase);
+        vehicleBase.ui_element = proj;
+
     }
     public void SetSquadLeader(VehicleBase vehicleBase)
     {

@@ -12,12 +12,21 @@ public class VehicleBase : MonoBehaviour
     public healthbar thishealthbar;
     public float current_health;
     public bool isBeingDestroyed = false;
+    public GameObject ui_element;
     // Start is called before the first frame update
     public void Start()
     {
       // Debug.Log("VehicleBase Start called");
       current_health = 1.0f;
       thishealthbar.SetHealth(current_health);
+      if(team == 1)
+      {
+         PlayerController playerController = FindObjectOfType<PlayerController>();
+         playerController.playerSingleVehicles.Add(this);
+         playerController.AddSingleVehicleToUI(this);
+         Debug.Log("playerController.playerSingleVehicles.Count => "+playerController.playerSingleVehicles.Count);
+      }
+      Debug.Log("add vehilce to hud if on player team");
     }
     // Update is called once per frame
     void Update()
@@ -108,6 +117,9 @@ public class VehicleBase : MonoBehaviour
     }
     public void DestroyThisVehicle()
     {
+      // remove this vehicle from UI
+      Destroy(ui_element);
+      PlayerController playercontroller = FindObjectOfType<PlayerController>();
       Debug.Log("DestroyThisVehicle called");
       Destroy(gameObject);
     }

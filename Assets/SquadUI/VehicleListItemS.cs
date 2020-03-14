@@ -77,7 +77,11 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
         GameObject playercontroller = FindObjectOfType<PlayerController>().gameObject;
         newSquad.transform.parent = playercontroller.GetComponent<PlayerController>().VehicleReferenceButtonList.transform;
         newSquad.GetComponent<SquadListItem>().SetSquadLeader(vehicleReference);
+        vehicleReference.ui_element = newSquad;
+
         newSquad.GetComponent<SquadListItem>().AddSquadMember(v.vehicleReference);
+        playercontroller.GetComponent<PlayerController>().playerSquads.Add(newSquad.GetComponent<SquadListItem>());
+        PlayerController playerController = FindObjectOfType<PlayerController>();
 
         Destroy(eventData.pointerDrag.gameObject);
         Destroy(gameObject);
