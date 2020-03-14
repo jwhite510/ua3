@@ -50,6 +50,7 @@ public class SquadListItem : MonoBehaviour, IDropHandler
         GameObject proj = Instantiate(SquadMember, new Vector3(0,0,0), new Quaternion(0,0,0,0));
         proj.GetComponent<SquadMemberS>().SetName(vehicleBase.name);
         proj.GetComponent<SquadMemberS>().squadListItem = this;
+        proj.GetComponent<SquadMemberS>().vehicleReference = vehicleBase;
         proj.transform.parent = this.gameObject.transform;
         squadMembersList.Add(vehicleBase);
         vehicleBase.ui_element = proj;
