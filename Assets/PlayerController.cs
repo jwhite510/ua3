@@ -398,7 +398,7 @@ public class PlayerController : MonoBehaviour
       // Debug.Log("veh.name => "+veh.name);
       if(veh.team == 1 && veh.isBeingDestroyed == false)
       {
-        Debug.Log("veh.name => "+veh.name);
+        // Debug.Log("veh.name => "+veh.name);
         teamvehicles.Add(veh);
         // append buttons list
 

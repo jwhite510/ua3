@@ -6,13 +6,10 @@ using UnityEngine.UI;
 public class SquadMemberS : MonoBehaviour
 {
 
-    private Text SquadMemberName;
+    public Text SquadMemberName;
     // Start is called before the first frame update
     void Start()
     {
-      // Debug.Log("GetComponent<Text> called");
-      // SquadMemberName = GetComponent<Text>();
-      // SquadMemberName.text = "text 123";
     }
 
     // Update is called once per frame
@@ -21,7 +18,8 @@ public class SquadMemberS : MonoBehaviour
     }
     public void SetName(string name)
     {
-      SquadMemberName = GetComponent<Text>();
+      Debug.Log("setting name to "+name);
+      // SquadMemberName = GetComponent<Text>();
       SquadMemberName.text = name;
     }
 }

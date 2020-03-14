@@ -26,7 +26,7 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
-      Debug.Log("OnDrag test");
+      // Debug.Log("OnDrag test");
       rectTransform.anchoredPosition += eventData.delta;
       canvasGroup.alpha = 0.6f;
       canvasGroup.blocksRaycasts = false;
@@ -55,13 +55,13 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-      Debug.Log("OnEndDrag test");
+      // Debug.Log("OnEndDrag test");
       canvasGroup.alpha = 1.0f;
       canvasGroup.blocksRaycasts = true;
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-      Debug.Log("OnPointerDown test");
+      // Debug.Log("OnPointerDown test");
     }
 
     // Start is called before the first frame update
