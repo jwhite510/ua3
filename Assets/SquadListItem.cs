@@ -34,6 +34,8 @@ public class SquadListItem : MonoBehaviour, IDropHandler
       GameObject proj = Instantiate(SquadMember, new Vector3(0,0,0), new Quaternion(0,0,0,0));
       // proj.transform.parent = this.gameObject;
       proj.transform.parent = this.gameObject.transform;
+      PlayerController playerController = FindObjectOfType<PlayerController>();
+      playerController.UpdateUnitsUI();
     }
 
 }
