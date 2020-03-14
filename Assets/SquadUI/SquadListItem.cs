@@ -4,20 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SquadListItem : MonoBehaviour, IDropHandler
+public class SquadListItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     public VehicleBase squadLeaderVehicle;
     public GameObject squadLeaderButton;
     public List<VehicleBase> squadMembersList = new List<VehicleBase>();
     private bool isHandlingClick = false;
     private float buttonClickTime = 0.0f;
+    private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+    public Transform originalParent;
 
     public GameObject SquadMember;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+      rectTransform = GetComponent<RectTransform>();
+      canvasGroup = GetComponent<CanvasGroup>();
+    }
     void Start()
     {
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -30,6 +36,42 @@ public class SquadListItem : MonoBehaviour, IDropHandler
         }
 
       }
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+      // Debug.Log("OnPointerDown test");
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+      // Debug.Log("OnDrag test");
+      rectTransform.anchoredPosition += eventData.delta;
+      canvasGroup.alpha = 0.6f;
+      canvasGroup.blocksRaycasts = false;
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+      // Debug.Log("OnBeginDrag test");
+      // get handle on UI
+      PlayerController playercontroller = FindObjectOfType<PlayerController>();
+      Transform canvasTransform;
+      Transform[] ts = playercontroller.PlayerUI.transform.GetComponentsInChildren<Transform>(true);
+      foreach(Transform t in ts)
+      {
+        if (t.gameObject.name == "Canvas")
+        {
+          transform.parent = t;
+          break;
+        }
+      }
+      // SpawnUnitsCursor.active = false;
+      // transform.parent = canvasTransform;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+      Debug.Log("OnEndDrag test");
+      transform.parent = originalParent;
+      canvasGroup.alpha = 1.0f;
+      canvasGroup.blocksRaycasts = true;
     }
 
     public void OnDrop(PointerEventData eventData)
