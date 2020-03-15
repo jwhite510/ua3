@@ -97,6 +97,17 @@ public class SquadListItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
           }
           Destroy(eventData.pointerDrag.gameObject);
         }
+        else if(eventData.pointerDrag.GetComponent<SquadMemberS>())
+        {
+          // Debug.Log("VehicleListItemS pointerDrag called on drop");
+          SquadMemberS s = eventData.pointerDrag.GetComponent<SquadMemberS>();
+          // remove this squad member from the current squad
+          s.vehicleReference.ui_element.GetComponent<SquadMemberS>().squadListItem.squadMembersList.Remove(s.vehicleReference);
+
+          AddSquadMember(s.vehicleReference);
+          Destroy(eventData.pointerDrag.gameObject);
+
+        }
 
       }
     }

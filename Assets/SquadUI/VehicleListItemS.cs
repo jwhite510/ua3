@@ -95,6 +95,21 @@ public class VehicleListItemS : MonoBehaviour, IPointerDownHandler, IBeginDragHa
           Destroy(eventData.pointerDrag.gameObject);
           Destroy(gameObject);
         }
+        else if(eventData.pointerDrag.GetComponent<SquadMemberS>())
+        {
+          // Debug.Log("VehicleListItemS pointerDrag called on drop");
+          SquadMemberS s = eventData.pointerDrag.GetComponent<SquadMemberS>();
+          // create a squad
+          GameObject newSquad = Instantiate(SquadListItemO, new Vector3(0,0,0), new Quaternion(0,0,0,0));
+          // remove this squad member from the current squad
+          s.vehicleReference.ui_element.GetComponent<SquadMemberS>().squadListItem.squadMembersList.Remove(s.vehicleReference);
+
+          newSquad.GetComponent<SquadListItem>().SetSquadLeader(vehicleReference);
+          newSquad.GetComponent<SquadListItem>().AddSquadMember(s.vehicleReference);
+
+          Destroy(eventData.pointerDrag.gameObject);
+          Destroy(gameObject);
+        }
       }
     }
     public void OnPointerDown(PointerEventData eventData)

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SquadMemberS : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class SquadMemberS : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     private bool isHandlingClick = false;
     public SquadListItem squadListItem;
@@ -98,5 +98,17 @@ public class SquadMemberS : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
       transform.parent = originalParent;
       canvasGroup.alpha = 1.0f;
       canvasGroup.blocksRaycasts = true;
+
+      // remove from squad vehicle list
+      squadListItem.squadMembersList.Remove(vehicleReference);
+
+      PlayerController playerController = FindObjectOfType<PlayerController>();
+      playerController.AddSingleVehicleToUI(vehicleReference);
+
+      // destroy the object
+      Destroy(gameObject);
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
     }
 }
