@@ -80,9 +80,24 @@ public class SquadListItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
       // get the object that was dropped
       if(eventData.pointerDrag != null)
       {
-        VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
-        AddSquadMember(v.vehicleReference);
-        Destroy(v.gameObject);
+        if(eventData.pointerDrag.GetComponent<VehicleListItemS>())
+        {
+          VehicleListItemS v = eventData.pointerDrag.GetComponent<VehicleListItemS>();
+          AddSquadMember(v.vehicleReference);
+          Destroy(v.gameObject);
+        }
+        else if(eventData.pointerDrag.GetComponent<SquadListItem>())
+        {
+          SquadListItem squadListItem = eventData.pointerDrag.GetComponent<SquadListItem>();
+          // add this whole squad to the other squad
+          AddSquadMember(squadListItem.squadLeaderVehicle);
+          foreach(VehicleBase veh in squadListItem.squadMembersList)
+          {
+            AddSquadMember(veh);
+          }
+          Destroy(eventData.pointerDrag.gameObject);
+        }
+
       }
     }
     public void AddSquadMember(VehicleBase vehicleBase)

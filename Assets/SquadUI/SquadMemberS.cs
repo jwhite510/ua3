@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SquadMemberS : MonoBehaviour
+public class SquadMemberS : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private bool isHandlingClick = false;
     public SquadListItem squadListItem;
@@ -11,6 +12,14 @@ public class SquadMemberS : MonoBehaviour
     public VehicleBase vehicleReference;
     public Text SquadMemberName;
     // Start is called before the first frame update
+    private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+    public Transform originalParent;
+    private void Awake()
+    {
+      rectTransform = GetComponent<RectTransform>();
+      canvasGroup = GetComponent<CanvasGroup>();
+    }
     void Start()
     {
     }
@@ -54,5 +63,40 @@ public class SquadMemberS : MonoBehaviour
       PlayerController playercontroller = FindObjectOfType<PlayerController>();
       playercontroller.ControlVehicle(vehicleReference);
 
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+      // Debug.Log("OnDrag test");
+      rectTransform.anchoredPosition += eventData.delta;
+      canvasGroup.alpha = 0.6f;
+      canvasGroup.blocksRaycasts = false;
+
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+      originalParent = transform.parent;
+      // Debug.Log("OnBeginDrag test");
+      // get handle on UI
+      PlayerController playercontroller = FindObjectOfType<PlayerController>();
+
+      Transform canvasTransform;
+      Transform[] ts = playercontroller.PlayerUI.transform.GetComponentsInChildren<Transform>(true);
+      foreach(Transform t in ts)
+      {
+        if (t.gameObject.name == "Canvas")
+        {
+          transform.parent = t;
+          break;
+        }
+      }
+      // SpawnUnitsCursor.active = false;
+      // transform.parent = canvasTransform;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+      Debug.Log("OnEndDrag test");
+      transform.parent = originalParent;
+      canvasGroup.alpha = 1.0f;
+      canvasGroup.blocksRaycasts = true;
     }
 }

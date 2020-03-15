@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7215244590205336787}
   - component: {fileID: 6065028074295837444}
   - component: {fileID: 4504547245096144107}
+  - component: {fileID: 1662499915147243952}
   m_Layer: 5
   m_Name: SquadMember
   m_TagString: Untagged
@@ -94,7 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squadListItem: {fileID: 0}
+  vehicleReference: {fileID: 0}
   SquadMemberName: {fileID: 7215244590205336787}
+  originalParent: {fileID: 0}
 --- !u!114 &4504547245096144107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,3 +127,15 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   delegates: []
+--- !u!225 &1662499915147243952
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7215244590205336785}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
