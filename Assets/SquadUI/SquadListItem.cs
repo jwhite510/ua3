@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class SquadListItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
@@ -171,5 +172,18 @@ public class SquadListItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
       PlayerController playercontroller = FindObjectOfType<PlayerController>();
       playercontroller.SelectVehicle(squadLeaderVehicle);
+    }
+    void OnDrawGizmos()
+    {
+      string squadmembers = "";
+      foreach(VehicleBase veh in squadMembersList)
+      {
+        squadmembers+=veh.name;
+        squadmembers += ", ";
+      }
+
+      GUIStyle style = new GUIStyle();
+      style.normal.textColor = Color.red;
+      Handles.Label(transform.position, squadmembers, style);
     }
 }
