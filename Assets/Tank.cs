@@ -74,6 +74,38 @@ public class Tank : VehicleBase
       base.FixedUpdate();
       // set tank position
       // transform.position = vehicle_base.transform.position;
+      if(ui_element_name == "SquadListItemO")
+      {
+        int squadMembers = ui_element.GetComponent<SquadListItem>().squadMembersList.Count;
+        Debug.DrawLine(
+        vehicle_base.transform.position,
+        vehicle_base.transform.position + -10* vehicle_base.transform.right,
+        Color.red,
+        0.0f
+        );
+        // position behind
+        Vector3 squadFollowPosition = vehicle_base.transform.position + -6*vehicle_base.transform.right;
+        float increment = 10.0f;
+        float rangeval = (increment/2) * (squadMembers-1);
+        int vehicle_number = 0;
+        for(float i=-rangeval; i<= rangeval; i+=increment)
+        {
+          Debug.Log("vehicle_number => "+vehicle_number);
+          Debug.DrawLine(
+              squadFollowPosition + i*vehicle_base.transform.forward,
+              squadFollowPosition  + i*vehicle_base.transform.forward + new Vector3(0,3,0),
+              Color.red,
+              0.0f
+              );
+          if(ui_element.GetComponent<SquadListItem>().squadMembersList[vehicle_number] is Tank)
+          {
+            Tank thistank = (Tank)ui_element.GetComponent<SquadListItem>().squadMembersList[vehicle_number];
+            thistank.MoveToWayPoint = true;
+            thistank.agent.SetDestination(squadFollowPosition + i*vehicle_base.transform.forward);
+          }
+          vehicle_number++;
+        }
+      }
       if(!player_controlled)
       {
         GameObject closestobject = FindNearestEnemyVehicle();
@@ -82,15 +114,6 @@ public class Tank : VehicleBase
           thistankturret.autoRotateTurret(closestobject);
         }
         // see if there is a squad leader
-        if(ui_element_name == "SquadMember")
-        {
-          // Debug.Log("move to SquadMember");
-
-          MoveToWayPoint = true;
-          Vector3 squadleaderposition = ui_element.GetComponent<SquadMemberS>().squadListItem.squadLeaderVehicle.transform.position;
-          agent.SetDestination(squadleaderposition);
-
-        }
         if(MoveToWayPoint)
         {
           TankMoveToWaypoint();

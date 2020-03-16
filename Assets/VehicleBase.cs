@@ -182,7 +182,12 @@ public class VehicleBase : MonoBehaviour
     }
     void OnDrawGizmos()
     {
-      Handles.Label(transform.position, gameObject.name);
+      string debugtext = "";
+      debugtext += gameObject.name;
+      debugtext += "  ui_element_name: ";
+      debugtext += ui_element_name;
+
+      Handles.Label(transform.position, debugtext);
     }
 
 
