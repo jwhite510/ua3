@@ -103,6 +103,15 @@ public class Tank : VehicleBase
             thistank.MoveToWayPoint = true;
             thistank.agent.SetDestination(squadFollowPosition + i*vehicle_base.transform.forward);
           }
+          else if(ui_element.GetComponent<SquadListItem>().squadMembersList[vehicle_number] is battlestation)
+          {
+            battlestation thisbattlestation = (battlestation)ui_element.GetComponent<SquadListItem>().squadMembersList[vehicle_number];
+            thisbattlestation.MoveToWayPoint = true;
+            thisbattlestation.navagent.SetDestination(squadFollowPosition + i*vehicle_base.transform.forward);
+          }
+
+
+
           vehicle_number++;
         }
       }
